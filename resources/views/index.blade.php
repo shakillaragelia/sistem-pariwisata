@@ -90,7 +90,7 @@
 
         <div class="row gy-4">
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3>Bukittinggi</h3>
+            <h3> Tentang Bukittinggi</h3>
             <img src="ragel/ragel/assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
             <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
             <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
@@ -191,7 +191,7 @@
           <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
             <div class="wisata-item">
               <div class="img">
-                <img src="ragel/ragel/assets/img/services-1.jpg" class="img-fluid" alt="">
+                <img src="ragel/ragel/assets/img/sejarah.jpg" class="img-fluid" alt="">
               </div>
               <div class="details position-relative">
                 <div class="icon">
@@ -208,7 +208,7 @@
           <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="wisata-item">
               <div class="img">
-                <img src="ragel/ragel/assets/img/sejarah.jpg" class="img-fluid" alt="">
+                <img src="ragel/ragel/assets/img/sejarah-2.jpg" class="img-fluid" alt="">
               </div>
               <div class="details position-relative">
                 <div class="icon">
@@ -225,7 +225,7 @@
           <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
             <div class="wisata-item">
               <div class="img">
-                <img src="ragel/ragel/assets/img/services-3.jpg" class="img-fluid" alt="">
+                <img src="ragel/ragel/assets/img/sejarah-3.jpg" class="img-fluid" alt="">
               </div>
               <div class="details position-relative">
                 <div class="icon">
@@ -242,7 +242,7 @@
           <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
             <div class="wisata-item">
               <div class="img">
-                <img src="ragel/ragel/assets/img/services-3.jpg" class="img-fluid" alt="">
+                <img src="ragel/ragel/assets/img/sejarah-4.jpg" class="img-fluid" alt="">
               </div>
               <div class="details position-relative">
                 <div class="icon">
