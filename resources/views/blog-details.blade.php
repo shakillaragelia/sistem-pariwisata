@@ -60,7 +60,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="cta-btn" href="index.blades.php#about">Get d</a>
+      <a class="cta-btn" href="index.blades.php#about">Get </a>
 
     </div>
   </header>
