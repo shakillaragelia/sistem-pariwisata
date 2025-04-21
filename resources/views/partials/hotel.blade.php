@@ -1,0 +1,72 @@
+<section id="hotel">
+  <h1>HOTEL</h1>
+   <!-- Hotel Section -->
+   <section id="hotel" class="hotel section light-background">
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+  <h2>Hotel</h2>
+  <p>HOTEL DI BUKITTINGGI</p>
+</div><!-- End Section Title -->
+
+<div class="container">
+
+  <div class="row gy-5">
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+      <div class="member">
+        <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-1.jpg" class="img-fluid" alt=""></div>
+        <div class="member-info">
+          <h4>NAMA HOTEL</h4>
+          <a href="hotel-details.blade.php" class="stretched-link"></a>
+          <span>DESKRIPSI SINGKAT</span>
+          <div class="social">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Hotel Member -->
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+      <div class="member">
+        <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-2.jpg" class="img-fluid" alt=""></div>
+        <div class="member-info">
+        <a href="detail-hotel" class="stretched-link">
+          <h4>Sarah Jhonson</h4>
+          <span>Product Manager</span>
+          <div class="social">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Hotel Member -->
+
+    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+      <div class="member">
+        <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-3.jpg" class="img-fluid" alt=""></div>
+        <div class="member-info">
+        <a href="hotel-details.blade.php" class="stretched-link">
+          <h4>William Anderson</h4>
+          <span>CTO</span>
+          <div class="social">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Hotel Member -->
+
+  </div>
+
+</div>
+
+</section><!-- /Hotel Section -->
+</section>
