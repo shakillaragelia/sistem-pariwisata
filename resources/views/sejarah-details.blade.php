@@ -27,9 +27,7 @@
   <!-- Main CSS File -->
   <link href="ragel/ragel/assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
   
-  ======================================================== -->
 </head>
 
 <body class="wisata-details-page">

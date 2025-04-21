@@ -27,13 +27,7 @@
   <!-- Main CSS File -->
   <link href="ragel/ragel/assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Dewi
-  * Template URL: https://bootstrapmade.com/dewi-free-multi-purpose-html-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body class="blog-details-page">
@@ -44,23 +38,23 @@
       <a href="index.blades.php" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Dewi</h1>
+        <h1 class="sitename">Shakilla Ragelia</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#wisata">Wisata</a></li>
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="#Hotel">Hotel</a></li>
+          <li><a href="index">Home</a></li>
+          <li><a href="about" class="active">About</a></li>
+          <li><a href="wisata">Wisata</a></li>
+          <li><a href="#detail-blog">blog</a></li>
+          <li><a href="detail-hotel">Hotel</a></li>
           
           <li><a href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="cta-btn" href="index.blades.php#about">Get tes</a>
+      <a class="cta-btn" href="index.blade.php#about">Get Started</a>
 
     </div>
   </header>
@@ -74,8 +68,8 @@
         <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="index.blades.php">Home</a></li>
-            <li class="current">Portfolio Details</li>
+            <li><a href="index">Home</a></li>
+            <li class="current">BLOG & EVENT</li>
           </ol>
         </nav>
       </div>
@@ -162,7 +156,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.blades.php" class="logo d-flex align-items-center">
-            <span class="sitename">Dewi</span>
+            <span class="sitename">Shakilla Ragelia</span>
           </a>
           <div class="footer-contact pt-3">
             <p>A108 Adam Street</p>
