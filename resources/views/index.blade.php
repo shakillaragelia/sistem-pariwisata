@@ -43,7 +43,7 @@
 
       <a href="index.blade.php" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="ragel/ragel/assets/img/logo.png" alt=""> -->
+        <img src="ragel/ragel/assets/img/logobkt.png" alt="">
         <h1 class="sitename">DISPAR BUKITTINGGI</h1>
       </a>
 
