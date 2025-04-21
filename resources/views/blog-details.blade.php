@@ -46,7 +46,7 @@
           <li><a href="index">Home</a></li>
           <li><a href="about" class="active">About</a></li>
           <li><a href="wisata">Wisata</a></li>
-          <li><a href="#detail-blog">blog</a></li>
+          <li><a href="#detail-blog">Blog</a></li>
           <li><a href="detail-hotel">Hotel</a></li>
           
           <li><a href="#contact">Contact</a></li>

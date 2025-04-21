@@ -419,7 +419,7 @@
                   <h4>Blog 2</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="ragel/ragel/assets/img/blog/app-2.jpg" title="Blog 2" data-gallery="blog-gallery-blog" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
@@ -432,7 +432,7 @@
                   <h4>Blog 3</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="assets/img/blog/app-3.jpg" title="Blog 3" data-gallery="blog-gallery-blog" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
@@ -444,7 +444,7 @@
                   <h4>Event 1</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="ragel/ragel/assets/img/blog/product-1.jpg" title="Event 1" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
@@ -457,7 +457,7 @@
                   <h4>Event 2</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="ragel/ragel/assets/img/blog/product-2.jpg" title="Event 2" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
@@ -470,7 +470,7 @@
                   <h4>Event 3</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="assets/img/blog/product-3.jpg" title="Event 3" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
