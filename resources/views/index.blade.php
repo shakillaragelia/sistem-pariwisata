@@ -208,7 +208,7 @@
           <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="wisata-item">
               <div class="img">
-                <img src="ragel/ragel/assets/img/services-2.jpg" class="img-fluid" alt="">
+                <img src="ragel/ragel/assets/img/sejarah.jpg" class="img-fluid" alt="">
               </div>
               <div class="details position-relative">
                 <div class="icon">
