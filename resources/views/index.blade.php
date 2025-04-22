@@ -9,7 +9,7 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="ragel/ragel/assets/img/favicon.png" rel="icon">
+  <link href="ragel/ragel/assets/img/icon.png" rel="icon">
   <link href="ragel/ragel/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -60,7 +60,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="cta-btn" href="index.blade.php#about">Get Started</a>
+      <!-- <a class="cta-btn" href="index.blade.php#about">Get Started</a> -->
 
     </div>
   </header>
@@ -123,7 +123,7 @@
     </section><!-- /About Section -->
 
     <!-- Stats Section -->
-    <section id="stats" class="stats section light-background">
+   <!-- <section id="stats" class="stats section light-background">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -137,9 +137,9 @@
                 <p>Happy Clients</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div> End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+       <!--   <div class="col-lg-3 col-md-6">
             <div class="stats-item d-flex align-items-center w-100 h-100">
               <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
               <div>
@@ -147,9 +147,9 @@
                 <p>Projects</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div> End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+        <!--  <div class="col-lg-3 col-md-6">
             <div class="stats-item d-flex align-items-center w-100 h-100">
               <i class="bi bi-headset color-green flex-shrink-0"></i>
               <div>
@@ -157,9 +157,9 @@
                 <p>Hours Of Support</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div> End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+       <!--   <div class="col-lg-3 col-md-6">
             <div class="stats-item d-flex align-items-center w-100 h-100">
               <i class="bi bi-people color-pink flex-shrink-0"></i>
               <div>
@@ -167,13 +167,13 @@
                 <p>Hard Workers</p>
               </div>
             </div>
-          </div><!-- End Stats Item -->
+          </div> End Stats Item -->
 
         </div>
 
       </div>
 
-    </section><!-- /Stats Section -->
+    </section>  <!-- /Stats Section -->
 
     <!-- Wisata Section -->
     <section id="wisata" class="wisata section">
@@ -438,11 +438,11 @@
 
             <div class="col-lg-4 col-md-6 blog-item isotope-item filter-event">
               <div class="blog-content h-100">
-                <img src="ragel/ragel/assets/img/blog/product-1.jpg" class="img-fluid" alt="">
+                <img src="ragel/ragel/assets/img/blog/pedati.jpg" class="img-fluid" alt="">
                 <div class="blog-info">
                   <h4>Event 1</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="ragel/ragel/assets/img/blog/product-1.jpg" title="Event 1" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="ragel/ragel/assets/img/blog/pedati.jpg" title="Event 1" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
@@ -451,11 +451,11 @@
 
             <div class="col-lg-4 col-md-6 blog-item isotope-item filter-event">
               <div class="blog-content h-100">
-                <img src="ragel/ragel/assets/img/blog/product-2.jpg" class="img-fluid" alt="">
+                <img src="ragel/ragel/assets/img/blog/pacukuda.jpg" class="img-fluid" alt="">
                 <div class="blog-info">
                   <h4>Event 2</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="ragel/ragel/assets/img/blog/product-2.jpg" title="Event 2" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="ragel/ragel/assets/img/blog/pacukuda.jpg" title="Event 2" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                   <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
@@ -572,7 +572,7 @@
                 <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
-                  <p>A108 Adam Street, New York, NY 535022</p>
+                  <p>JL. Belakang Balok, Kota Bukittinggi, Sumatera Barat</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -580,7 +580,7 @@
                 <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
+                  <p>+62 000000</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -641,12 +641,12 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.blade.php" class="logo d-flex align-items-center">
-            <span class="sitename">DISPAR</span>
+            <span class="sitename">DISPAR BUKITTINGGI</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p>JL. Belakang Balok</p>
+            <p>Kota Bukittinggi, Sumatera Barat</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+62 000000</span></p>
             <p><strong>Email:</strong> <span>info@example.com</span></p>
           </div>
           <div class="social-links d-flex mt-4">
@@ -657,7 +657,7 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-md-3 footer-links">
+   <!--     <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
@@ -666,9 +666,9 @@
             <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
           </ul>
-        </div>
+        </div> -->
 
-        <div class="col-lg-2 col-md-3 footer-links">
+   <!--     <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
@@ -677,9 +677,9 @@
             <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
           </ul>
-        </div>
+        </div> -->
 
-        <div class="col-lg-4 col-md-12 footer-newsletter">
+   <!--     <div class="col-lg-4 col-md-12 footer-newsletter">
           <h4>Our Newsletter</h4>
           <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
           <form action="forms/newsletter.php" method="post" class="php-email-form">
@@ -691,7 +691,7 @@
         </div>
 
       </div>
-    </div>
+    </div> -->
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">Shakilla Ragelia</strong> <span>All Rights Reserved</span></p>
