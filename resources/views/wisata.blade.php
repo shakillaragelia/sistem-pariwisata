@@ -1,7 +1,11 @@
-<section id="wisata">
-  <h2>Daftar Wisata</h2>
-      <!-- Wisata Section -->
-      <section id="wisata" class="wisata section">
+@extends('layouts.app')
+
+@section('content')
+
+<main class="main">
+ 
+ <!-- Wisata Section -->
+ <section id="wisata" class="wisata section">
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
@@ -16,7 +20,7 @@
     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
       <div class="wisata-item">
         <div class="img">
-          <img src="ragel/ragel/assets/img/services-1.jpg" class="img-fluid" alt="">
+          <img src="ragel/ragel/assets/img/sejarah.jpg" class="img-fluid" alt="">
         </div>
         <div class="details position-relative">
           <div class="icon">
@@ -33,7 +37,7 @@
     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
       <div class="wisata-item">
         <div class="img">
-          <img src="ragel/ragel/assets/img/services-2.jpg" class="img-fluid" alt="">
+          <img src="ragel/ragel/assets/img/sejarah-2.jpg" class="img-fluid" alt="">
         </div>
         <div class="details position-relative">
           <div class="icon">
@@ -50,7 +54,7 @@
     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
       <div class="wisata-item">
         <div class="img">
-          <img src="ragel/ragel/assets/img/services-3.jpg" class="img-fluid" alt="">
+          <img src="ragel/ragel/assets/img/sejarah-3.jpg" class="img-fluid" alt="">
         </div>
         <div class="details position-relative">
           <div class="icon">
@@ -67,7 +71,7 @@
     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
       <div class="wisata-item">
         <div class="img">
-          <img src="ragel/ragel/assets/img/services-3.jpg" class="img-fluid" alt="">
+          <img src="ragel/ragel/assets/img/sejarah-4.jpg" class="img-fluid" alt="">
         </div>
         <div class="details position-relative">
           <div class="icon">
@@ -86,4 +90,5 @@
 </div>
 
 </section><!-- /Wisata Section -->
-</section>
+</main>
+@endsection

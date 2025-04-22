@@ -1,7 +1,11 @@
-<section id="blog">
-  <h1>BLOG & EVENT</h1>
-  <!-- blog Section -->
-  <section id="blog" class="blog section">
+@extends('layouts.app')
+
+@section('content')
+
+<main class="main">
+
+<!-- blog Section -->
+ <section id="blog" class="blog section">
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
@@ -61,11 +65,11 @@
 
       <div class="col-lg-4 col-md-6 blog-item isotope-item filter-event">
         <div class="blog-content h-100">
-          <img src="ragel/ragel/assets/img/blog/product-1.jpg" class="img-fluid" alt="">
+          <img src="ragel/ragel/assets/img/blog/pedati.jpg" class="img-fluid" alt="">
           <div class="blog-info">
             <h4>Event 1</h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a href="ragel/ragel/assets/img/blog/product-1.jpg" title="Event 1" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+            <a href="ragel/ragel/assets/img/blog/pedati.jpg" title="Event 1" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
             <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
           </div>
         </div>
@@ -74,11 +78,11 @@
 
       <div class="col-lg-4 col-md-6 blog-item isotope-item filter-event">
         <div class="blog-content h-100">
-          <img src="ragel/ragel/assets/img/blog/product-2.jpg" class="img-fluid" alt="">
+          <img src="ragel/ragel/assets/img/blog/pacukuda.jpg" class="img-fluid" alt="">
           <div class="blog-info">
             <h4>Event 2</h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a href="ragel/ragel/assets/img/blog/product-2.jpg" title="Event 2" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+            <a href="ragel/ragel/assets/img/blog/pacukuda.jpg" title="Event 2" data-gallery="blog-gallery-event" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
             <a href="detail-blog" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
           </div>
         </div>
@@ -104,5 +108,6 @@
 
 </div>
 
-</section><!-- /blog Section -->
-</section>
+</section> <!-- /blog Section -->
+</main>
+@endsection

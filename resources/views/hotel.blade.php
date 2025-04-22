@@ -1,7 +1,11 @@
-<section id="hotel">
-  <h1>HOTEL</h1>
-   <!-- Hotel Section -->
-   <section id="hotel" class="hotel section light-background">
+@extends('layouts.app')
+
+@section('content')
+
+  <main class="main">
+
+ <!-- Hotel Section -->
+ <section id="hotel" class="hotel section light-background">
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
@@ -15,9 +19,9 @@
 
     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
       <div class="member">
-        <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-1.jpg" class="img-fluid" alt=""></div>
+        <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" class="img-fluid" alt=""></div>
         <div class="member-info">
-          <h4>NAMA HOTEL</h4>
+          <h4>ROCKY HOTEL BUKITTINGGI</h4>
           <a href="hotel-details.blade.php" class="stretched-link"></a>
           <span>DESKRIPSI SINGKAT</span>
           <div class="social">
@@ -32,10 +36,10 @@
 
     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
       <div class="member">
-        <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-2.jpg" class="img-fluid" alt=""></div>
+        <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-2.jpg" class="img-fluid" alt=""></div>
         <div class="member-info">
         <a href="detail-hotel" class="stretched-link">
-          <h4>Sarah Jhonson</h4>
+          <h4>MONOPOLI HOTEL BUKITTINGGI</h4>
           <span>Product Manager</span>
           <div class="social">
             <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -49,10 +53,10 @@
 
     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
       <div class="member">
-        <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-3.jpg" class="img-fluid" alt=""></div>
+        <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-3.jpg" class="img-fluid" alt=""></div>
         <div class="member-info">
         <a href="hotel-details.blade.php" class="stretched-link">
-          <h4>William Anderson</h4>
+          <h4>GRAND ROYAL DENAI HOTEL</h4>
           <span>CTO</span>
           <div class="social">
             <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -69,4 +73,5 @@
 </div>
 
 </section><!-- /Hotel Section -->
-</section>
+  </main>
+@endsection

@@ -6,20 +6,32 @@ use App\Http\Controllers\Indexcontroller;
 
 
 Route::get("/", [ProductController::class, "index"]) -> name("product");
+
 Route::get('/index', function () {
     return view('index');
 });
 
-Route::get('/sejarah', function () {
-    return view('sejarah-details');
+Route::get('/about', function () {
+    return view('about');
 });
 
-Route::get('/detail-blog', function () {
-    return view('blog-details');
+Route::get('/wisata', function () {
+    return view('wisata');
 });
 
-Route::get('/detail-hotel', function () {
-    return view('hotel-details');
+Route::get('/event', function () {
+    return view('event');
 });
+
+Route::get('/hotel', function () {
+    return view('hotel');
+});
+
+Route::get('/kontak', function () {
+    return view('kontak');
+});
+
+
+
 
 Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');

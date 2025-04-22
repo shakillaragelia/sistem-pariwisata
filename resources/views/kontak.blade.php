@@ -1,12 +1,16 @@
-<section id="contact">
-  <h1>CONTACT INFO</h1>
-  <!-- Contact Section -->
-  <section id="contact" class="contact section">
+@extends('layouts.app')
+
+@section('content')
+
+  <main class="main">
+ 
+ <!-- Contact Section -->
+ <section id="contact" class="contact section">
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
-  <h2>Contact</h2>
-  <p>Necessitatibus eius consequatur</p>
+  <h2>Kontak</h2>
+  <p>HUBUNGI KAMI</p>
 </div><!-- End Section Title -->
 
 <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -18,16 +22,16 @@
         <div class="col-lg-12">
           <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
             <i class="bi bi-geo-alt"></i>
-            <h3>Address</h3>
-            <p>A108 Adam Street, New York, NY 535022</p>
+            <h3>Alamat</h3>
+            <p>Jl. Perwira No.54, Belakang Balok, Kec. Aur Birugo Tigo Baleh</p>
           </div>
         </div><!-- End Info Item -->
 
         <div class="col-md-6">
           <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
             <i class="bi bi-telephone"></i>
-            <h3>Call Us</h3>
-            <p>+1 5589 55488 55</p>
+            <h3>Telepon</h3>
+            <p>+62 000000</p>
           </div>
         </div><!-- End Info Item -->
 
@@ -78,5 +82,6 @@
 
 </div>
 
-</section><!-- /Contact Section -->
-</section>
+</section> <!-- /Contact Section -->
+</main>
+@endsection
