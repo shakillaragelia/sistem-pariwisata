@@ -92,8 +92,6 @@
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <h3> Tentang Bukittinggi</h3>
             <img src="ragel/ragel/assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
-            <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
-            <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
           </div>
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
             <div class="content ps-0 ps-lg-5">
@@ -495,9 +493,9 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-1.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
-                <h4>NAMA HOTEL</h4>
+                <h4>ROCKY HOTEL BUKITTINGGI</h4>
                 <a href="hotel-details.blade.php" class="stretched-link"></a>
                 <span>DESKRIPSI SINGKAT</span>
                 <div class="social">
@@ -512,10 +510,10 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
-              <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-2.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-2.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
               <a href="detail-hotel" class="stretched-link">
-                <h4>Sarah Jhonson</h4>
+                <h4>MONOPOLI HOTEL BUKITTINGGI</h4>
                 <span>Product Manager</span>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
