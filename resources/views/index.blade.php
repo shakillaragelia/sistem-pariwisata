@@ -49,13 +49,13 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="#hero" class="active">Beranda</a></li>
+          <li><a href="#about">Tentang</a></li>
           <li><a href="#wisata">Wisata</a></li>
-          <li><a href="#blog">blog</a></li>
+          <li><a href="#blog">Berita</a></li>
           <li><a href="#hotel">Hotel</a></li>
           
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact">Kontak</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -105,10 +105,7 @@
                 <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
                 <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
               </ul>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-              </p>
+            
 
              <!-- <div class="position-relative mt-4">
                 <img src="ragel/ragel/assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
@@ -571,15 +568,15 @@
               <div class="col-lg-12">
                 <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
-                  <p>JL. Belakang Balok, Kota Bukittinggi, Sumatera Barat</p>
+                  <h3>Alamat</h3>
+                  <p>Jl. Perwira No.54, Belakang Balok, Kec. Aur Birugo Tigo Baleh</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="col-md-6">
                 <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
+                  <h3>Telepon</h3>
                   <p>+62 000000</p>
                 </div>
               </div><!-- End Info Item -->
@@ -644,8 +641,8 @@
             <span class="sitename">DISPAR BUKITTINGGI</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>JL. Belakang Balok</p>
-            <p>Kota Bukittinggi, Sumatera Barat</p>
+            <p>Jl. Perwira No.54, Belakang Balok, Kec. Aur Birugo Tigo Baleh</p> 
+            <p>Kota Bukittinggi, Sumatera Barat 26181</p>
             <p class="mt-3"><strong>Phone:</strong> <span>+62 000000</span></p>
             <p><strong>Email:</strong> <span>info@example.com</span></p>
           </div>
