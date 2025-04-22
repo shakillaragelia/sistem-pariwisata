@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Indexcontroller;
 
 
 Route::get("/", [ProductController::class, "index"]) -> name("product");
@@ -21,3 +21,5 @@ Route::get('/detail-blog', function () {
 Route::get('/detail-hotel', function () {
     return view('hotel-details');
 });
+
+Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');

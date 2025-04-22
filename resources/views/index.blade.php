@@ -527,10 +527,10 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="ragel/ragel/assets/img/hotel/team-3.jpg" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-3.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
               <a href="hotel-details.blade.php" class="stretched-link">
-                <h4>William Anderson</h4>
+                <h4>GRAND ROYAL DENAI HOTEL</h4>
                 <span>CTO</span>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
