@@ -38,7 +38,7 @@
         <div class="col-md-6">
           <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
             <i class="bi bi-envelope"></i>
-            <h3>Email Us</h3>
+            <h3>Email Kami</h3>
             <p>info@example.com</p>
           </div>
         </div><!-- End Info Item -->
@@ -51,27 +51,27 @@
         <div class="row gy-4">
 
           <div class="col-md-6">
-            <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+            <input type="text" name="name" class="form-control" placeholder="Nama Anda" required="">
           </div>
 
           <div class="col-md-6 ">
-            <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+            <input type="email" class="form-control" name="email" placeholder="Email Anda" required="">
           </div>
 
           <div class="col-md-12">
-            <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+            <input type="text" class="form-control" name="subject" placeholder="Subjek" required="">
           </div>
 
           <div class="col-md-12">
-            <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
+            <textarea class="form-control" name="message" rows="4" placeholder="Pesan" required=""></textarea>
           </div>
 
           <div class="col-md-12 text-center">
-            <div class="loading">Loading</div>
+            <div class="loading">Memuat</div>
             <div class="error-message"></div>
-            <div class="sent-message">Your message has been sent. Thank you!</div>
+            <div class="sent-message">Pesan Anda Telah Terkirim. Terima Kasih!</div>
 
-            <button type="submit">Send Message</button>
+            <button type="submit">Kirim Pesan</button>
           </div>
 
         </div>

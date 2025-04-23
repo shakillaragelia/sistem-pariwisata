@@ -23,12 +23,9 @@
         <div class="member-info">
           <h4>ROCKY HOTEL BUKITTINGGI</h4>
           <a href="hotel-details.blade.php" class="stretched-link"></a>
-          <span>DESKRIPSI SINGKAT</span>
+          <span></span>
           <div class="social">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href=""><i class="bi bi-geo-alt"></i></a>
           </div>
         </div>
       </div>
@@ -40,12 +37,9 @@
         <div class="member-info">
         <a href="detail-hotel" class="stretched-link">
           <h4>MONOPOLI HOTEL BUKITTINGGI</h4>
-          <span>Product Manager</span>
+          <span></span>
           <div class="social">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+          <a href=""><i class="bi bi-geo-alt"></i></a>
           </div>
         </div>
       </div>
@@ -57,12 +51,9 @@
         <div class="member-info">
         <a href="hotel-details.blade.php" class="stretched-link">
           <h4>GRAND ROYAL DENAI HOTEL</h4>
-          <span>CTO</span>
+          <span></span>
           <div class="social">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+          <a href=""><i class="bi bi-geo-alt"></i></a>
           </div>
         </div>
       </div>

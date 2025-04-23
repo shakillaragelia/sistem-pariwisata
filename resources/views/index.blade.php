@@ -121,7 +121,6 @@
                   <h4>Jam Gadang</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="ragel/ragel/assets/img/ikon-1.jpg" title="Jam Gadang" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
@@ -133,8 +132,6 @@
                   <h4>Karupuak Sanjai</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="ragel/ragel/assets/img/ikon-2.jpg" title="Karupuak Sanjai" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
               </div>
             </div><!-- End blog Item -->
 
@@ -145,7 +142,6 @@
                   <h4>Ngarai Sianok</h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                   <a href="ragel/ragel/assets/img/ikon-3.jpg" title="Ngarai Sianok" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="blog-details.blades.php" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->

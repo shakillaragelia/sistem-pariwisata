@@ -14,9 +14,7 @@
 </div><!-- End Section Title -->
 
 <div class="container" data-aos="fade-up" data-aos-delay="100">
-
   <div class="row gy-5">
-
     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
       <div class="wisata-item">
         <div class="img">
@@ -84,11 +82,8 @@
         </div>
       </div>
     </div><!-- End Wisata Item -->
-
   </div>
-
 </div>
-
 </section><!-- /Wisata Section -->
 </main>
 @endsection
