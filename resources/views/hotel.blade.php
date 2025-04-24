@@ -22,7 +22,7 @@
         <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" class="img-fluid" alt=""></div>
         <div class="member-info">
           <h4>ROCKY HOTEL BUKITTINGGI</h4>
-          <a href="hotel-details.blade.php" class="stretched-link"></a>
+          <a href="detail-hotel" class="stretched-link"></a>
           <span></span>
           <div class="social">
             <a href=""><i class="bi bi-geo-alt"></i></a>

@@ -31,6 +31,10 @@ Route::get('/kontak', function () {
     return view('kontak');
 });
 
+Route::get('/detail-hotel', function () {
+    return view('detail-hotel');
+});
+
 
 
 
