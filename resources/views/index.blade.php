@@ -119,8 +119,8 @@
                 <img src="ragel/ragel/assets/img/ikon-1.jpg" class="img-fluid" alt="">
                 <div class="blog-info">
                   <h4>Jam Gadang</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="ragel/ragel/assets/img/ikon-1.jpg" title="Jam Gadang" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
+                  <a href="ragel/ragel/assets/img/ikon-1.jpg" title="Jam Gadang Merupakan salah satu Cagar Budaya yang ada di Kota Bukittingi" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
@@ -140,13 +140,14 @@
                 <img src="ragel/ragel/assets/img/ikon-3.jpg" class="img-fluid" alt="">
                 <div class="blog-info">
                   <h4>Ngarai Sianok</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="ragel/ragel/assets/img/ikon-3.jpg" title="Ngarai Sianok" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
+                  <a href="ragel/ragel/assets/img/ikon-3.jpg" title="Ngarai Sianok salah satu cagar alama yang ada di Kota Bukittinggi" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 </div>
               </div>
             </div><!-- End blog Item -->
           </div><!-- End blog Container -->
         </div>
+      </div>
       </div>
     </section><!-- /blog Section -->
 </main>
