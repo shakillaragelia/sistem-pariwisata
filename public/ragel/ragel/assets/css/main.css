@@ -1772,6 +1772,23 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
+.blog .blog-content img {
+  height: 300px; /* kamu bisa adjust sesuai selera */
+  object-fit: cover;
+  width: 100%;
+}
+
+.blog .blog-item {
+  display: flex;
+}
+
+.blog .blog-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 /*--------------------------------------------------------------
 # wisata Details Section
 --------------------------------------------------------------*/
@@ -1838,9 +1855,3 @@ section,
   color: var(--accent-color);
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}
