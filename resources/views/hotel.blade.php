@@ -49,7 +49,7 @@
       <div class="member">
         <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-3.jpg" class="img-fluid" alt=""></div>
         <div class="member-info">
-        <a href="hotel-details.blade.php" class="stretched-link">
+        <a href="detail-hotel" class="stretched-link">
           <h4>GRAND ROYAL DENAI HOTEL</h4>
           <span></span>
           <div class="social">

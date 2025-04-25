@@ -1,20 +1,15 @@
 @extends('layouts.app')
-
 @section('content')
-
-
+ 
   <main class="main">
-
     <!-- hotel Details Section -->
-    <section id="hotel-details" class="hotel-details section">
+    <section id="detail-hotel" class="detail-hotel section">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-4">
-
           <div class="col-lg-8">
-            <div class="hotel-details-slider swiper init-swiper">
-
+            <div class="detail-hotel-slider swiper init-swiper">
               <script type="application/json" class="swiper-config">
                 {
                   "loop": true,
@@ -32,28 +27,22 @@
               </script>
 
               <div class="swiper-wrapper align-items-center">
-
                 <div class="swiper-slide">
                   <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
                 </div>
-
                 <div class="swiper-slide">
                   <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
                 </div>
-
                 <div class="swiper-slide">
                   <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
                 </div>
-
                 <div class="swiper-slide">
                   <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
                 </div>
-
               </div>
               <div class="swiper-pagination"></div>
             </div>
           </div>
-
           <div class="col-lg-4">
             <div class="hotel-info" data-aos="fade-up" data-aos-delay="200">
               <h3>INFORMASI HOTEL</h3>
@@ -71,12 +60,8 @@
               </p>
             </div>
           </div>
-
         </div>
-
       </div>
-
     </section><!-- /hotel Details Section -->
-
   </main>
 @endsection

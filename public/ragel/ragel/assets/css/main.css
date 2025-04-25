@@ -1553,7 +1553,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Team Section
+# hotel Section
 --------------------------------------------------------------*/
 .hotel .member {
   position: relative;
@@ -1621,6 +1621,67 @@ section,
   font-size: 16px;
   margin: 0 2px;
 }
+
+/* DETAIL-HOTEL SECTION */
+.detail-hotel .detail-hotel-slider img {
+  width: 100%;
+}
+
+.detail-hotel .detail-hotel-slider .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+
+.detail-hotel .detail-hotel-slider .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: color-mix(in srgb, var(--default-color), transparent 85%);
+  opacity: 1;
+}
+
+.detail-hotel .detail-hotel-slider .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: var(--accent-color);
+}
+
+.detail-hotel .hotel-info {
+  background-color: var(--surface-color);
+  padding: 30px;
+  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.detail-hotel .hotel-info h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+}
+
+.detail-hotel .hotel-info ul {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+}
+
+.detail-hotel .hotel-info ul li+li {
+  margin-top: 10px;
+}
+
+.detail-hotel .hotel-description {
+  padding-top: 30px;
+}
+
+.detail-hotel .hotel-description h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.detail-hotel .hotel-description p {
+  padding: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+}
+
 
 /*--------------------------------------------------------------
 # Contact Section
@@ -1853,5 +1914,65 @@ section,
   font-size: 20px;
   margin-right: 8px;
   color: var(--accent-color);
+}
+
+/* DETAIL-HOTEL SECTION */
+.detail-hotel .detail-hotel-slider img {
+  width: 100%;
+}
+
+.detail-hotel .detail-hotel-slider .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+
+.detail-hotel .detail-hotel-slider .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: color-mix(in srgb, var(--default-color), transparent 85%);
+  opacity: 1;
+}
+
+.detail-hotel .detail-hotel-slider .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: var(--accent-color);
+}
+
+.detail-hotel .hotel-info {
+  background-color: var(--surface-color);
+  padding: 30px;
+  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.detail-hotel .hotel-info h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+}
+
+.detail-hotel .hotel-info ul {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+}
+
+.detail-hotel .hotel-info ul li+li {
+  margin-top: 10px;
+}
+
+.detail-hotel .hotel-description {
+  padding-top: 30px;
+}
+
+.detail-hotel .hotel-description h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.detail-hotel .hotel-description p {
+  padding: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
