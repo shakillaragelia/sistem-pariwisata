@@ -39,6 +39,9 @@ Route::get('/senbud-detail', function () {
     return view('senbud-detail');
 });
 
+Route::get('/admin', function () {
+    return view('admin');
+});
 
 
 
