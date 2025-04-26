@@ -22,7 +22,8 @@
                 <div class="blog-info">
                   <h4>PEDATI</h4>
                   <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-                  <a href="ragel/ragel/assets/img/event-1.jpg" title="Pesta Budaya Seni Pameran Dagang dan Industri (PEDATI)" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="ragel/ragel/assets/img/event-1.jpg" title="Pesta Budaya Seni Pameran Dagang dan Industri (PEDATI)" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
+                  <a href="https://minangkabaunews.com/dibuka-wali-kota-pemko-bukittinggi-resmi-gelar-pedati-ke-13-tahun-2023/" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
               </div>
               </div>
             </div><!-- End blog Item -->
@@ -34,7 +35,8 @@
                   <h4>Pacu Kudo</h4>
                   <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
                   <a href="ragel/ragel/assets/img/event-2.jpg" title="Balap pacu kuda yang diadakan di arena Balap Kuda Bukit Ambacang" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              </div>
+                  <a href="https://www.rri.co.id/olimpik/807258/pacu-kuda-wali-kota-cup-open-race-2024-pemersatu-bukittinggi-agam" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
+                </div>
               </div>
             </div><!-- End blog Item -->
 
@@ -45,7 +47,8 @@
                   <h4>Police Women Run 10k 2024</h4>
                   <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
                   <a href="ragel/ragel/assets/img/event-3.jpg" title="Lomba lari yang diadakan oleh Polresta Kota Bukittinggi" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              </div>
+                  <a href="https://www.beyondrun.com/leaderboards?event=Polwan" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
+                </div>
             </div><!-- End blog Item -->
           </div><!-- End blog Container -->
         </div>
