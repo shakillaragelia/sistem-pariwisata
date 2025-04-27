@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@include('content')
+
+@section('content')
+
 <main>
 <!-- resources/views/list-wisata.blade.php -->
 
@@ -16,7 +18,9 @@
           <div class="card shadow-sm border-0">
             <div class="row g-0">
               <div class="col-md-4">
-                <img src="{{ asset('storage/' . $wisata->gambar) }}" class="img-fluid rounded-start" alt="{{ $wisata->nama }}">
+              <img src="{{ asset('ragel/ragel/assets/img/sejarah-4.jpg/' . $wisata->gambar) }}" class="img-fluid rounded-start" alt="{{ $wisata->nama }}">
+
+
               </div>
               <div class="col-md-8">
                 <div class="card-body d-flex flex-column justify-content-between h-100">
@@ -25,6 +29,7 @@
                     <p class="card-text">{{ Str::limit($wisata->deskripsi, 150) }}</p>
                   </div>
                   <a href="{{ route('detail-wisata', $wisata->id) }}" class="btn btn-primary mt-3" style="width: fit-content;">Lihat Detail</a>
+
                 </div>
               </div>
             </div>
@@ -32,8 +37,7 @@
         </div>
       @endforeach
     </div>
-
   </div>
 </section>
 </main>
-@extends
+@end
