@@ -1,5 +1,6 @@
-@extends()
-@include()
+@extends('layouts.app') 
+@section('content')
+
   <main class="main">
 
     <!-- Service Details Section -->
