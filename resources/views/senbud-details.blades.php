@@ -1,15 +1,16 @@
-
+@extends()
+@include()
   <main class="main">
 
     <!-- Service Details Section -->
-    <section id="service-details" class="service-details section">
+    <section id="wisata-details" class="wisata-details section">
 
       <div class="container">
 
         <div class="row gy-4">
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="services-list">
+            <div class="wisata-list">
               <a href="#" class="active">Web Design</a>
               <a href="#">Software Development</a>
               <a href="#">Product Management</a>
@@ -22,7 +23,7 @@
           </div>
 
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/img/services.jpg" alt="" class="img-fluid services-img">
+            <img src="ragel/ragel/assets/img/services.jpg" alt="" class="img-fluid wisata-img">
             <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
             <p>
               Blanditiis voluptate odit ex error ea sed officiis deserunt. Cupiditate non consequatur et doloremque consequuntur. Accusantium labore reprehenderit error temporibus saepe perferendis fuga doloribus vero. Qui omnis quo sit. Dolorem architecto eum et quos deleniti officia qui.

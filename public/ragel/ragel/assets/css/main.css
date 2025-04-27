@@ -1153,6 +1153,72 @@ section,
 }
 
 /*--------------------------------------------------------------
+# wisata Details Section
+--------------------------------------------------------------*/
+.service-details .wisata-list {
+  background-color: var(--surface-color);
+  padding: 10px 30px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  margin-bottom: 20px;
+}
+
+.wisata-detail .wisata-list a {
+  display: block;
+  line-height: 1;
+  padding: 8px 0 8px 15px;
+  border-left: 3px solid color-mix(in srgb, var(--default-color), transparent 70%);
+  margin: 20px 0;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  transition: 0.3s;
+}
+
+.wisata-detail .wisata-list a.active {
+  color: var(--heading-color);
+  font-weight: 700;
+  border-color: var(--accent-color);
+}
+
+.wisata-detail .wisata-list a:hover {
+  border-color: var(--accent-color);
+}
+
+.wisata-detail .wisata-img {
+  margin-bottom: 20px;
+}
+
+.wisata-detail h3 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.wisata-detail h4 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.wisata-detail p {
+  font-size: 15px;
+}
+
+.wisata-detail ul {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+}
+
+.wisata-detail ul li {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.wisata-detail ul i {
+  font-size: 20px;
+  margin-right: 8px;
+  color: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
 # Clients Section
 --------------------------------------------------------------*/
 .clients {
