@@ -1218,6 +1218,72 @@ section,
   color: var(--accent-color);
 }
 
+/* Tambahan untuk halaman list-wisata */
+
+#list-wisata {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+#list-wisata .section-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #2c2c2c;
+}
+
+#list-wisata .section-title p {
+  font-size: 18px;
+  color: #6c757d;
+  margin-bottom: 40px;
+}
+
+#list-wisata .card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  background: #fff;
+}
+
+#list-wisata .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+#list-wisata .card img {
+  height: 100%;
+  object-fit: cover;
+}
+
+#list-wisata .card-body {
+  padding: 20px;
+}
+
+#list-wisata .card-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+#list-wisata .card-text {
+  font-size: 16px;
+  color: #555;
+  margin-top: 10px;
+}
+
+#list-wisata .btn-primary {
+  background-color: #007bff;
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: background-color 0.3s;
+}
+
+#list-wisata .btn-primary:hover {
+  background-color: #0056b3;
+}
+
 /*--------------------------------------------------------------
 # Clients Section
 --------------------------------------------------------------*/

@@ -75,7 +75,7 @@
           <div class="icon">
             <i class="bi bi-easel"></i>
           </div>
-          <a href="senbud-detail" class="stretched-link">
+          <a href="list-wisata" class="stretched-link">
             <h3>Wisata Seni dan Budaya</h3>
           </a>
           <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>

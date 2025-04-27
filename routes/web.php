@@ -35,6 +35,10 @@ Route::get('/detail-hotel', function () {
     return view('detail-hotel');
 });
 
+Route::get('/list-wisata', function () {
+    return view('list-wisata');
+});
+
 Route::get('/senbud-detail', function () {
     return view('senbud-detail');
 });
