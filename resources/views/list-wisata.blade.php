@@ -9,7 +9,7 @@
   <div class="container">
     <div class="section-title">
       <h2>Wisata</h2>
-      <p>Destinasi Pilihan satu dua</p>
+      <p>Destinasi Pilihan</p>
     </div>
 
     <div class="row">

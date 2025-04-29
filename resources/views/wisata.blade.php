@@ -4,6 +4,19 @@
 
 <main class="main">
  
+ <!-- Hero Section -->
+ <section id="hero" class="hero section dark-background">
+
+<img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
+
+<div class="container d-flex flex-column align-items-center">
+  <h2 data-aos="fade-up" data-aos-delay="100">SELAMAT DATANG!</h2>
+  <p data-aos="fade-up" data-aos-delay="200">Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat. Temukan destinasi menarik, kuliner khas, dan pengalaman tak terlupakan di Kota Bukittinggi.</p>
+  <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+  </div>
+</div>
+
+</section><!-- /Hero Section -->
  <!-- Wisata Section -->
  <section id="wisata" class="wisata section">
 

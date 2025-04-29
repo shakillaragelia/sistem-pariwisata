@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Indexcontroller;
@@ -43,9 +44,6 @@ Route::get('/senbud-detail', function () {
     return view('senbud-detail');
 });
 
-Route::get('/admin', function () {
-    return view('admin');
-});
 
 
 
