@@ -8,6 +8,8 @@ use App\Http\Controllers\Indexcontroller;
 
 Route::get("/", [ProductController::class, "index"]) -> name("product");
 
+
+
 Route::get('/index', function () {
     return view('index');
 });
@@ -48,3 +50,9 @@ Route::get('/senbud-detail', function () {
 
 
 Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Matches The "/admin/users" URL
+    });
+});
