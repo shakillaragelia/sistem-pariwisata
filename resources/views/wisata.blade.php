@@ -20,11 +20,28 @@
  <!-- Wisata Section -->
  <section id="wisata" class="wisata section">
 
+
+
+ <!-- Portfolio Section -->
+ <section id="portfolio" class="portfolio section">
+
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
-  <h2>Wisata</h2>
-  <p>Kategori Wisata<br></p>
+  <h2>WISATA</h2>
+  <p>WISATA KOTA Bukittinggi</p>
 </div><!-- End Section Title -->
+
+<div class="container">
+
+  <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+      <li data-filter="*" class="filter-active">SEMUA</li>
+      <li data-filter=".filter-app">SEJARAH</li>
+      <li data-filter=".filter-product">ALAM</li>
+      <li data-filter=".filter-branding">KULINER</li>
+      <li data-filter=".filter-books">SENI BUDAYA</li>
+    </ul><!-- End Portfolio Filters -->
 
 <div class="container" data-aos="fade-up" data-aos-delay="100">
   <div class="row gy-5">

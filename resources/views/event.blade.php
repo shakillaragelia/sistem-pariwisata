@@ -26,7 +26,7 @@
         <h2>EVENT</h2>
         <p>EVENT KOTA BUKITTINGGI </p>
       </div><!-- End Section Title -->
-
+      
       <div class="container">
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
@@ -34,6 +34,7 @@
               <div class="blog-content h-100">
                 <img src="ragel/ragel/assets/img/event-1.jpg" class="img-fluid" alt="">
                 <div class="blog-info">
+                  
                   <h4>PEDATI</h4>
                   <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
                   <a href="ragel/ragel/assets/img/event-1.jpg" title="Pesta Budaya Seni Pameran Dagang dan Industri (PEDATI)" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
