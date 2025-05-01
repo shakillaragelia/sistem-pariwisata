@@ -38,9 +38,9 @@
     <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
       <li data-filter="*" class="filter-active">SEMUA</li>
       <li data-filter=".filter-app">SEJARAH</li>
-      <li data-filter=".filter-product">ALAM</li>
-      <li data-filter=".filter-branding">KULINER</li>
-      <li data-filter=".filter-books">SENI BUDAYA</li>
+      <li data-filter=".filter-alam">ALAM</li>
+      <li data-filter=".filter-kuliner">KULINER</li>
+      <li data-filter=".filter-senbud">SENI BUDAYA</li>
     </ul><!-- End Portfolio Filters -->
 
 <!-- Hotel Section -->
@@ -49,6 +49,7 @@
 <div class="container">
 
   <div class="row gy-5">
+    
 
     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
       <div class="member">
@@ -91,11 +92,8 @@
         </div>
       </div>
     </div><!-- End Hotel Member -->
-
   </div>
-
 </div>
-
 </section><!-- /Hotel Section -->
 </main>
 @endsection
