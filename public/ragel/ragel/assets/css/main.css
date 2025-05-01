@@ -1793,6 +1793,19 @@ section,
   margin: 0 2px;
 }
 
+.hotel .member .pic {
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+
+.hotel .member .pic img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
 /* DETAIL-HOTEL SECTION */
 .detail-hotel .detail-hotel-slider img {
   width: 100%;

@@ -58,7 +58,7 @@
           <a href="senbud-detail" class="stretched-link"></a>
           <span>Menara jam pemberian Ratu Belanda Wilhemina pada tahun 1927</span>
           <div class="social">
-            <a href=""><i class="bi bi-geo-alt"></i></a>
+            <a href="https://maps.app.goo.gl/EiDQ5t7Z4Xux5FcQ9"><i class="bi bi-geo-alt"></i></a>
           </div>
         </div>
       </div>
@@ -80,11 +80,11 @@
 
     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
       <div class="member">
-        <div class="pic"><img src="ragel/ragel/assets/img/hotel/hotel-3.jpg" class="img-fluid" alt=""></div>
+        <div class="pic"><img src="ragel/ragel/assets/img/ikon-3.jpg" class="img-fluid" alt=""></div>
         <div class="member-info">
         <a href="detail-hotel" class="stretched-link">
           <h4>NGARAI SIANOK</h4>
-          <span></span>
+          <span>Patahan Semangko membentuk lembah curam Ngarai Sianok di Sumatra.</span>
           <div class="social">
           <a href=""><i class="bi bi-geo-alt"></i></a>
           </div>
