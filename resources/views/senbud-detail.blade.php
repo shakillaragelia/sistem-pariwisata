@@ -63,7 +63,7 @@
           </div>
           <div class="col-lg-4">
             <div class="hotel-info" data-aos="fade-up" data-aos-delay="200">
-              <h3>INFORMASI HOTEL</h3>
+              <h3>INFORMASI WISATA</h3>
               <ul>
                 <li><strong>Hotel Bintang </strong>: Web design</li>
                 <li><strong>Alamat</strong>: Jl. Yos Sudarso No.29, Kayu Kubu, Kec. Guguk Panjang, Kota Bukittinggi, Sumatera Barat 26115</li>
@@ -72,7 +72,7 @@
               </ul>
             </div>
             <div class="hotel-description" data-aos="fade-up" data-aos-delay="300">
-              <h2>GRAND ROCKY HOTEL BUKITTINGGI</h2>
+              <h2>JAM GADANG</h2>
               <p>
                 Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
               </p>
