@@ -10,8 +10,8 @@
 <img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
 
 <div class="container d-flex flex-column align-items-center">
-  <h2 data-aos="fade-up" data-aos-delay="100">SELAMAT DATANG!</h2>
-  <p data-aos="fade-up" data-aos-delay="200">Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat. Temukan destinasi menarik, kuliner khas, dan pengalaman tak terlupakan di Kota Bukittinggi.</p>
+  <h2 data-aos="fade-up" data-aos-delay="100">WISATA</h2>
+  <!-- <p data-aos="fade-up" data-aos-delay="200">Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat. Temukan destinasi menarik, kuliner khas, dan pengalaman tak terlupakan di Kota Bukittinggi.</p> -->
   <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
   </div>
 </div>
@@ -37,7 +37,7 @@
 
     <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
       <li data-filter="*" class="filter-active">SEMUA</li>
-      <li data-filter=".filter-app">SEJARAH</li>
+      <li data-filter=".filter-sejarah">SEJARAH</li>
       <li data-filter=".filter-alam">ALAM</li>
       <li data-filter=".filter-kuliner">KULINER</li>
       <li data-filter=".filter-senbud">SENI BUDAYA</li>

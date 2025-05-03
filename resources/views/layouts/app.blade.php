@@ -57,6 +57,7 @@
   <script src="ragel/ragel/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="ragel/ragel/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="ragel/ragel/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 
   <!-- Main JS File -->
   <script src="ragel/ragel/assets/js/main.js"></script>
