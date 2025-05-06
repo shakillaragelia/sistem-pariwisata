@@ -46,7 +46,9 @@ Route::get('/senbud-detail', function () {
     return view('senbud-detail');
 });
 
-
+Route::get('/admin', function () {
+    return view('admin');
+});
 
 
 Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');

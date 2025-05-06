@@ -12,8 +12,8 @@
 <img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
 
 <div class="container d-flex flex-column align-items-center">
-  <h2 data-aos="fade-up" data-aos-delay="100">SELAMAT DATANG!</h2>
-  <p data-aos="fade-up" data-aos-delay="200">Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat. Temukan destinasi menarik, kuliner khas, dan pengalaman tak terlupakan di Kota Bukittinggi.</p>
+  <h2 data-aos="fade-up" data-aos-delay="100">DETAIL</h2>
+  <!-- <p data-aos="fade-up" data-aos-delay="200">Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat. Temukan destinasi menarik, kuliner khas, dan pengalaman tak terlupakan di Kota Bukittinggi.</p> -->
   <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
   </div>
 </div>
@@ -46,16 +46,16 @@
 
               <div class="swiper-wrapper align-items-center">
                 <div class="swiper-slide">
-                  <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
+                  <img src="ragel/ragel/assets/img/jam.jpg" alt="">
                 </div>
                 <div class="swiper-slide">
-                  <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
+                  <img src="ragel/ragel/assets/img/jam.jpg" alt="">
                 </div>
                 <div class="swiper-slide">
-                  <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
+                  <img src="ragel/ragel/assets/img/jam.jpg" alt="">
                 </div>
                 <div class="swiper-slide">
-                  <img src="ragel/ragel/assets/img/hotel/hotel-1.jpg" alt="">
+                  <img src="ragel/ragel/assets/img/jam.jpg" alt="">
                 </div>
               </div>
               <div class="swiper-pagination"></div>
@@ -74,7 +74,7 @@
             <div class="hotel-description" data-aos="fade-up" data-aos-delay="300">
               <h2>JAM GADANG</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+              Menara jam pemberian Ratu Belanda Wilhemina pada tahun 1927
               </p>
             </div>
           </div>
