@@ -43,7 +43,7 @@
               <a href="sejarah" class="stretched-link">
                 <h3>Wisata Sejarah</h3>
               </a>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis.</p>
+              <p>Bukittinggi adalah kota bersejarah dengan banyak peninggalan masa perjuangan dan kolonial. Wisata sejarah di kota ini menawarkan pengalaman edukatif dengan nuansa klasik dan budaya yang kental.</p>
             </div>
           </div>
         </div><!-- End Wisata Item -->
@@ -60,7 +60,7 @@
               <a href="detail" class="stretched-link">
                 <h3>Wisata Alam</h3>
               </a>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+              <p>Kota Bukittinggi merupakan salah satu destinasi unggulan di Sumatera Barat yang dikenal dengan keindahan alamnya. Dikelilingi oleh perbukitan dan ngarai yang menawan, kota ini menawarkan sejumlah tempat wisata alam yang memanjakan mata dan memberikan pengalaman menyegarkan.</p>
             </div>
           </div>
         </div><!-- End Wisata Item -->
@@ -77,7 +77,7 @@
               <a href="detail" class="stretched-link">
                 <h3>Wisata Kuliner</h3>
               </a>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+              <p>Wisata kuliner menjadi daya tarik utama Kota Bukittinggi, mencerminkan budaya dan kearifan lokalnya, mulai dari camilan dan minuman. Ragam kuliner ini memberi pengalaman rasa yang otentik bagi para wisatawan.</p>
             </div>
           </div>
         </div><!-- End Wisata Item -->
@@ -94,7 +94,7 @@
               <a href="list-wisata" class="stretched-link">
                 <h3>Wisata Seni dan Budaya</h3>
               </a>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+              <p>Seni dan budaya Minangkabau yang kaya nilai historis dan filosofis. Rumah Gadang menjadi ikon utama dengan atap berbentuk tanduk kerbau. Seni tenun Pandai Sikek hadir lewat motif khas dalam busana adat.</p>
             </div>
           </div>
         </div><!-- End Wisata Item -->
