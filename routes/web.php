@@ -46,15 +46,7 @@ Route::get('/senbud-detail', function () {
     return view('senbud-detail');
 });
 
-Route::get('/admin', function () {
-    return view('admin');
-});
-
 
 Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/users', function () {
-        // Matches The "/admin/users" URL
-    });
-});
+Route::get('dashboard/admin', [AdminController::class, 'index'])->name('admin');

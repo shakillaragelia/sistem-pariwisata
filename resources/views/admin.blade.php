@@ -1,5 +1,5 @@
   @extends('layouts.dashboard')
-  @include('content-admin')
+  @section('content-admin')
   
   <body class="with-welcome-text">
     <div class="container-scroller">
