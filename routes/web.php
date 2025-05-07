@@ -50,3 +50,8 @@ Route::get('/senbud-detail', function () {
 Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');
 
 Route::get('dashboard/admin', [AdminController::class, 'index'])->name('admin');
+
+Route::get('/kategoriad', function () {
+    return view('kategoriad');
+});
+
