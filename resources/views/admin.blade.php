@@ -205,24 +205,6 @@
               </a>
             </li>
 
-            <!-- UI ELEMENTS SECTIONS -->
-            <!-- <li class="nav-item nav-category">UI Elements</li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <i class="menu-icon mdi mdi-floor-plan"></i>
-                <span class="menu-title">UI Elements</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                </ul>
-              </div>
-            </li> -->
-
-<!-- FORM ELEMENTS SECTION  -->
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                 <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -260,20 +242,6 @@
               </div>
             </li>
 
-            <!-- ICONS ELEMENTS -->
-            <!-- <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-                <i class="menu-icon mdi mdi-layers-outline"></i>
-                <span class="menu-title">Icons</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="collapse" id="icons">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/icons/font-awesome.html">Font Awesome</a></li>
-                </ul>
-              </div>
-            </li> -->
-
             <!-- LOGIN AND REGISTER PAGES -->
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
@@ -292,13 +260,6 @@
               </div>
             </li>
 
-            <!-- DOCUMENTATION SECTION -->
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="docs/documentation.html">
-                <i class="menu-icon mdi mdi-file-document"></i>
-                <span class="menu-title">Documentation</span>
-              </a>
-            </li> -->
           </ul>
         </nav>
         <!-- partial -->
@@ -940,75 +901,6 @@
                                       </div>
                                       <div class="mt-3">
                                         <canvas id="leaveReport"></canvas>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row flex-grow">
-                            <div class="col-12 grid-margin stretch-card">
-                              <div class="card card-rounded">
-                                <div class="card-body">
-                                  <div class="row">
-                                    <div class="col-lg-12">
-                                      <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div>
-                                          <h4 class="card-title card-title-dash">Top Performer</h4>
-                                        </div>
-                                      </div>
-                                      <div class="mt-3">
-                                        <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
-                                          <div class="d-flex">
-                                            <img class="img-sm rounded-10" src="assets/images/faces/face1.jpg" alt="profile">
-                                            <div class="wrapper ms-3">
-                                              <p class="ms-1 mb-1 fw-bold">Brandon Washington</p>
-                                              <small class="text-muted mb-0">162543</small>
-                                            </div>
-                                          </div>
-                                          <div class="text-muted text-small"> 1h ago </div>
-                                        </div>
-                                        <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
-                                          <div class="d-flex">
-                                            <img class="img-sm rounded-10" src="assets/images/faces/face2.jpg" alt="profile">
-                                            <div class="wrapper ms-3">
-                                              <p class="ms-1 mb-1 fw-bold">Wayne Murphy</p>
-                                              <small class="text-muted mb-0">162543</small>
-                                            </div>
-                                          </div>
-                                          <div class="text-muted text-small"> 1h ago </div>
-                                        </div>
-                                        <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
-                                          <div class="d-flex">
-                                            <img class="img-sm rounded-10" src="assets/images/faces/face3.jpg" alt="profile">
-                                            <div class="wrapper ms-3">
-                                              <p class="ms-1 mb-1 fw-bold">Katherine Butler</p>
-                                              <small class="text-muted mb-0">162543</small>
-                                            </div>
-                                          </div>
-                                          <div class="text-muted text-small"> 1h ago </div>
-                                        </div>
-                                        <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
-                                          <div class="d-flex">
-                                            <img class="img-sm rounded-10" src="assets/images/faces/face4.jpg" alt="profile">
-                                            <div class="wrapper ms-3">
-                                              <p class="ms-1 mb-1 fw-bold">Matthew Bailey</p>
-                                              <small class="text-muted mb-0">162543</small>
-                                            </div>
-                                          </div>
-                                          <div class="text-muted text-small"> 1h ago </div>
-                                        </div>
-                                        <div class="wrapper d-flex align-items-center justify-content-between pt-2">
-                                          <div class="d-flex">
-                                            <img class="img-sm rounded-10" src="assets/images/faces/face5.jpg" alt="profile">
-                                            <div class="wrapper ms-3">
-                                              <p class="ms-1 mb-1 fw-bold">Rafell John</p>
-                                              <small class="text-muted mb-0">Alaska, USA</small>
-                                            </div>
-                                          </div>
-                                          <div class="text-muted text-small"> 1h ago </div>
-                                        </div>
                                       </div>
                                     </div>
                                   </div>
