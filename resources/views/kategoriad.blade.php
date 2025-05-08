@@ -1,6 +1,14 @@
 @extends('layouts.dashboard')
 @section('content-admin')
 
+@foreach($kategori as $item)
+  <tr>
+    <td>{{ $item->id }}</td>
+    <td>{{ $item->nama_kategori }}</td>
+    <td>{{ $item->deskripsi }}</td>
+  </tr>
+@endforeach
+
 
   <body class="with-welcome-text">
     <div class="container-scroller">

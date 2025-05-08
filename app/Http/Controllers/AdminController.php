@@ -12,3 +12,8 @@ class AdminController extends Controller
         return view('admin');
     }
 }
+ function kategori()
+{
+    $kategori = \App\Models\Kategori::all(); // pastikan model Kategori sudah ada
+    return view('kategoriad', compact('kategori'));
+}
