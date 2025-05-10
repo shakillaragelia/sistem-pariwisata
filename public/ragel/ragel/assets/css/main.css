@@ -2160,3 +2160,7 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
+.white-text-shadow {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
