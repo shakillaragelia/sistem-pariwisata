@@ -11,46 +11,46 @@ Route::get("/", [ProductController::class, "index"]) -> name("product");
 
 
 Route::get('/index', function () {
-    return view('index');
+    return view('home.index');
 });
 
 Route::get('/about', function () {
-    return view('about');
+    return view('home.about');
 });
 
 Route::get('/wisata', function () {
-    return view('wisata');
+    return view('home.wisata');
 });
 
 Route::get('/event', function () {
-    return view('event');
+    return view('home.event');
 });
 
 Route::get('/hotel', function () {
-    return view('hotel');
+    return view('home.hotel');
 });
 
 Route::get('/kontak', function () {
-    return view('kontak');
+    return view('home.kontak');
 });
 
 Route::get('/detail-hotel', function () {
-    return view('detail-hotel');
+    return view('home.detail-hotel');
 });
 
 Route::get('/list-wisata', function () {
-    return view('list-wisata');
+    return view('home.list-wisata');
 });
 
 Route::get('/senbud-detail', function () {
-    return view('senbud-detail');
+    return view('home.senbud-detail');
 });
 
 
 Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');
 
-Route::get('dashboard/admin', [AdminController::class, 'index'])->name('admin');
+Route::get('dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
 
-Route::get('/kategoriad', [AdminController::class, 'kategori'])->name('kategoriad');
+Route::get('/kategoriad', [AdminController::class, 'kategori'])->name('kategori.kategoriad');
 
 
