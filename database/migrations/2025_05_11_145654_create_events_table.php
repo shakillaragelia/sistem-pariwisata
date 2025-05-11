@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wisata', function (Blueprint $table) {
-            $table->id('id_wisata');
-            $table->foreignId('id_kategori');
-            $table->varchar('nama');
+        Schema::create('event', function (Blueprint $table) {
+            $table->id('id_event');
+            $table->foreignId('id_user');
+            $table->varchar('judul');
             $table->varchar('slug');
-            $table->text('deskripsi');
-            $table->decimal('harga');
-            $table->text('lokasi');
-            $table->gambar('varchar');
+            $table->varchar('deskripsi');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wisata');
+        Schema::dropIfExists('event');
     }
 };
