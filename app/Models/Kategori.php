@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kategori extends Model
 {
     use HasFactory;
+
+    protected $table = 'kategori'; // Sesuaikan jika nama tabel berbeda
+
     protected $fillable = [
-        'id_kategori',
         'nama',
         'slug',
         'gambar',
-
     ];
 }
+
