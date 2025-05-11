@@ -9,7 +9,9 @@ class kritiksaran extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama', (SESUAI DATABASE LAKUKAN DISEMUA MODEL)
-        'foto',
+        'id_kritiksaran', 
+        'id_user',
+        'subjek',
+        'konten',
     ];
 }

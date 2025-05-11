@@ -3,8 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class hotel extends Model
 {
-    //
+    use HasFactory;
+    protected $fillable = [
+        'id_hotel',
+        'nama',
+        'slug',
+        'deskripsi',
+        'lokasi',
+        'gambar',
+
+    ];
 }
