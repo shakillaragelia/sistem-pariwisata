@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -46,8 +47,14 @@ Route::get('/senbud-detail', function () {
     return view('home.senbud-detail');
 });
 
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'register_proses']);
 
-Route::get('/beranda', [Indexcontroller::class, 'beranda'])->name('beranda');
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'auth']);
+
+
 
 Route::get('dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
 

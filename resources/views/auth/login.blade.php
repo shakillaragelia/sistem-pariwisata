@@ -12,24 +12,47 @@
                                 <img src="{{asset('profil/img/logo.png')}}" class="navbar-logo">
                             </div>
                          
-                            <form class="pt-3" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-lg" name="email"
-                                        placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg" name="password"
-                                        placeholder="Password">
-                                </div>
-                                <div class="mt-3 d-grid gap-2">
-                                <button type="submit"class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn">SIGN IN</button>
-                                </div>
+                            <form class="pt-3" method="POST" action="{{ route('login') }}">
+    @csrf
 
-                                <div class="text-center mt-4 fw-light"> Buat akun baru ? <a
-                                        href="{{ route('register') }}" class="text-primary">Buat akun</a>
-                                </div>
-                            </form>
+    @if ($errors->any())
+        <div class="alert alert-danger mt-2">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success mt-2">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('failed'))
+        <div class="alert alert-danger mt-2">
+            {{ session('failed') }}
+        </div>
+    @endif
+
+    <div class="form-group">
+        <input type="email" class="form-control form-control-lg" name="email"
+            placeholder="Email" value="{{ old('email') }}">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control form-control-lg" name="password"
+            placeholder="Password">
+    </div>
+    <div class="mt-3 d-grid gap-2">
+        <button type="submit" class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn">SIGN IN</button>
+    </div>
+
+    <div class="text-center mt-4 fw-light"> Buat akun baru ?
+        <a href="{{ route('register') }}" class="text-primary">Buat akun</a>
+    </div>
+</form>
                         </div>
                     </div>
                 </div>
