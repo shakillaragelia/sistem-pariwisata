@@ -12,6 +12,11 @@ class wisata extends Model
         'id_wisata',
         'nama',
         'slug',
+        'id_kategori',
+        'deskripsi',
+        'harga',
+        'lokasi',
+        'gambar',
 
     ];
 }
