@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('komentar', function (Blueprint $table) {
+        Schema::create('komentars', function (Blueprint $table) {
             $table->id('id_komentar');
             $table->foreignId('id_wisata');
             $table->foreignId('id_user');

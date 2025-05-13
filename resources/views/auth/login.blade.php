@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.main')
 @section('content-admin')
 
 <body>
