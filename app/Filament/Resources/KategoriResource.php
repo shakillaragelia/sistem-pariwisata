@@ -14,8 +14,6 @@ use Filament\Forms\Components\FileUpload;
 class KategoriResource extends Resource
 {
     protected static ?string $model = Kategori::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'Data Master';
     protected static ?string $navigationLabel = 'Kategoris';
 
