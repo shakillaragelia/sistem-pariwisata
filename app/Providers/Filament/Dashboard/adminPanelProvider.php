@@ -18,7 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-// tambahkan ini manual
+// Register resource manual juga (opsional)
 use App\Filament\Resources\KategoriResource;
 
 class AdminPanelProvider extends PanelProvider
@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->resources([
                 KategoriResource::class,
             ])
+            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
