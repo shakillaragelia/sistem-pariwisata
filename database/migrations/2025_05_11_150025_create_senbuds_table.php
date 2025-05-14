@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('senbuds', function (Blueprint $table) {
             $table->id('id_senbud');
-            $table->varchar('nama');
-            $table->varchar('slug');
-            $table->varchar('kategori');
+            $table->string('nama');
+            $table->string('slug');
+            $table->string('kategori');
             $table->text('deskripsi');
-            $table->varchar('gambar');
+            $table->string('gambar');
             $table->timestamps();
         });
     }

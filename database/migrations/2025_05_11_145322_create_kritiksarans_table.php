@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kritiksarans', function (Blueprint $table) {
             $table->id('id_kritiksaran');
             $table->foreignId('id_user');
-            $table->varchar('subjek');
+            $table->string('subjek');
             $table->text('konten');
             $table->timestamps();
         });

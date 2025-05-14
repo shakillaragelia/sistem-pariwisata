@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('kuliners', function (Blueprint $table) {
             $table->id('id_kuliner');
-            $table->varchar('nama');
-            $table->varchar('slug');
+            $table->string('nama');
+            $table->string('slug');
             $table->text('deskripsi');
-            $table->varchar('gambar');
+            $table->string('gambar');
             $table->timestamps();
         });
     }

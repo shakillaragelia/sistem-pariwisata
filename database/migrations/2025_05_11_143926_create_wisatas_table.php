@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('wisatas', function (Blueprint $table) {
             $table->id('id_wisata');
             $table->foreignId('id_kategori');
-            $table->varchar('nama');
-            $table->varchar('slug');
+            $table->string('nama');
+            $table->string('slug');
             $table->text('deskripsi');
             $table->decimal('harga');
             $table->text('lokasi');
-            $table->gambar('varchar');
+            $table->string('gambar');
             $table->timestamps();
         });
     }

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('visits', function (Blueprint $table) {
             $table->id('id_visit');
             $table->foreignId('id_user');
-            $table->varchar('id_session');
-            $table->varchar('ip_address');
+            $table->string('id_session');
+            $table->string('ip_address');
             $table->date('tanggal');
-            $table->int('online');
+            $table->integer('online');
             $table->dateTime('time');
             $table->timestamps();
         });
