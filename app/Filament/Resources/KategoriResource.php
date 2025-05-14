@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\FileUpload;
 
 class KategoriResource extends Resource
 {
@@ -16,13 +17,17 @@ class KategoriResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'Data Master';
-    protected static ?string $navigationLabel = 'Kategori';
+    protected static ?string $navigationLabel = 'Kategoris';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\TextInput::make('nama')->required(),
             Forms\Components\TextInput::make('slug')->required(),
+            FileUpload::make('attachment')
+                ->label('Lampiran') 
+                ->directory('attachments') 
+                ->preserveFilenames(),    
         ]);
     }
 
