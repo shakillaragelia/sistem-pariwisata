@@ -24,7 +24,9 @@ class KulinerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama')->required(),
+                Forms\Components\TextInput::make('slug')->required(),
+                Forms\Components\TextInput::make('deskripsi')->required(),
             ]);
     }
 

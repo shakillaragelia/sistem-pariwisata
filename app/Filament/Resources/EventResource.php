@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
+
 
 class EventResource extends Resource
 {
@@ -25,9 +27,13 @@ class EventResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('judul')->required(),
-                Forms\Components\TextInput::make('slug')->required(),
+                Forms\Components\TextInput::make('slug')
+                ->required() 
+                ->reactive() 
+                ->afterStateUpdated(fn($state, callable $set) => $set ('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('deskripsi')->required(),
-    }
+            ]);
+        }
 
     public static function table(Table $table): Table
     {
