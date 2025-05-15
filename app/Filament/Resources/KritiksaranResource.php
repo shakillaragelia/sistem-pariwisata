@@ -24,7 +24,8 @@ class KritiksaranResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('subjek')->required(),
+                Forms\Components\TextInput::make('konten')->required(),
             ]);
     }
 
