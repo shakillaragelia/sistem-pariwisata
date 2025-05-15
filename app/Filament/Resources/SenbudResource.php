@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Resources;
 
-use App\Filament\Admin\Resources\WisataResource\Pages;
-use App\Filament\Admin\Resources\WisataResource\RelationManagers;
-use App\Models\Wisata;
+use App\Filament\Resources\SenbudResource\Pages;
+use App\Filament\Resources\SenbudResource\RelationManagers;
+use App\Models\Senbud;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,11 +13,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class WisataResource extends Resource
+class SenbudResource extends Resource
 {
-    protected static ?string $model = Wisata::class;
+    protected static ?string $model = Senbud::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Data Master';
+    protected static ?string $navigationLabel = 'Seni Budaya';
 
     public static function form(Form $form): Form
     {
@@ -56,9 +57,9 @@ class WisataResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListWisatas::route('/'),
-            'create' => Pages\CreateWisata::route('/create'),
-            'edit' => Pages\EditWisata::route('/{record}/edit'),
+            'index' => Pages\ListSenbuds::route('/'),
+            'create' => Pages\CreateSenbud::route('/create'),
+            'edit' => Pages\EditSenbud::route('/{record}/edit'),
         ];
     }
 }

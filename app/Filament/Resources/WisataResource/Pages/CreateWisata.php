@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources\WisataResource\Pages;
+namespace App\Filament\Resources\WisataResource\Pages;
 
-use App\Filament\Admin\Resources\WisataResource;
+use App\Filament\Resources\WisataResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

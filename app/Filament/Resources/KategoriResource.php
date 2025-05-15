@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Resources;
 
-use App\Filament\Admin\Resources\KategoriResource\Pages;
+use App\Filament\Resources\KategoriResource\Pages;
 use App\Models\Kategori;
 use Filament\Forms;
 use Filament\Forms\Form;
