@@ -24,7 +24,7 @@ class KomentarResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('komentar')->required(),
             ]);
     }
 

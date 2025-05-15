@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\FileUpload;
 
 class KategoriResource extends Resource
 {
@@ -21,6 +22,7 @@ class KategoriResource extends Resource
         return $form->schema([
             Forms\Components\TextInput::make('nama')->required(),
             Forms\Components\TextInput::make('slug')->required(),
+            FileUpload::make('gambar')
         ]);
     }
 
