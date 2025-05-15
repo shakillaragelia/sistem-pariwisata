@@ -18,6 +18,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+// ✅ Tambahkan resource manual
+use App\Filament\Resources\KategoriResource;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -34,6 +37,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+            ])
+            ->resources([
+                KategoriResource::class, // ✅ Ini penting banget
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
