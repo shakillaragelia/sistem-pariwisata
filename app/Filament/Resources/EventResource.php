@@ -24,8 +24,9 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                //
-            ]);
+                Forms\Components\TextInput::make('judul')->required(),
+                Forms\Components\TextInput::make('slug')->required(),
+                Forms\Components\TextInput::make('deskripsi')->required(),
     }
 
     public static function table(Table $table): Table

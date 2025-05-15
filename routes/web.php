@@ -7,7 +7,7 @@ use App\Http\Controllers\Indexcontroller;
 
 
 
-Route::get('/index', function () {
+Route::get('/', function () {
     return view('home.index');
 });
 Route::get('/about', function () {
