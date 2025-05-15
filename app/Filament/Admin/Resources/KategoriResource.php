@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Admin\Resources;
 
-use App\Filament\Resources\KategoriResource\Pages;
+use App\Filament\Admin\Resources\KategoriResource\Pages;
 use App\Models\Kategori;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,7 +13,6 @@ use Filament\Tables\Table;
 class KategoriResource extends Resource
 {
     protected static ?string $model = Kategori::class;
-
     protected static ?string $navigationGroup = 'Data Master';
     protected static ?string $navigationLabel = 'Kategori';
 
@@ -27,16 +26,17 @@ class KategoriResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
-            Tables\Columns\TextColumn::make('nama')->searchable(),
-            Tables\Columns\TextColumn::make('slug')->searchable(),
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make(),
-        ]);
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('nama'),
+                Tables\Columns\TextColumn::make('slug'),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
     }
 
     public static function getPages(): array

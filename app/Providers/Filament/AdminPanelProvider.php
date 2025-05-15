@@ -19,8 +19,8 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 // ✅ Tambahkan resource manual
-use App\Filament\Resources\KategoriResource;
-
+use App\Filament\Admin\Resources\KategoriResource;
+use App\Filament\Admin\Resources\WisataResource;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -39,7 +39,8 @@ class AdminPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
             ])
             ->resources([
-                KategoriResource::class, // ✅ Ini penting banget
+                KategoriResource::class, 
+                WisataResource::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([

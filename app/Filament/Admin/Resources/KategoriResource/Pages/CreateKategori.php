@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\KategoriResource\Pages;
+namespace App\Filament\Admin\Resources\KategoriResource\Pages;
 
-use App\Filament\Resources\KategoriResource;
+use App\Filament\Admin\Resources\KategoriResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateKategori extends CreateRecord
