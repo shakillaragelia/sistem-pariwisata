@@ -29,7 +29,7 @@ class HotelResource extends Resource
                 Forms\Components\TextInput::make('slug')->required(),
                 Forms\Components\TextInput::make('deskripsi')->required(),
                 Forms\Components\TextInput::make('lokasi')->required(),
-                FileUpload::make('gambar')
+                FileUpload::make('gambar'),
             ]);
     }
 
