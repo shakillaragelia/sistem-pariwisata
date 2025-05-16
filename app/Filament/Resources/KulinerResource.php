@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
 
 class KulinerResource extends Resource
 {
@@ -27,6 +28,7 @@ class KulinerResource extends Resource
                 Forms\Components\TextInput::make('nama')->required(),
                 Forms\Components\TextInput::make('slug')->required(),
                 Forms\Components\TextInput::make('deskripsi')->required(),
+                FileUpload::make('gambar'),
             ]);
     }
 
