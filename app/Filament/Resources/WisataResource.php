@@ -13,6 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+
 
 class WisataResource extends Resource
 {
@@ -32,10 +35,9 @@ class WisataResource extends Resource
             Forms\Components\TextInput::make('lokasi')->required(),
             Forms\Components\FileUpload::make('gambar')
                 ->image()
+                ->disk('public')
                 ->directory('wisata-images')
-                ->visibility('public')
                 ->required(),
-
             Forms\Components\Select::make('id_kategori')
                 ->label('Kategori')
                 ->relationship('kategori', 'nama') 
@@ -49,22 +51,22 @@ public static function table(Table $table): Table
 {
     return $table
         ->columns([
-            Tables\Columns\TextColumn::make('nama')->label('Nama'),
-            Tables\Columns\TextColumn::make('deskripsi')->label('Deskripsi')
-                ->label('Deskrispi')
+            Tables\Columns\TextColumn::make('nama')->searchable(),
+            Tables\Columns\TextColumn::make('deskripsi')
+                ->limit(50)
                 ->wrap()
-                ->limit(50),
-            Tables\Columns\TextColumn::make('slug')->label('Slug'),
+                ->toggleable(),
+            Tables\Columns\TextColumn::make('slug'),
             Tables\Columns\TextColumn::make('lokasi')
-                ->label('Lokasi')
+                ->limit(50)
                 ->wrap()
-                ->limit(50),
-            Tables\Columns\TextColumn::make('harga')->label('Harga'),
+                ->toggleable(),
+            Tables\Columns\TextColumn::make('harga'),
             Tables\Columns\ImageColumn::make('gambar')
                 ->label('Gambar')
-                ->disk('public') 
-                ->height(60),
-            Tables\Columns\TextColumn::make('kategori.nama')->label('Kategori'),
+                ->url(fn ($record) => asset('storage/' . $record->gambar)), 
+            Tables\Columns\TextColumn::make('kategori.nama') 
+                ->label('Kategori'),
         ])
         ->filters([
             //

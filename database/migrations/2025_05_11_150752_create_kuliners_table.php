@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_kuliner');
             $table->string('nama');
             $table->string('slug');
-            $table->foreignId('id_kategpri');
+            $table->foreignId('id_kategori');
             $table->text('deskripsi');
             $table->string('gambar');
             $table->timestamps();

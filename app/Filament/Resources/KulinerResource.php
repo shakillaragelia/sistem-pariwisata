@@ -13,6 +13,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 
 class KulinerResource extends Resource
 {
@@ -28,7 +30,16 @@ class KulinerResource extends Resource
                 Forms\Components\TextInput::make('nama')->required(),
                 Forms\Components\TextInput::make('slug')->required(),
                 Forms\Components\TextInput::make('deskripsi')->required(),
-                FileUpload::make('gambar'),
+                Forms\Components\FileUpload::make('gambar')
+                ->image()
+                ->disk('public')
+                ->directory('wisata-images')
+                ->required(),
+            Forms\Components\Select::make('id_kategori')
+                ->label('Kategori')
+                ->relationship('kategori', 'nama') 
+                ->required(),
+            
             ]);
     }
 
@@ -36,7 +47,17 @@ class KulinerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nama')->searchable(),
+                Tables\Columns\TextColumn::make('deskripsi')
+                    ->limit(50)
+                    ->wrap()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->url(fn ($record) => asset('storage/' . $record->gambar)), 
+                Tables\Columns\TextColumn::make('kategori.nama') 
+                    ->label('Kategori'),
             ])
             ->filters([
                 //
