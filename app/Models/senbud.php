@@ -9,11 +9,12 @@ class senbud extends Model
 {
     use HasFactory;
     protected $table ='senbuds';
+    protected $primaryKey = 'id_senbud';
     protected $fillable = [
         'id_senbud',
         'nama',
         'slug',
-        'kategori',
+        'id_kategori',
         'deskripsi',
         'gambar',
     ];

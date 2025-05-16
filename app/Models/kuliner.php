@@ -9,10 +9,12 @@ class kuliner extends Model
 {
     use HasFactory;
     protected $table ='kuliners';
+    protected $primaryKey = 'id_kuliner';
     protected $fillable = [
         'id_kuliner', 
         'nama',
         'slug',
+        'id_kategori',
         'deskripsi',
         'gambar',
     ];

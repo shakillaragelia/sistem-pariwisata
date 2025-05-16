@@ -33,7 +33,9 @@ class WisataResource extends Resource
             Forms\Components\FileUpload::make('gambar')
                 ->image()
                 ->directory('wisata-images')
-                ->required(), 
+                ->visibility('public')
+                ->required(),
+
             Forms\Components\Select::make('id_kategori')
                 ->label('Kategori')
                 ->relationship('kategori', 'nama') 
@@ -43,24 +45,40 @@ class WisataResource extends Resource
 }
 
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+public static function table(Table $table): Table
+{
+    return $table
+        ->columns([
+            Tables\Columns\TextColumn::make('nama')->label('Nama'),
+            Tables\Columns\TextColumn::make('deskripsi')->label('Deskripsi')
+                ->label('Deskrispi')
+                ->wrap()
+                ->limit(50),
+            Tables\Columns\TextColumn::make('slug')->label('Slug'),
+            Tables\Columns\TextColumn::make('lokasi')
+                ->label('Lokasi')
+                ->wrap()
+                ->limit(50),
+            Tables\Columns\TextColumn::make('harga')->label('Harga'),
+            Tables\Columns\ImageColumn::make('gambar')
+                ->label('Gambar')
+                ->disk('public') 
+                ->height(60),
+            Tables\Columns\TextColumn::make('kategori.nama')->label('Kategori'),
+        ])
+        ->filters([
+            //
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]),
+        ]);
+}
+
 
     public static function getRelations(): array
     {

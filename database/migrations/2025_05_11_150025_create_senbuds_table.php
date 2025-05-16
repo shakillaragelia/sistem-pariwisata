@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_senbud');
             $table->string('nama');
             $table->string('slug');
-            $table->string('kategori');
+            $table->foreignId('id_kategori');
             $table->text('deskripsi');
             $table->string('gambar');
             $table->timestamps();
