@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class komentar extends Model
 {
     use HasFactory;
+    protected $table ='komentars';
     protected $fillable = [
         'id_komentar',
         'id_wisata',

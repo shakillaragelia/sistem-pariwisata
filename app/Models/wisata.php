@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Wisata extends Model
 {
     use HasFactory;
-
+    protected $table ='wisatas';
     protected $fillable = [
         'id_wisata',
         'nama',
