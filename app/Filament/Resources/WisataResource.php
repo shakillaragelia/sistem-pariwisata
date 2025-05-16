@@ -22,17 +22,26 @@ class WisataResource extends Resource
     protected static ?string $navigationLabel = 'Wisata';
 
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('nama')->required(),
-                Forms\Components\TextInput::make('slug')->required(),
-                Forms\Components\TextInput::make('deskripsi')->required(),
-                Forms\Components\TextInput::make('harga')->required(),
-                Forms\Components\TextInput::make('lokasi')->required(),
-                FileUpload::make('gambar'),
-            ]);
-    }
+{
+    return $form
+        ->schema([
+            Forms\Components\TextInput::make('nama')->required(),
+            Forms\Components\TextInput::make('slug')->required(),
+            Forms\Components\Textarea::make('deskripsi')->required(),
+            Forms\Components\TextInput::make('harga')->required()->numeric(),
+            Forms\Components\TextInput::make('lokasi')->required(),
+            Forms\Components\FileUpload::make('gambar')
+                ->image()
+                ->directory('wisata-images')
+                ->required(), 
+            Forms\Components\Select::make('id_kategori')
+                ->label('Kategori')
+                ->relationship('kategori', 'nama') 
+                ->required(),
+            
+        ]);
+}
+
 
     public static function table(Table $table): Table
     {
