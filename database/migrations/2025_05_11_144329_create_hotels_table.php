@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->text('lokasi');
             $table->string('gambar');
+            $table->tinyInteger('bintang')->nullable();
             $table->timestamps();
         });
     }

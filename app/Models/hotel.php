@@ -17,6 +17,7 @@ class hotel extends Model
         'deskripsi',
         'lokasi',
         'gambar',
+        'bintang',
 
     ];
 }

@@ -25,6 +25,15 @@ class KomentarResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('komentar')->required(),
+                Forms\Components\Select::make('id_wisata')
+                    ->label('Wisata')
+                    ->relationship('wisata', 'nama')
+                    ->required(),
+                Forms\Components\Select::make('id_user')
+                    ->label('User')
+                    ->relationship('user', 'name') // Pastikan relasi di model Komentar sudah benar
+                    ->required(),
+
             ]);
     }
 
@@ -32,7 +41,20 @@ class KomentarResource extends Resource
     {
         return $table
             ->columns([
-                //
+                    Tables\Columns\TextColumn::make('komentar')
+                        ->label('Isi Komentar')
+                        ->limit(50),
+        
+                    Tables\Columns\TextColumn::make('user.name')
+                        ->label('Nama User'),
+        
+                    Tables\Columns\TextColumn::make('wisata.nama')
+                        ->label('Nama Wisata'),
+        
+                    Tables\Columns\TextColumn::make('created_at')
+                        ->label('Dibuat')
+                        ->dateTime(),
+        
             ])
             ->filters([
                 //

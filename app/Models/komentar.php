@@ -16,4 +16,16 @@ class komentar extends Model
         'id_user',
         'komentar',
     ];
+    
+    public function wisata()
+{
+    return $this->belongsTo(Wisata::class, 'id_wisata');
+}
+
+public function user()
+{
+    return $this->belongsTo(User::class, 'id_user');
+}
+
+
 }
