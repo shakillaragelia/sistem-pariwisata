@@ -13,6 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+
 
 class SenbudResource extends Resource
 {
@@ -27,9 +30,17 @@ class SenbudResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nama')->required(),
                 Forms\Components\TextInput::make('slug')->required(),
-                Forms\Components\TextInput::make('kategori')->required(),
-                Forms\Components\TextInput::make('deskripai')->required(),
-                FileUpload::make('gambar'),
+                Forms\Components\TextInput::make('deskripsi')->required(),
+                Forms\Components\FileUpload::make('gambar')
+                ->image()
+                ->disk('public')
+                ->directory('wisata-images')
+                ->required(),
+            Forms\Components\Select::make('id_kategori')
+                ->label('Kategori')
+                ->relationship('kategori', 'nama') 
+                ->required(),
+            
             ]);
     }
 
@@ -37,7 +48,17 @@ class SenbudResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nama')->searchable(),
+                Tables\Columns\TextColumn::make('deskripsi')
+                    ->limit(50)
+                    ->wrap()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->url(fn ($record) => asset('storage/' . $record->gambar)), 
+                Tables\Columns\TextColumn::make('kategori.nama') 
+                    ->label('Kategori'),
             ])
             ->filters([
                 //
