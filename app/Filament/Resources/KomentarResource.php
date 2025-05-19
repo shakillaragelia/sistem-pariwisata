@@ -31,7 +31,7 @@ class KomentarResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('id_user')
                     ->label('User')
-                    ->relationship('user', 'name') // Pastikan relasi di model Komentar sudah benar
+                    ->relationship('user', 'name') 
                     ->required(),
 
             ]);
