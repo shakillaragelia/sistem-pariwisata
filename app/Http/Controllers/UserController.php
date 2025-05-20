@@ -19,11 +19,21 @@ public function wisata()
 
 public function index()
 {
-    $kategori = Kategori::latest()->take(3)->get();
-    $hotel = Hotel::latest()->take(3)->get();
-    $event = Event::latest()->take(3)->get();
+    $kategori = Kategori::all();
+    $ikon = Kategori::whereIn('nama', [
+        'Wisata Sejarah',
+        'Wisata Alam',
+        'Wisata Kuliner'
+    ])->take(3)->get();
+    
 
-    return view('home.index', compact('kategori', 'hotel', 'event'));
+    return view('home.index', compact('kategori', 'ikon'));
+}
+
+public function hotel()
+{
+    $data = Hotel::latest()->get(); 
+    return view('home.hotel', compact('data'));
 }
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Indexcontroller;
 
+
 Route::get('/', [UserController::class, 'index']);
 
 Route::get('/about', function () {
@@ -18,9 +19,7 @@ Route::get('/event', function () {
     return view('home.event');
 });
 
-Route::get('/hotel', function () {
-    return view('home.hotel');
-});
+Route::get('/hotel', [UserController::class, 'hotel']);
 
 Route::get('/kontak', function () {
     return view('home.kontak');
