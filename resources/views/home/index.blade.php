@@ -6,153 +6,86 @@
 
   <!-- Hero Section -->
   <section id="hero" class="hero section dark-background">
-
     <img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
-
     <div class="container d-flex flex-column align-items-center">
-    <h2 class="white-text-shadow" data-aos="fade-up" data-aos-delay="100">SELAMAT DATANG!</h2>
-<p class="white-text-shadow" data-aos="fade-up" data-aos-delay="200">
-  Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat.
-</p>
-      <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-      </div>
+      <h2 class="white-text-shadow" data-aos="fade-up" data-aos-delay="100">SELAMAT DATANG!</h2>
+      <p class="white-text-shadow" data-aos="fade-up" data-aos-delay="200">
+        Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat.
+      </p>
     </div>
-
-  </section><!-- /Hero Section -->
+  </section>
 
   <!-- Wisata Section -->
   <section id="wisata" class="wisata section">
-
-    <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-      <h2>Wisata</h2>
-      <p>Kategori Wisata<br></p>
-    </div><!-- End Section Title -->
-
+      <h2>Kategori Wisata</h2>
+      <p>Kategori yang tersedia</p>
+    </div>
     <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-      <div class="row gy-5">
-
-        <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-          <div class="wisata-item">
-            <div class="img">
-              <img src="ragel/ragel/assets/img/sejarah.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="details position-relative">
-              <div class="icon">
-                <i class="bi bi-activity"></i>
+      <div class="row gy-4">
+        @foreach ($kategori as $item)
+          <div class="col-lg-4 col-md-6">
+            <div class="card shadow-sm h-100">
+              <img src="{{ asset('storage/' . $item->gambar) }}" class="card-img-top" style="object-fit: cover; height: 200px;">
+              <div class="card-body">
+                <h5 class="card-title">{{ $item->nama }}</h5>
+                <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi ?? '-', 60) }}</p>
+                <a href="#" class="btn btn-sm btn-primary">Lihat</a>
               </div>
-              <a href="sejarah" class="stretched-link">
-                <h3>Wisata Sejarah</h3>
-              </a>
-              <p>Bukittinggi adalah kota bersejarah dengan banyak peninggalan masa perjuangan dan kolonial. Wisata sejarah di kota ini menawarkan pengalaman edukatif dengan nuansa klasik dan budaya yang kental.</p>
             </div>
           </div>
-        </div><!-- End Wisata Item -->
-
-        <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-          <div class="wisata-item">
-            <div class="img">
-              <img src="ragel/ragel/assets/img/sejarah-2.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="details position-relative">
-              <div class="icon">
-                <i class="bi bi-easel"></i>
-              </div>
-              <a href="detail" class="stretched-link">
-                <h3>Wisata Alam</h3>
-              </a>
-              <p>Kota Bukittinggi merupakan salah satu destinasi unggulan di Sumatera Barat yang dikenal dengan keindahan alamnya. Dikelilingi oleh perbukitan dan ngarai yang menawan.</p>
-            </div>
-          </div>
-        </div><!-- End Wisata Item -->
-
-        <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-          <div class="wisata-item">
-            <div class="img">
-              <img src="ragel/ragel/assets/img/sejarah-3.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="details position-relative">
-              <div class="icon">
-                <i class="bi bi-easel"></i>
-              </div>
-              <a href="detail" class="stretched-link">
-                <h3>Wisata Kuliner</h3>
-              </a>
-              <p>Wisata kuliner menjadi daya tarik utama Kota Bukittinggi, mencerminkan budaya dan kearifan lokalnya, mulai dari camilan dan minuman. Ragam kuliner ini memberi pengalaman rasa yang otentik bagi para wisatawan.</p>
-            </div>
-          </div>
-        </div><!-- End Wisata Item -->
-
-        <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-          <div class="wisata-item">
-            <div class="img">
-              <img src="ragel/ragel/assets/img/sejarah-4.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="details position-relative">
-              <div class="icon">
-                <i class="bi bi-easel"></i>
-              </div>
-              <a href="list-wisata" class="stretched-link">
-                <h3>Wisata Seni dan Budaya</h3>
-              </a>
-              <p>Seni dan budaya Minangkabau yang kaya nilai historis dan filosofis. Rumah Gadang menjadi ikon utama dengan atap berbentuk tanduk kerbau. Seni tenun Pandai Sikek hadir lewat motif khas dalam busana adat.</p>
-            </div>
-          </div>
-        </div><!-- End Wisata Item -->
+        @endforeach
       </div>
     </div>
-  </section><!-- /Wisata Section -->
+  </section>
 
-    <!-- blog Section -->
-    <section id="blog" class="blog section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>IKON KOTA</h2>
-        <p>IKON KOTA BUKITTINGGI </p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-            <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
-              <div class="blog-content h-100">
-                <img src="ragel/ragel/assets/img/ikon-1.jpg" class="img-fluid" alt="">
-                <div class="blog-info">
-                  <h4>Jam Gadang</h4>
-                  <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-                  <a href="ragel/ragel/assets/img/ikon-1.jpg" title="Jam Gadang Merupakan salah satu Cagar Budaya yang ada di Kota Bukittingi" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                </div>
-              </div>
-            </div><!-- End blog Item -->
-
-            <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
-  <div class="blog-content h-100">
-    <img src="ragel/ragel/assets/img/ikon-2.jpg" class="img-fluid" alt="">
-    <div class="blog-info">
-      <h4>Karupuak Sanjai</h4>
-      <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-      <a href="ragel/ragel/assets/img/ikon-2.jpg" title="Karupuak Sanjai" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+  <!-- Hotel Section -->
+  <section id="hotel" class="hotel section">
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Hotel</h2>
+      <p>Hotel unggulan</p>
     </div>
-  </div>
-</div><!-- End blog Item -->
-
-
-            <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
-              <div class="blog-content h-100">
-                <img src="ragel/ragel/assets/img/ikon-3.jpg" class="img-fluid" alt="">
-                <div class="blog-info">
-                  <h4>Ngarai Sianok</h4>
-                  <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-                  <a href="ragel/ragel/assets/img/ikon-3.jpg" title="Ngarai Sianok salah satu cagar alama yang ada di Kota Bukittinggi" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                </div>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        @foreach ($hotel as $item)
+          <div class="col-lg-4 col-md-6">
+            <div class="card shadow-sm h-100">
+              <img src="{{ asset('storage/' . $item->gambar) }}" class="card-img-top" style="object-fit: cover; height: 200px;">
+              <div class="card-body">
+                <h5 class="card-title">{{ $item->nama }}</h5>
+                <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi ?? '-', 60) }}</p>
+                <a href="#" class="btn btn-sm btn-primary">Lihat</a>
               </div>
-            </div><!-- End blog Item -->
-          </div><!-- End blog Container -->
-        </div>
+            </div>
+          </div>
+        @endforeach
       </div>
+    </div>
+  </section>
+
+  <!-- Event Section -->
+  <section id="event" class="event section">
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Event</h2>
+      <p>Event mendatang</p>
+    </div>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        @foreach ($event as $item)
+          <div class="col-lg-4 col-md-6">
+            <div class="card shadow-sm h-100">
+              <img src="{{ asset('storage/' . $item->gambar) }}" class="card-img-top" style="object-fit: cover; height: 200px;">
+              <div class="card-body">
+                <h5 class="card-title">{{ $item->nama }}</h5>
+                <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi ?? '-', 60) }}</p>
+                <a href="#" class="btn btn-sm btn-primary">Lihat</a>
+              </div>
+            </div>
+          </div>
+        @endforeach
       </div>
-    </section><!-- /blog Section -->
+    </div>
+  </section>
+
 </main>
 @endsection

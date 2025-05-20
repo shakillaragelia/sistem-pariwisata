@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Indexcontroller;
 
-Route::get('/', function () {
-    return view('home.index');
-});
+Route::get('/', [UserController::class, 'index']);
 
 Route::get('/about', function () {
     return view('home.about');
