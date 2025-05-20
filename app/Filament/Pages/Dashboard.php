@@ -15,16 +15,23 @@ use App\Filament\Widgets\VisitChart;
 class Dashboard extends BaseDashboard
 {
     protected function getStats(): array
-    {
-        return [
-            Stat::make('Total Wisata', Wisata::count())->columnSpan(2),
-            Stat::make('Total Hotel', Hotel::count())->columnSpan(2),
-            Stat::make('Total Event', Event::count())->columnSpan(2),
-            Stat::make('Total User', User::where('role', 'user')->count())->columnSpan(2),
-            Stat::make('Kritik & Saran', kritiksaran::count())->columnSpan(2),
-            Stat::make('Visit Website', Visit::count())->columnSpan(2),
-        ];
-    }
+{
+    return [
+        Stat::make('Total Wisata', Wisata::count())->columnSpan(1),
+        Stat::make('Total Hotel', Hotel::count())->columnSpan(1),
+        Stat::make('Total Event', Event::count())->columnSpan(1),
+        Stat::make('Total User', User::where('role', 'user')->count())->columnSpan(1),
+        Stat::make('Kritik & Saran', kritiksaran::count())->columnSpan(1),
+    ];
+}
+
+
+
+public function getColumns(): int
+{
+    return 6;
+}
+
 
     public function getHeaderWidgets(): array
     {
