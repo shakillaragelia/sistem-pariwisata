@@ -13,6 +13,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+
 
 class HotelResource extends Resource
 {
@@ -30,6 +34,12 @@ class HotelResource extends Resource
                 Forms\Components\TextInput::make('deskripsi')->required(),
                 Forms\Components\TextInput::make('lokasi')->required(),
                 FileUpload::make('gambar'),
+                TextInput::make('bintang')
+                ->label('Bintang')
+                ->numeric()
+                ->minValue(1)
+                ->maxValue(5)
+                ->required(),
             ]);
     }
 
@@ -37,7 +47,14 @@ class HotelResource extends Resource
     {
         return $table
             ->columns([
-                //
+            TextColumn::make('nama')->label('Nama Hotel')->searchable(),
+            TextColumn::make('lokasi')->label('Lokasi')->limit(30),
+            TextColumn::make('deskripsi')->label('Deskripsi')->limit(30),
+            TextColumn::make('bintang')->label('Bintang')->sortable(),
+            Tables\Columns\ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->url(fn ($record) => asset('storage/' . $record->gambar)), 
+
             ])
             ->filters([
                 //

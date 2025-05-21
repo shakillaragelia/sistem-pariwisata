@@ -42,4 +42,5 @@ public function detailHotel($slug)
     return view('home.detail-hotel', compact('hotel'));
 }
 
+
 }

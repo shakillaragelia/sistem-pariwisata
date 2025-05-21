@@ -27,9 +27,6 @@ Route::get('/kontak', function () {
     return view('home.kontak');
 });
 
-Route::get('/detail-hotel', function () {
-    return view('home.detail-hotel');
-});
 
 Route::get('/list-wisata', function () {
     return view('home.list-wisata');

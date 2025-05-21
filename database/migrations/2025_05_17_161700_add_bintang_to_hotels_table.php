@@ -10,19 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::table('hotels', function (Blueprint $table) {
-            //
-        });
-    }
+{
+    Schema::table('hotels', function (Blueprint $table) {
+        $table->tinyInteger('bintang')->nullable()->after('alamat');
+    });
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::table('hotels', function (Blueprint $table) {
-            //
-        });
-    }
+{
+    Schema::table('hotels', function (Blueprint $table) {
+        $table->dropColumn('bintang');
+    });
+}
+
 };
