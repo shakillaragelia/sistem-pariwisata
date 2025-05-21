@@ -40,6 +40,9 @@ class HotelResource extends Resource
                 ->minValue(1)
                 ->maxValue(5)
                 ->required(),
+                TextInput::make('latitude')->required(),
+                TextInput::make('longitude')->required(),
+
             ]);
     }
 

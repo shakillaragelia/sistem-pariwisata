@@ -21,7 +21,7 @@
 
     <div class="container">
       <div class="row gy-5">
-        <div class="col-lg-7" data-aos="fade-up">
+        <div class="col-lg-7" data-aos="fade-up">strong
           <div class="card shadow-sm border-0">
             <img src="{{ asset('storage/' . $hotel->gambar) }}" class="card-img-top w-100" style="object-fit: cover; height: 350px;" alt="{{ $hotel->nama }}">
           </div>
@@ -32,10 +32,25 @@
             <h4 class="fw-bold mb-3">Informasi Hotel</h4>
             <ul class="list-unstyled">
               <li class="mb-2"><strong>Nama:</strong> {{ $hotel->nama }}</li>
-              <li class="mb-2"><strong>Alamat:</strong> {{ $hotel->alamat ?? '-' }}</li>
+              <li class="mb-2"><strong>Alamat:</strong> {{ $hotel->lokasi ?? '-' }}</li>
+              @if($hotel->bintang)
+              <li class="mb-2"><strong>Rating:</strong>
+                @for ($i = 0; $i < $hotel->bintang; $i++)
+                  <i class="bi bi-star-fill text-warning"></i>
+                @endfor
+              </li>
+              @endif
             </ul>
             <h5 class="fw-bold mt-4">Deskripsi</h5>
             <p>{{ $hotel->deskripsi }}</p>
+            <h5 class="fw-bold mt-4">Rekomendasi Wisata Terdekat</h5>
+@foreach ($rekomendasiWisata as $wisata)
+  <div class="mb-2">
+    <a href="{{ url('/detail-wisata/' . $wisata->slug) }}">
+      {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)
+    </a>
+  </div>
+@endforeach
           </div>
         </div>
       </div>

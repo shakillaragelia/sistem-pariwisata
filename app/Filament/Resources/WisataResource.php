@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-
+use Filament\Forms\Components\TextInput;
 
 class WisataResource extends Resource
 {
@@ -42,6 +42,9 @@ class WisataResource extends Resource
                 ->label('Kategori')
                 ->relationship('kategori', 'nama') 
                 ->required(),
+                TextInput::make('latitude')->required(),
+                TextInput::make('longitude')->required(),
+                
             
         ]);
 }
