@@ -21,7 +21,7 @@
 
     <div class="container">
       <div class="row gy-5">
-        <div class="col-lg-7" data-aos="fade-up">strong
+        <div class="col-lg-7" data-aos="fade-up">
           <div class="card shadow-sm border-0">
             <img src="{{ asset('storage/' . $hotel->gambar) }}" class="card-img-top w-100" style="object-fit: cover; height: 350px;" alt="{{ $hotel->nama }}">
           </div>

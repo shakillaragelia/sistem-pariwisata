@@ -4,7 +4,8 @@
 
       <a href="index.blade.php" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="ragel/ragel/assets/img/logobkt.png" alt=""> 
+        <img src="{{ asset('ragel/ragel/assets/img/logobkt.png') }}" alt="Logo" style="height: 40px;" class="me-2">
+ 
         <h1 class="sitename">DISPAR BUKITTINGGI</h1>
       </a>
 

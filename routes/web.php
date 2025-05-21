@@ -27,6 +27,9 @@ Route::get('/kontak', function () {
     return view('home.kontak');
 });
 
+Route::get('/detail-wisata/{slug}', [UserController::class, 'detailWisata']);
+Route::post('/detail-wisata/{slug}/komentar', [UserController::class, 'kirimKomentar']);
+
 
 Route::get('/list-wisata', function () {
     return view('home.list-wisata');

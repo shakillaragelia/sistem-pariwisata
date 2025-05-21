@@ -20,8 +20,15 @@ return new class extends Migration
 public function down(): void
 {
     Schema::table('wisatas', function (Blueprint $table) {
-        $table->dropColumn(['latitude', 'longitude']);
+        if (Schema::hasColumn('wisatas', 'latitude')) {
+            $table->dropColumn('latitude');
+        }
+        if (Schema::hasColumn('wisatas', 'longitude')) {
+            $table->dropColumn('longitude');
+        }
     });
 }
+
+
 
 };

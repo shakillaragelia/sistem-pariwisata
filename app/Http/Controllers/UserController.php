@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Event;
 use App\Models\Kategori;
+use App\Models\Komentar;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -56,5 +57,31 @@ public function detailHotel($slug)
 
     return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
 }
+
+public function detailWisata($slug)
+{
+    $wisata = Wisata::where('slug', $slug)->firstOrFail();
+    $komentar = Komentar::where('id_wisata', $wisata->id)->latest()->get();
+    
+    return view('home.detail-wisata', compact('wisata', 'komentar'));
+}
+
+public function kirimKomentar(Request $request, $slug)
+{
+    $wisata = Wisata::where('slug', $slug)->firstOrFail();
+
+    $request->validate([
+        'komentar' => 'required|string|max:500',
+    ]);
+
+    Komentar::create([
+        'id_user' => auth()->id(),
+        'id_wisata' => $wisata->id,
+        'comment' => $request->komentar,
+    ]);
+
+    return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
+}
+
 
 }
