@@ -29,7 +29,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ $item->nama }}</h5>
                 <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi, 70) }}</p>
-                <a href="#" class="btn btn-sm btn-primary">Lihat Detail</a>
+                <a href="{{ url('/detail-hotel/' . $item->slug) }}" class="btn btn-sm btn-primary">Lihat Detail</a>
               </div>
             </div>
           </div>

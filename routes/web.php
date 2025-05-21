@@ -21,6 +21,8 @@ Route::get('/event', function () {
 
 Route::get('/hotel', [UserController::class, 'hotel']);
 
+Route::get('/detail-hotel/{slug}', [UserController::class, 'detailHotel']);
+
 Route::get('/kontak', function () {
     return view('home.kontak');
 });

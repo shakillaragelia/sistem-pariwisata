@@ -36,4 +36,10 @@ public function hotel()
     return view('home.hotel', compact('data'));
 }
 
+public function detailHotel($slug)
+{
+    $hotel = Hotel::where('slug', $slug)->firstOrFail();
+    return view('home.detail-hotel', compact('hotel'));
+}
+
 }
