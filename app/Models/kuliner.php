@@ -23,4 +23,11 @@ class kuliner extends Model
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
+
+    public function komentars()
+{
+    return $this->morphMany(Komentar::class, 'commentable');
+}
+
+
 }

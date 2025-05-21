@@ -29,6 +29,10 @@ Route::get('/kontak', function () {
 
 Route::get('/detail-wisata/{slug}', [UserController::class, 'detailWisata']);
 Route::post('/detail-wisata/{slug}/komentar', [UserController::class, 'kirimKomentar']);
+Route::post('/wisata/{id}/komentar', [UserController::class, 'storeKomentarWisata'])->name('komentar.wisata.store');
+Route::post('/komentar', [UserController::class, 'simpanKomentar'])->name('komentar.store');
+
+
 
 
 Route::get('/list-wisata', function () {

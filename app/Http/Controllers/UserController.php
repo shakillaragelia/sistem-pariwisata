@@ -12,76 +12,71 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $kategori = Kategori::all();
+        $ikon = Kategori::whereIn('nama', [
+            'Wisata Sejarah',
+            'Wisata Alam',
+            'Wisata Kuliner'
+        ])->take(3)->get();
 
-public function wisata()
-{
-    $data = Wisata::latest()->get();
-    return view('home.wisata', compact('data'));
-}
+        return view('home.index', compact('kategori', 'ikon'));
+    }
 
-public function index()
-{
-    $kategori = Kategori::all();
-    $ikon = Kategori::whereIn('nama', [
-        'Wisata Sejarah',
-        'Wisata Alam',
-        'Wisata Kuliner'
-    ])->take(3)->get();
-    
+    public function wisata()
+    {
+        $data = Wisata::latest()->get();
+        return view('home.wisata', compact('data'));
+    }
 
-    return view('home.index', compact('kategori', 'ikon'));
-}
+    public function hotel()
+    {
+        $data = Hotel::latest()->get(); 
+        return view('home.hotel', compact('data'));
+    }
 
-public function hotel()
-{
-    $data = Hotel::latest()->get(); 
-    return view('home.hotel', compact('data'));
-}
+    public function detailHotel($slug)
+    {
+        $hotel = Hotel::where('slug', $slug)->firstOrFail();
 
-public function detailHotel($slug)
-{
-    $hotel = Hotel::where('slug', $slug)->firstOrFail();
+        // Rekomendasi wisata terdekat
+        $radius = 10; // km
+        $rekomendasiWisata = DB::table('wisatas')
+            ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * 
+                cos(radians(longitude) - radians(?)) + 
+                sin(radians(?)) * sin(radians(latitude)))) AS distance", [
+                    $hotel->latitude, $hotel->longitude, $hotel->latitude
+                ])
+            ->having('distance', '<', $radius)
+            ->orderBy('distance')
+            ->limit(3)
+            ->get();
 
-   
-    $radius = 10; // km
-    $rekomendasiWisata = DB::table('wisatas')
-        ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * 
-            cos(radians(longitude) - radians(?)) + 
-            sin(radians(?)) * sin(radians(latitude)))) AS distance", [
-                $hotel->latitude, $hotel->longitude, $hotel->latitude
-            ])
-        ->having('distance', '<', $radius)
-        ->orderBy('distance')
-        ->limit(3)
-        ->get();
+        return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
+    }
 
-    return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
-}
+    public function detailWisata($slug)
+    {
+        $wisata = Wisata::where('slug', $slug)->firstOrFail();
+        $komentar = $wisata->komentars()->latest()->get();
 
-public function detailWisata($slug)
-{
-    $wisata = Wisata::where('slug', $slug)->firstOrFail();
-    $komentar = Komentar::where('id_wisata', $wisata->id)->latest()->get();
-    
-    return view('home.detail-wisata', compact('wisata', 'komentar'));
-}
+        return view('home.detail-wisata', compact('wisata', 'komentar'));
+    }
 
-public function kirimKomentar(Request $request, $slug)
-{
-    $wisata = Wisata::where('slug', $slug)->firstOrFail();
+    public function kirimKomentar(Request $request, $slug)
+    {
+        $wisata = Wisata::where('slug', $slug)->firstOrFail();
 
-    $request->validate([
-        'komentar' => 'required|string|max:500',
-    ]);
+        $request->validate([
+            'komentar' => 'required|string|max:500',
+        ]);
 
-    Komentar::create([
-        'id_user' => auth()->id(),
-        'id_wisata' => $wisata->id,
-        'comment' => $request->komentar,
-    ]);
+        $wisata->komentars()->create([
+            'id_user' => auth()->id(),
+            'komentar' => $request->komentar,
+        ]);
 
-    return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
-}
-
-
+        return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
+    }
 }

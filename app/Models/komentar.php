@@ -27,5 +27,10 @@ public function user()
     return $this->belongsTo(User::class, 'id_user');
 }
 
+public function commentable()
+{
+    return $this->morphTo();
+}
+
 
 }

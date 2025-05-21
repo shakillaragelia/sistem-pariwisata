@@ -33,4 +33,10 @@ class Wisata extends Model
         return $this->belongsTo(Wisata::class, 'id_wisata');
     }
 
+    public function komentars()
+{
+    return $this->morphMany(Komentar::class, 'commentable');
+}
+
+
 }
