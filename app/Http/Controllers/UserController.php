@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wisata;
+use App\Models\Kuliner;
+use App\Models\Senbud;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Event;
@@ -57,30 +59,45 @@ class UserController extends Controller
         return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
     }
 
-    public function detailWisata($slug)
+    // Detail Wisata Alam
+    public function detailAlam($slug)
     {
-        $wisata = Wisata::where('slug', $slug)->firstOrFail();
+        $wisata = Wisata::where('slug', $slug)->whereHas('kategori', function($q) {
+            $q->where('slug', 'alam');
+        })->firstOrFail();
+
         $komentar = $wisata->komentars()->latest()->get();
-
-        return view('home.detail-wisata', compact('wisata', 'komentar'));
+        return view('home.detail-alam', compact('wisata', 'komentar'));
     }
 
-    public function kirimKomentar(Request $request, $slug)
+    // Detail Wisata Sejarah
+    public function detailSejarah($slug)
     {
-        $wisata = Wisata::where('slug', $slug)->firstOrFail();
+        $wisata = Wisata::where('slug', $slug)->whereHas('kategori', function($q) {
+            $q->where('slug', 'sejarah');
+        })->firstOrFail();
 
-        $request->validate([
-            'komentar' => 'required|string|max:500',
-        ]);
-
-        $wisata->komentars()->create([
-            'id_user' => auth()->id(),
-            'komentar' => $request->komentar,
-        ]);
-
-        return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
+        $komentar = $wisata->komentars()->latest()->get();
+        return view('home.detail-sejarah', compact('wisata', 'komentar'));
     }
 
+    // Detail Kuliner
+    public function detailKuliner($slug)
+    {
+        $kuliner = Kuliner::where('slug', $slug)->firstOrFail();
+        $komentar = $kuliner->komentars()->latest()->get();
+        return view('home.detail-kuliner', compact('kuliner', 'komentar'));
+    }
+
+    // Detail Seni Budaya
+    public function detailSenbud($slug)
+    {
+        $senbud = Senbud::where('slug', $slug)->firstOrFail();
+        $komentar = $senbud->komentars()->latest()->get();
+        return view('home.detail-senbud', compact('senbud', 'komentar'));
+    }
+
+    // Komentar Polymorphic
     public function simpanKomentar(Request $request)
     {
         $request->validate([
@@ -90,7 +107,7 @@ class UserController extends Controller
         ]);
     
         $modelClass = $request->type;
-    
+
         if (!class_exists($modelClass)) {
             return abort(404, 'Model tidak ditemukan');
         }
@@ -104,5 +121,4 @@ class UserController extends Controller
     
         return back()->with('success', 'Komentar berhasil dikirim!');
     }
-
 }

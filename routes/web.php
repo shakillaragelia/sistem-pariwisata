@@ -14,6 +14,10 @@ Route::get('/about', function () {
 });
 
 Route::get('/wisata', [UserController::class, 'wisata']);
+Route::get('/detail-alam/{slug}', [UserController::class, 'detailAlam'])->name('detail.alam');
+Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
+Route::get('/detail-kuliner/{slug}', [UserController::class, 'detailKuliner'])->name('detail.kuliner');
+Route::get('/detail-senbud/{slug}', [UserController::class, 'detailSenbud'])->name('detail.senbud');
 
 Route::get('/event', function () {
     return view('home.event');
@@ -27,21 +31,8 @@ Route::get('/kontak', function () {
     return view('home.kontak');
 });
 
-Route::get('/detail-wisata/{slug}', [UserController::class, 'detailWisata']);
-Route::post('/detail-wisata/{slug}/komentar', [UserController::class, 'kirimKomentar']);
 Route::post('/wisata/{id}/komentar', [UserController::class, 'storeKomentarWisata'])->name('komentar.wisata.store');
 Route::post('/komentar', [UserController::class, 'simpanKomentar'])->name('komentar.store');
-
-
-
-
-Route::get('/list-wisata', function () {
-    return view('home.list-wisata');
-});
-
-Route::get('/senbud-detail', function () {
-    return view('home.senbud-detail');
-});
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'register_proses']);
