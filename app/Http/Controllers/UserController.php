@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\Event;
 use App\Models\Kategori;
 use App\Models\Komentar;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -79,4 +80,29 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
     }
+
+    public function simpanKomentar(Request $request)
+    {
+        $request->validate([
+            'komentar' => 'required|string|max:1000',
+            'type' => 'required|string',
+            'id' => 'required|integer',
+        ]);
+    
+        $modelClass = $request->type;
+    
+        if (!class_exists($modelClass)) {
+            return abort(404, 'Model tidak ditemukan');
+        }
+    
+        $item = $modelClass::findOrFail($request->id);
+    
+        $item->komentars()->create([
+            'id_user' => auth()->id(),
+            'komentar' => $request->komentar,
+        ]);
+    
+        return back()->with('success', 'Komentar berhasil dikirim!');
+    }
+
 }
