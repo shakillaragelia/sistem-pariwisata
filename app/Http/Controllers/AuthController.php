@@ -72,7 +72,7 @@ class AuthController extends Controller
     $data['email']      = $request->email;
     $data['password']   = Hash::make($request->password);
     $data['email_verified_at'] = Carbon::now();
-    $data['role'] = 'user'; 
+    $data['role'] = 'user';
 
     User::create($data);
 
