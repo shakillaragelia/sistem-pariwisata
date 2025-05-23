@@ -11,7 +11,7 @@
 
       <nav id="navmenu" class="navmenu">
   <ul>
-    <li><a href="index" class="{{ request()->is('beranda') ? 'active' : '' }}">Beranda</a></li>
+    <li><a href=" " class="{{ request()->is('beranda') ? 'active' : '' }}">Beranda</a></li>
     <li><a href="about" class="{{ request()->is('about') ? 'active' : '' }}">Tentang</a></li>
     <li><a href="wisata" class="{{ request()->is('wisata') ? 'active' : '' }}">Wisata</a></li>
     <li><a href="event" class="{{ request()->is('event') ? 'active' : '' }}">Event</a></li>

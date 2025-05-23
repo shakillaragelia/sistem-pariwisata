@@ -41,15 +41,20 @@
     <div class="container">
       <h4>Komentar</h4>
       @auth
-      <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
-        @csrf
-        <input type="hidden" name="id" value="{{ $wisata->id }}">
-        <input type="hidden" name="type" value="{{ get_class($wisata) }}">
-        <div class="form-group">
-          <textarea name="komentar" class="form-control" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Kirim Komentar</button>
-      </form>
+      @php
+  $type = get_class($wisata);
+@endphp
+
+      <form action="{{ route('komentar.store') }}" method="POST">
+  @csrf
+  <input type="hidden" name="id" value="{{ $wisata->id }}">
+  <input type="hidden" name="type" value="{{ $type }}">
+
+  <textarea name="komentar" required></textarea>
+  <button type="submit">Kirim</button>
+</form>
+
+
       @else
       <p><a href="{{ route('login') }}">Login</a> untuk memberikan komentar.</p>
       @endauth

@@ -26,8 +26,9 @@ class senbud extends Model
 
     public function komentars()
 {
-    return $this->morphMany(\App\Models\Komentar::class, 'commentable');
+    return $this->morphMany(Komentar::class, 'commentable');
 }
+
     
 
 }
