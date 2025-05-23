@@ -36,7 +36,12 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('dashboard/admin');
+        
+            if (Auth::user()->role === 'admin') {
+                return redirect('dashboard/admin');
+            } else {
+                return redirect('/'); 
+            }
         }
 
         return back()->withErrors([
@@ -56,30 +61,31 @@ class AuthController extends Controller
     }
 
     public function register_proses(Request $request)
-    {
-        $request->validate([
-            'nama'  => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6'
-        ]);
+{
+    $request->validate([
+        'nama'  => 'required',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:6'
+    ]);
 
-        $data['name']       = $request->nama;
-        $data['email']      = $request->email;
-        $data['password']   = Hash::make($request->password);
-        $data['email_verified_at'] = Carbon::now();
+    $data['name']       = $request->nama;
+    $data['email']      = $request->email;
+    $data['password']   = Hash::make($request->password);
+    $data['email_verified_at'] = Carbon::now();
+    $data['role'] = 'user'; 
 
-        User::create($data);
+    User::create($data);
 
-        $login = [
-            'email'     => $request->email,
-            'password'  => $request->password
-        ];
+    $login = [
+        'email'     => $request->email,
+        'password'  => $request->password
+    ];
 
-        if (Auth::attempt($login)) {
-            return redirect()->route('login');
-        } else {
-            return redirect()->route('login')->with('failed', 'Email atau Password Salah');
-        }
+    if (Auth::attempt($login)) {
+        return redirect()->route('login');
+    } else {
+        return redirect()->route('login')->with('failed', 'Email atau Password Salah');
     }
+}
 
 }

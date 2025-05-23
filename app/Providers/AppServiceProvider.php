@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Filament\Facades\Filament;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,11 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Filament::serving(function () {
-            if (auth()->check() && auth()->user()->role !== 'admin') {
-                auth()->logout();
-                redirect('/')->send();
-            }
-        });
+        if (class_exists(Filament::class)) {
+            Filament::serving(function () {
+                if (auth()->check() && auth()->user()->role !== 'admin') {
+                    auth()->logout();
+                    redirect('/')->send();
+                }
+            });
+        }
     }
 }
