@@ -37,34 +37,39 @@
     </div>
   </section>
 
+  {{-- Bagian Komentar --}}
   <section class="section">
     <div class="container">
-      <h4>Komentar</h4>
+      <h4 class="mb-4">Komentar</h4>
+
       @auth
-      @php
-  $type = get_class($wisata);
-@endphp
+        @php
+          $type = get_class($wisata);
+        @endphp
 
-      <form action="{{ route('komentar.store') }}" method="POST">
-  @csrf
-  <input type="hidden" name="id" value="{{ $wisata->id }}">
-  <input type="hidden" name="type" value="{{ $type }}">
+        <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
+          @csrf
+          <input type="hidden" name="id" value="{{ $wisata->id }}">
+          <input type="hidden" name="type" value="{{ $type }}">
 
-  <textarea name="komentar" required></textarea>
-  <button type="submit">Kirim</button>
-</form>
-
-
+          <div class="mb-3">
+            <label for="komentar" class="form-label">Tulis Komentar:</label>
+            <textarea name="komentar" class="form-control" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Kirim Komentar</button>
+        </form>
       @else
-      <p><a href="{{ route('login') }}">Login</a> untuk memberikan komentar.</p>
+        <div class="alert alert-info">
+          <a href="{{ route('login') }}" class="btn btn-primary">Login dulu untuk memberikan komentar</a>
+        </div>
       @endauth
 
       <div class="komentar-list mt-4">
         @forelse ($komentar as $komen)
-          <div class="mb-3">
+          <div class="border rounded p-3 mb-3">
             <strong>{{ $komen->user->name }}</strong><br>
-            <small>{{ $komen->created_at->format('d M Y') }}</small>
-            <p>{{ $komen->komentar }}</p>
+            <small class="text-muted">{{ $komen->created_at->format('d M Y') }}</small>
+            <p class="mt-2">{{ $komen->komentar }}</p>
           </div>
         @empty
           <p>Belum ada komentar.</p>
