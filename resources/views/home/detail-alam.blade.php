@@ -37,45 +37,48 @@
     </div>
   </section>
 
+  
   {{-- Bagian Komentar --}}
   <section class="section">
     <div class="container">
       <h4 class="mb-4">Komentar</h4>
 
+      {{-- Form Komentar --}}
       @auth
-        @php
-          $type = get_class($wisata);
-        @endphp
-
         <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
           @csrf
+          {{-- Polymorphic type & ID --}}
           <input type="hidden" name="id" value="{{ $wisata->id }}">
-          <input type="hidden" name="type" value="{{ $type }}">
+          <input type="hidden" name="type" value="{{ get_class($wisata) }}">
 
           <div class="mb-3">
             <label for="komentar" class="form-label">Tulis Komentar:</label>
             <textarea name="komentar" class="form-control" rows="3" required></textarea>
           </div>
+
           <button type="submit" class="btn btn-success">Kirim Komentar</button>
         </form>
       @else
+        {{-- Redirect ke route login user --}}
         <div class="alert alert-info">
-          <a href="{{ route('login') }}" class="btn btn-primary">Login dulu untuk memberikan komentar</a>
+          <p class="mb-2">Silakan login terlebih dahulu untuk memberikan komentar.</p>
+          <a href="{{ route('user.login') }}" class="btn btn-primary">Login untuk Berkomentar</a>
         </div>
       @endauth
 
+      {{-- Daftar Komentar --}}
       <div class="komentar-list mt-4">
         @forelse ($komentar as $komen)
           <div class="border rounded p-3 mb-3">
             <strong>{{ $komen->user->name }}</strong><br>
             <small class="text-muted">{{ $komen->created_at->format('d M Y') }}</small>
-            <p class="mt-2">{{ $komen->komentar }}</p>
+            <p class="mt-2 mb-0">{{ $komen->komentar }}</p>
           </div>
         @empty
-          <p>Belum ada komentar.</p>
+          <p class="text-muted">Belum ada komentar.</p>
         @endforelse
       </div>
     </div>
   </section>
-</main>
+
 @endsection

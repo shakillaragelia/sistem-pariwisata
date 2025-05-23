@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('komentars', function (Blueprint $table) {
-            $table->id('id_komentar');
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
-            $table->text('komentar');
-            $table->morphs('commentable'); 
-            $table->timestamps();            
+        Schema::create('visit_logs', function (Blueprint $table) {
+            $table->id();
+            $table->ipAddress('ip');
+            $table->string('user_agent')->nullable();
+            $table->string('url');
+            $table->timestamp('visited_at')->useCurrent();
         });
+        
     }
 
     /**
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('komentars');
+        Schema::dropIfExists('visit_logs');
     }
 };

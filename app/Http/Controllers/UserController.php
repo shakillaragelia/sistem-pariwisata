@@ -101,25 +101,21 @@ class UserController extends Controller
     public function simpanKomentar(Request $request)
 {
     $request->validate([
-        'komentar' => 'required|string|max:1000',
-        'type' => 'required|string',
-        'id' => 'required|integer',
+        'id' => 'required',
+        'type' => 'required',
+        'komentar' => 'required',
     ]);
 
-    $modelClass = $request->type;
+    $model = $request->type::findOrFail($request->id);
 
-    if (!class_exists($modelClass)) {
-        return abort(404, 'Model tidak ditemukan');
-    }
-
-    $item = $modelClass::findOrFail($request->id);
-
-    $item->komentars()->create([
+    $model->komentars()->create([
         'id_user' => auth()->id(),
         'komentar' => $request->komentar,
     ]);
 
-    return back()->with('success', 'Komentar berhasil dikirim!');
+    return back()->with('success', 'Komentar berhasil dikirim.');
 }
+
+
 
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Indexcontroller;
 
 
+
 Route::get('/', [UserController::class, 'index']);
 
 Route::get('/about', function () {
@@ -48,6 +49,15 @@ Route::post('/login-user', [AuthController::class, 'login']);
 Route::get('/register-user', [AuthController::class, 'registerForm'])->name('register.user');
 Route::post('/register-user', [AuthController::class, 'register']);
 Route::post('/logout-user', [AuthController::class, 'logout'])->name('logout.user');
+
+//VISIT
+    Route::middleware('log.visitor')->group(function () {
+    Route::get('/wisata-alam/{slug}', [UserController::class, 'detailAlam']);
+    Route::get('/wisata-sejarah/{slug}', [UserController::class, 'detailSejarah']);
+    Route::get('/wisata-kuliner/{slug}', [UserController::class, 'detailKuliner']);
+    Route::get('/wisata-senbud/{slug}', [UserController::class, 'detailSenbud']);
+});
+
 
 
 Route::get('dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
