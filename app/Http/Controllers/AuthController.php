@@ -3,89 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    
-    public function login()
+    public function loginForm()
     {
         return view('auth.login');
     }
 
-
     public function auth(Request $request)
     {
-
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
-
-        if (empty($request->email) || empty($request->password)) {
-            return back()->withErrors([
-                'kosong' => 'Email dan password harus diisi'
-            ]);
-        }
-
-
-        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-        
-            if (Auth::user()->role === 'admin') {
-                return redirect('dashboard/admin');
+
+            // Redirect berdasarkan role
+            if (auth()->user()->role === 'admin') {
+                return redirect()->intended('/dashboard/admin');
             } else {
-                return redirect('/'); 
+                return redirect()->intended('/');
             }
         }
 
         return back()->withErrors([
-            'loginError' => 'Email atau Password salah'
+            'email' => 'Email atau password salah.',
         ]);
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('login')->with('success', 'Kamu berhasil logout');
-    }
-
-    public function register()
+    public function registerForm()
     {
         return view('auth.register');
     }
 
-    public function register_proses(Request $request)
-{
-    $request->validate([
-        'nama'  => 'required',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6'
-    ]);
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:6'],
+        ]);
 
-    $data['name']       = $request->nama;
-    $data['email']      = $request->email;
-    $data['password']   = Hash::make($request->password);
-    $data['email_verified_at'] = Carbon::now();
-    $data['role'] = 'user';
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => 'user',
+            'password' => Hash::make($request->password),
+        ]);
 
-    User::create($data);
-
-    $login = [
-        'email'     => $request->email,
-        'password'  => $request->password
-    ];
-
-    if (Auth::attempt($login)) {
-        return redirect()->route('login');
-    } else {
-        return redirect()->route('login')->with('failed', 'Email atau Password Salah');
+        Auth::login($user);
+        return redirect('/');
     }
-}
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.user');
+    }
 }
