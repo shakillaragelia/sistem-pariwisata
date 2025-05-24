@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Indexcontroller;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 
 
 
@@ -44,11 +46,17 @@ Route::post('/login', [AuthController::class, 'auth']);
 
 
 //USER
-Route::get('/login-user', [AuthController::class, 'loginForm'])->name('login.user');
-Route::post('/login-user', [AuthController::class, 'login']);
-Route::get('/register-user', [AuthController::class, 'registerForm'])->name('register.user');
-Route::post('/register-user', [AuthController::class, 'register']);
-Route::post('/logout-user', [AuthController::class, 'logout'])->name('logout.user');
+// Login user
+Route::get('/login-user', [LoginController::class, 'showLoginForm'])->name('login.user');
+Route::post('/login-user', [LoginController::class, 'login']);
+
+
+
+// Register user
+Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
+
+
 
 //VISIT
     Route::middleware('log.visitor')->group(function () {
