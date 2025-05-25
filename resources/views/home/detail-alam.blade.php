@@ -43,16 +43,15 @@
     <div class="container">
       <h4 class="mb-4">Komentar</h4>
       @auth
-  <p class="text-muted small">
-    Login sebagai: <strong>{{ auth()->user()->email }}</strong> | Role: <strong>{{ auth()->user()->role }}</strong>
-  </p>
-@endauth
-
+        <p class="text-muted small">
+          Login sebagai: <strong>{{ auth()->user()->email }}</strong> | Role: <strong>{{ auth()->user()->role }}</strong>
+        </p>
+      @endauth
 
       @if(auth()->check() && auth()->user()->role === 'user')
         <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
           @csrf
-          <input type="hidden" name="id" value="{{ $wisata->id }}">
+          <input type="hidden" name="id" value="{{ $wisata->id_wisata }}">
           <input type="hidden" name="type" value="{{ get_class($wisata) }}">
 
           <div class="mb-3">

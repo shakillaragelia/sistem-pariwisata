@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Komentar;
 
 class Wisata extends Model
 {
@@ -26,18 +27,14 @@ class Wisata extends Model
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'id_user');
     }
-    public function wisata() {
-        return $this->belongsTo(Wisata::class, 'id_wisata');
+
+    // Relasi komentar polymorphic
+    public function komentar()
+    {
+        return $this->morphMany(Komentar::class, 'commentable');
     }
-
-    public function komentars()
-{
-    return $this->morphMany(Komentar::class, 'commentable');
-}
-
-
-
 }

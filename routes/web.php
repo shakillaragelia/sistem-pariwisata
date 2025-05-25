@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Indexcontroller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\KomentarController;
 
 
 
@@ -36,7 +37,8 @@ Route::get('/kontak', function () {
 
 //KOMENTAR
 Route::post('/wisata/{id}/komentar', [UserController::class, 'storeKomentarWisata'])->name('komentar.wisata.store');
-Route::post('/komentar', [UserController::class, 'simpanKomentar'])->name('komentar.store');
+Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
+
 
 //ADMIN
 Route::get('/register', [AuthController::class, 'register'])->name('register');

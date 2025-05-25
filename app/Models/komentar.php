@@ -3,36 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class komentar extends Model
+class Komentar extends Model
 {
-    use HasFactory;
-    protected $table ='komentars';
-    protected $primaryKey = 'id_komentar';
-    protected $fillable = [
-        'id_komentar',
-        'id_wisata',
-        'id_user',
-        'komentar',
-    ];
+    protected $table = 'komentars';
+
     
-    public function wisata()
-{
-    return $this->belongsTo(Wisata::class, 'id_wisata');
-}
+    protected $fillable = [
+        'id_user', 'komentar', 'commentable_id', 'commentable_type',
+    ];
 
-public function user()
-{
-    return $this->belongsTo(User::class, 'id_user');
-}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user'); 
+    }
 
-public function commentable()
-{
-    return $this->morphTo();
-}
-
-
-
-
+    public function commentable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

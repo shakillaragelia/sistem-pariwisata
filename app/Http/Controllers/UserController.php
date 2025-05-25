@@ -66,26 +66,25 @@ class UserController extends Controller
             $q->where('slug', 'alam');
         })->firstOrFail();
 
-        $komentar = $wisata->komentars()->latest()->get();
+        $komentar = $wisata->komentar()->latest()->get();
         return view('home.detail-alam', compact('wisata', 'komentar'));
     }
 
     // Detail Wisata Sejarah
     public function detailSejarah($slug)
-    {
-        $wisata = Wisata::where('slug', $slug)->whereHas('kategori', function($q) {
-            $q->where('slug', 'sejarah');
-        })->firstOrFail();
+{
+    $wisata = Wisata::where('slug', $slug)->firstOrFail();
+    $komentar = $wisata->komentar()->latest()->get();
 
-        $komentar = $wisata->komentars()->latest()->get();
-        return view('home.detail-sejarah', compact('wisata', 'komentar'));
-    }
+    return view('home.detail-sejarah', compact('wisata', 'komentar'));
+}
+
 
     // Detail Kuliner
     public function detailKuliner($slug)
     {
         $kuliner = Kuliner::where('slug', $slug)->firstOrFail();
-        $komentar = $kuliner->komentars()->latest()->get();
+        $komentar = $kuliner->komentar()->latest()->get();
         return view('home.detail-kuliner', compact('kuliner', 'komentar'));
     }
 
@@ -93,7 +92,7 @@ class UserController extends Controller
     public function detailSenbud($slug)
     {
         $senbud = Senbud::where('slug', $slug)->firstOrFail();
-        $komentar = $senbud->komentars()->latest()->get();
+        $komentar = $senbud->komentar()->latest()->get();
         return view('home.detail-senbud', compact('senbud', 'komentar'));
     }
 
@@ -108,7 +107,7 @@ class UserController extends Controller
 
     $model = $request->type::findOrFail($request->id);
 
-    $model->komentars()->create([
+    $model->komentar()->create([
         'id_user' => auth()->id(),
         'komentar' => $request->komentar,
     ]);
