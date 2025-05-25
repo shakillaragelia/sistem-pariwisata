@@ -50,6 +50,9 @@ Route::post('/login', [AuthController::class, 'auth']);
 
 
 //USER
+
+
+
 // Login user
 Route::get('/login-user', [LoginController::class, 'showLoginForm'])->name('login.user');
 Route::post('/login-user', [LoginController::class, 'login']);
