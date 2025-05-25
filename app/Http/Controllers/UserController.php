@@ -22,17 +22,23 @@ class UserController extends Controller
             'Wisata Sejarah',
             'Wisata Alam',
             'Wisata Kuliner',
-            'Wisata Seni Budaya',
-        ])->take(3)->get();
+            'Wisata Senbud',
+        ])->take(5)->get();
 
         return view('home.index', compact('kategori', 'ikon'));
     }
 
-    public function wisata()
-    {
-        $data = Wisata::latest()->get();
-        return view('home.wisata', compact('data'));
-    }
+   public function wisata()
+{
+    $wisata = Wisata::latest()->get();
+    $kuliner = Kuliner::latest()->get();
+    $senbud = Senbud::latest()->get();
+
+    // Gabungkan semua data jadi satu koleksi
+    $data = $wisata->concat($kuliner)->concat($senbud);
+
+    return view('home.wisata', compact('data'));
+}
 
     public function hotel()
     {

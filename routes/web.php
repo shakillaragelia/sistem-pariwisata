@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Indexcontroller;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\KritikController;
 use App\Http\Controllers\KomentarController;
+use App\Http\Controllers\RegisterController;
 
 
 
@@ -32,15 +33,16 @@ Route::get('/hotel', [UserController::class, 'hotel']);
 
 Route::get('/detail-hotel/{slug}', [UserController::class, 'detailHotel']);
 
-Route::get('/kontak', function () {
-    return view('home.kontak');
-});
+
 
 //KOMENTAR
 Route::post('/wisata/{id}/komentar', [UserController::class, 'storeKomentarWisata'])->name('komentar.wisata.store');
 Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
 Route::get('/wisata/sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
 
+//kririksarab(kontak)
+Route::get('/kontak', [KritikController::class, 'index'])->name('home.kontak');
+Route::post('/kritik', [KritikController::class, 'store'])->name('kritik.store');
 
 
 //ADMIN
