@@ -21,7 +21,8 @@ class UserController extends Controller
         $ikon = Kategori::whereIn('nama', [
             'Wisata Sejarah',
             'Wisata Alam',
-            'Wisata Kuliner'
+            'Wisata Kuliner',
+            'Wisata Seni Budaya',
         ])->take(3)->get();
 
         return view('home.index', compact('kategori', 'ikon'));

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Komentar extends Model
 {
     protected $table = 'komentars';
+    protected $primaryKey = 'id_komentar';
+
 
     
     protected $fillable = [

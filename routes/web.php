@@ -11,7 +11,8 @@ use App\Http\Controllers\KomentarController;
 
 
 
-Route::get('/', [UserController::class, 'index']);
+Route::get('/', [UserController::class, 'index'])->name('home');
+
 
 Route::get('/about', function () {
     return view('home.about');
@@ -49,13 +50,12 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'auth']);
 
 
-//USER
-
-
-
 // Login user
 Route::get('/login-user', [LoginController::class, 'showLoginForm'])->name('login.user');
 Route::post('/login-user', [LoginController::class, 'login']);
+
+//logout user
+Route::post('/logout-user', [LoginController::class, 'logout']);
 
 
 

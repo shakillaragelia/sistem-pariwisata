@@ -32,6 +32,8 @@ class EventResource extends Resource
                 ->reactive() 
                 ->afterStateUpdated(fn($state, callable $set) => $set ('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('deskripsi')->required(),
+                Forms\Components\Hidden::make('id_user')
+                    ->default(auth()->user()->id),
             ]);
         }
 
@@ -39,7 +41,9 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('judul'),
+                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('deskripsi'),
             ])
             ->filters([
                 //

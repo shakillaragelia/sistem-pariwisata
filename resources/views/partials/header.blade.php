@@ -17,6 +17,15 @@
     <li><a href="event" class="{{ request()->is('event') ? 'active' : '' }}">Event</a></li>
     <li><a href="hotel" class="{{ request()->is('hotel') ? 'active' : '' }}">Hotel</a></li>
     <li><a href="kontak" class="{{ request()->is('kontak') ? 'active' : '' }}">Kontak</a></li>
+    <li>
+  <form action="{{ url('/logout-user') }}" method="POST" style="display: inline;">
+    @csrf
+    <button type="submit" class="btn btn-link nav-link {{ request()->is('keluar') ? 'active' : '' }}" style="padding: 0; border: none; background: none;">
+      KELUAR
+    </button>
+  </form>
+</li>
+
   </ul>
   <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 </nav>

@@ -84,4 +84,6 @@ class KomentarResource extends Resource
             'edit' => Pages\EditKomentar::route('/{record}/edit'),
         ];
     }
+
 }
+
