@@ -38,6 +38,8 @@ Route::get('/kontak', function () {
 //KOMENTAR
 Route::post('/wisata/{id}/komentar', [UserController::class, 'storeKomentarWisata'])->name('komentar.wisata.store');
 Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
+Route::get('/wisata/sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
+
 
 
 //ADMIN

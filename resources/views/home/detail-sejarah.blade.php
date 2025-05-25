@@ -50,8 +50,12 @@
       @if(auth()->check() && auth()->user()->role === 'user')
         <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
           @csrf
-          <input type="hidden" name="id" value="{{ $wisata->id }}">
-          <input type="hidden" name="type" value="{{ get_class($wisata) }}">
+
+      
+
+          <input type="hidden" name="id" value="{{ $wisata->id_wisata }}">
+
+          <input type="hidden" name="type" value="App\Models\Wisata">
 
           <div class="mb-3">
             <label for="komentar" class="form-label">Tulis Komentar:</label>

@@ -9,6 +9,8 @@ class KomentarController extends Controller
 {
     public function store(Request $request)
     {
+        
+
         $request->validate([
             'komentar' => 'required|string',
             'type' => 'required|string',
