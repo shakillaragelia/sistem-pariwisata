@@ -25,9 +25,8 @@ Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->
 Route::get('/detail-kuliner/{slug}', [UserController::class, 'detailKuliner'])->name('detail.kuliner');
 Route::get('/detail-senbud/{slug}', [UserController::class, 'detailSenbud'])->name('detail.senbud');
 
-Route::get('/event', function () {
-    return view('home.event');
-});
+Route::get('/event', [UserController::class, 'event'])->name('home.event');
+
 
 Route::get('/hotel', [UserController::class, 'hotel']);
 

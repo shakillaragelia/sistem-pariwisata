@@ -122,6 +122,10 @@ class UserController extends Controller
     return back()->with('success', 'Komentar berhasil dikirim.');
 }
 
-
+public function event()
+{
+    $events = event::latest()->get();
+    return view('home.event', compact('events')); // <- INI PENTING
+}
 
 }

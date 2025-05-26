@@ -3,72 +3,42 @@
 @section('content')
 
 <main class="main">
+  <!-- Hero Section -->
+  <section id="hero" class="hero section dark-background">
+    <img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
+    <div class="container d-flex flex-column align-items-center">
+      <h2 data-aos="fade-up" data-aos-delay="100">EVENT</h2>
+    </div>
+  </section>
 
- <!-- Hero Section -->
- <section id="hero" class="hero section dark-background">
+  <!-- Event Section -->
+  <section id="blog" class="blog section">
+    <div class="container section-title" data-aos="fade-up">
+      <h2>EVENT</h2>
+      <p>EVENT KOTA BUKITTINGGI</p>
+    </div>
 
-<img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
-
-<div class="container d-flex flex-column align-items-center">
-  <h2 data-aos="fade-up" data-aos-delay="100">EVENT</h2>
-  <!-- <p data-aos="fade-up" data-aos-delay="200">Jelajahi pesona alam, budaya, dan sejarah yang menakjubkan di jantung Sumatera Barat. Temukan destinasi menarik, kuliner khas, dan pengalaman tak terlupakan di Kota Bukittinggi.</p> -->
-  <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-  </div>
-</div>
-
-</section><!-- /Hero Section -->
-
-<!-- blog Section -->
- <section id="blog" class="blog section">
-
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-        <h2>EVENT</h2>
-        <p>EVENT KOTA BUKITTINGGI </p>
-      </div><!-- End Section Title -->
-      
-      <div class="container">
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-            <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
-              <div class="blog-content h-100">
-                <img src="ragel/ragel/assets/img/event-1.jpg" class="img-fluid" alt="">
-                <div class="blog-info">
-                  
-                  <h4>PEDATI</h4>
-                  <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-                  <a href="ragel/ragel/assets/img/event-1.jpg" title="Pesta Budaya Seni Pameran Dagang dan Industri (PEDATI)" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
-                  <a href="https://minangkabaunews.com/dibuka-wali-kota-pemko-bukittinggi-resmi-gelar-pedati-ke-13-tahun-2023/" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
+    <div class="container">
+      <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+        @forelse ($events as $item)
+          <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
+            <div class="blog-content h-100">
+              <img src="{{ asset('storage/' . $item->gambar) }}" class="img-fluid" alt="{{ $item->judul }}">
+              <div class="blog-info">
+                <h4>{{ $item->judul }}</h4>
+                <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
+                <a href="{{ asset('storage/' . $item->gambar) }}" title="{{ $item->judul }}" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
-              </div>
-            </div><!-- End blog Item -->
-
-            <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
-              <div class="blog-content h-100">
-                <img src="ragel/ragel/assets/img/event-2.jpg" class="img-fluid" alt="">
-                <div class="blog-info">
-                  <h4>Pacu Kudo</h4>
-                  <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-                  <a href="ragel/ragel/assets/img/event-2.jpg" title="Balap pacu kuda yang diadakan di arena Balap Kuda Bukit Ambacang" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="https://www.rri.co.id/olimpik/807258/pacu-kuda-wali-kota-cup-open-race-2024-pemersatu-bukittinggi-agam" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
-                </div>
-              </div>
-            </div><!-- End blog Item -->
-
-            <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
-              <div class="blog-content h-100">
-                <img src="ragel/ragel/assets/img/event-3.jpg" class="img-fluid" alt="">
-                <div class="blog-info">
-                  <h4>Police Women Run 10k 2024</h4>
-                  <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-                  <a href="ragel/ragel/assets/img/event-3.jpg" title="Lomba lari yang diadakan oleh Polresta Kota Bukittinggi" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="https://www.beyondrun.com/leaderboards?event=Polwan" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in" class="details-link"><i class="bi bi-link-45deg"></i></a></i></a>
-                </div>
-            </div><!-- End blog Item -->
-          </div><!-- End blog Container -->
-        </div>
+            </div>
+          </div>
+        @empty
+          <div class="col-12 text-center">
+            <p>Belum ada event tersedia.</p>
+          </div>
+        @endforelse
       </div>
-      </div>
-    </section><!-- /blog Section -->
+    </div>
+  </section>
 </main>
+
 @endsection

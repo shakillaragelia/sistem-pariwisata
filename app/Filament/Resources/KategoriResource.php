@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 class KategoriResource extends Resource
 {
@@ -32,6 +33,9 @@ class KategoriResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama'),
                 Tables\Columns\TextColumn::make('slug'),
+                ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->url(fn ($record) => asset('storage/' . $record->gambar)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
