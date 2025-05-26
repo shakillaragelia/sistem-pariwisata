@@ -67,12 +67,12 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 
 //VISIT
-    Route::middleware('log.visitor')->group(function () {
+    
     Route::get('/wisata-alam/{slug}', [UserController::class, 'detailAlam']);
     Route::get('/wisata-sejarah/{slug}', [UserController::class, 'detailSejarah']);
     Route::get('/wisata-kuliner/{slug}', [UserController::class, 'detailKuliner']);
     Route::get('/wisata-senbud/{slug}', [UserController::class, 'detailSenbud']);
-});
+
 
 
 

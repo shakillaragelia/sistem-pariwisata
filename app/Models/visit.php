@@ -15,7 +15,7 @@ class visit extends Model
         'id_user',
         'id_session',
         'ip_address',
-        'date',
+        'tanggal',
         'online',
         'time',
     ];

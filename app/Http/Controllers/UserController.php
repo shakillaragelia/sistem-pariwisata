@@ -13,8 +13,10 @@ use App\Models\Komentar;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+
 class UserController extends Controller
 {
+    //index
     public function index()
     {
         $kategori = Kategori::all();
@@ -28,6 +30,7 @@ class UserController extends Controller
         return view('home.index', compact('kategori', 'ikon'));
     }
 
+    //wisata
    public function wisata()
 {
     $wisata = Wisata::latest()->get();
@@ -40,6 +43,8 @@ class UserController extends Controller
     return view('home.wisata', compact('data'));
 }
 
+
+//hotel
     public function hotel()
     {
         $data = Hotel::latest()->get(); 
@@ -122,10 +127,12 @@ class UserController extends Controller
     return back()->with('success', 'Komentar berhasil dikirim.');
 }
 
+//event
 public function event()
 {
     $events = event::latest()->get();
-    return view('home.event', compact('events')); // <- INI PENTING
+    return view('home.event', compact('events')); 
 }
+
 
 }
