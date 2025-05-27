@@ -65,9 +65,11 @@ public static function table(Table $table): Table
                 ->wrap()
                 ->toggleable(),
             Tables\Columns\TextColumn::make('harga'),
-            Tables\Columns\ImageColumn::make('gambar')
+            ImageColumn::make('gambar')
                 ->label('Gambar')
-                ->url(fn ($record) => asset('storage/' . $record->gambar)), 
+                ->disk('public') 
+                ->url(fn ($record) => asset('storage/wisata/' . $record->gambar)) 
+                ->height(60),
             Tables\Columns\TextColumn::make('kategori.nama') 
                 ->label('Kategori'),
         ])

@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
 
 class KritiksaranResource extends Resource
 {
@@ -35,8 +36,12 @@ class KritiksaranResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                ->label('Nama User'),
+                TextColumn::make('user.name')
+                    ->label('Nama User')
+                    ->sortable()
+                    ->searchable()
+                    ->default('-') 
+                    ->formatStateUsing(fn ($state) => $state ?? 'Anonim'), 
                 Tables\Columns\TextColumn::make('subjek'),
                 Tables\Columns\TextColumn::make('pesan'),
     
