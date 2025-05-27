@@ -11,16 +11,14 @@ class RecordVisit
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!app()->runningInConsole() && !$request->is('admin/*')) {
-            Visit::create([
-                'ip_address' => $request->ip(),
-                'id_user' => auth()->check() ? auth()->id() : null,
-                'id_session' => session()->getId(),
-                'tanggal' => now()->toDateString(), 
-                'time' => now()->format('Y-m-d H:i:s'), 
-                'online' => true,
-            ]);
-        }
+        Visit::create([
+            'ip_address' => $request->ip(),
+            'id_session' => session()->getId(),
+            'id_user'    => auth()->check() ? auth()->id() : null,
+            'tanggal'    => now()->toDateString(),
+            'time'       => now()->format('Y-m-d H:i:s'),
+            'online'     => true,
+        ]);
 
         return $next($request);
     }

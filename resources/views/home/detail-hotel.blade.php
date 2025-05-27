@@ -34,7 +34,7 @@
               <li class="mb-2"><strong>Nama:</strong> {{ $hotel->nama }}</li>
               <li class="mb-2"><strong>Alamat:</strong> {{ $hotel->lokasi ?? '-' }}</li>
               @if($hotel->bintang)
-              <li class="mb-2"><strong>Rating:</strong>
+              <li class="mb-2"><strong>Bintang:</strong>
                 @for ($i = 0; $i < $hotel->bintang; $i++)
                   <i class="bi bi-star-fill text-warning"></i>
                 @endfor

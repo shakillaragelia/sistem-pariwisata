@@ -11,7 +11,6 @@ class visit extends Model
     protected $table ='visits';
     protected $primaryKey = 'id_visit';
     protected $fillable = [
-        'id_visit',
         'id_user',
         'id_session',
         'ip_address',

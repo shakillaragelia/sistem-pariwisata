@@ -2164,3 +2164,43 @@ section,
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+.kategori-wisata {
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.kategori-wisata:hover {
+  transform: translateY(-5px);
+}
+
+.kategori-wisata .icon {
+  width: 70px;
+  height: 70px;
+  background-color: #ff4a17;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+
+.kategori-wisata .icon i {
+  color: white;
+  font-size: 28px;
+}
+
+.kategori-wisata h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.kategori-wisata p {
+  font-size: 14px;
+  color: #666;
+}
