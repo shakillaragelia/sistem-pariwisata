@@ -16,4 +16,6 @@ class kritiksaran extends Model
         'subjek',
         'konten',
     ];
+
+    
 }

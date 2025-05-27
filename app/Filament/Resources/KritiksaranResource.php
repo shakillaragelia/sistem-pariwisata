@@ -25,7 +25,7 @@ class KritiksaranResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('subjek')->required(),
-                Forms\Components\TextInput::make('konten')->required(),
+                Forms\Components\TextInput::make('pesan')->required(),
                 Forms\Components\Hidden::make('id_user')
                     ->default(auth()->user()->id),
             ]);
@@ -35,8 +35,11 @@ class KritiksaranResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('user.name')
+                ->label('Nama User'),
                 Tables\Columns\TextColumn::make('subjek'),
-                Tables\Columns\TextColumn::make('konten'),
+                Tables\Columns\TextColumn::make('pesan'),
+    
             ])
             ->filters([
                 //
