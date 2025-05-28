@@ -17,6 +17,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Providers\FilamentGeocodeServiceProvider;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -26,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()          
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -53,7 +55,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                \App\Http\Middleware\IsAdmin::class, 
+                \App\Http\Middleware\IsAdmin::class,
+            ])
+            ->plugins([
+                \App\Providers\FilamentGeocodeServiceProvider::make(),
             ]);
+            
     }
 }

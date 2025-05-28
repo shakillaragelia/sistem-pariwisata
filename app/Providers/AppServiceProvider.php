@@ -3,28 +3,20 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Filament\Facades\Filament;
-use App\Providers\Filament\AdminPanelProvider;
-use Illuminate\Support\Facades\Request;
+use App\Providers\FilamentGeocodeServiceProvider;
 use App\Models\Visit;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        // Register Filament Admin Panel
-        app()->register(AdminPanelProvider::class);
+        // Register geocode plugin for Filament
+        $this->app->register(FilamentGeocodeServiceProvider::class);
 
         // Tracking kunjungan otomatis (selain admin route)
         if (!app()->runningInConsole() && !app()->runningUnitTests()) {
@@ -36,14 +28,12 @@ class AppServiceProvider extends ServiceProvider
                     'time' => now()->toTimeString(),
                     'online' => 1,
                 ];
-                
+
                 if (auth()->check()) {
-                    $data['id_user'] = auth()->id(); 
+                    $data['id_user'] = auth()->id();
                 }
-                
+
                 Visit::create($data);
-                
-                
             }
         }
     }
