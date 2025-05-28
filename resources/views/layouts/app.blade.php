@@ -56,5 +56,8 @@
   <!-- Main JS File -->
   <script src="{{ asset('ragel/ragel/assets/js/main.js') }}"></script>
 
+  {{-- Script tambahan (misal: SweetAlert dari halaman lain) --}}
+@stack('scripts')
+
 </body>
 </html>

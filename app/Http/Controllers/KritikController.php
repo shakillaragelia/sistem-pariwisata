@@ -29,6 +29,8 @@ class KritikController extends Controller
             'id_user' => Auth::id()
         ]);
 
-        return redirect()->back()->with('success', 'Pesan Anda Telah Terkirim. Terima Kasih!');
+        return redirect()->back()->with('success', 'Terima kasih atas masukannya!');
     }
+
+    
 }

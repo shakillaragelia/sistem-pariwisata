@@ -70,3 +70,19 @@
 </section> <!-- /Contact Section -->
 </main>
 @endsection
+@push('scripts')
+  @if (session('success'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+          icon: 'success',
+          title: 'Pesan Terkirim!',
+          text: '{{ session('success') }}',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      });
+    </script>
+  @endif
+@endpush
