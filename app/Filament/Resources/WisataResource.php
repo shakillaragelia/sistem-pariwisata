@@ -65,16 +65,18 @@ public static function table(Table $table): Table
                 ->wrap()
                 ->toggleable(),
             Tables\Columns\TextColumn::make('harga'),
-            ImageColumn::make('gambar')
+            TextColumn::make('gambar')
                 ->label('Gambar')
-                ->disk('public') 
-                ->url(fn ($record) => asset('storage/wisata/' . $record->gambar)) 
-                ->height(60),
+                ->html()
+                ->getStateUsing(fn ($record) => 
+                    '<img src="' . asset('storage/wisata-images/' . $record->gambar) . '" style="height: 60px; border-radius: 6px;">'
+                )
+                ->limit(0),
             Tables\Columns\TextColumn::make('kategori.nama') 
                 ->label('Kategori'),
         ])
         ->filters([
-            //
+            //  
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
