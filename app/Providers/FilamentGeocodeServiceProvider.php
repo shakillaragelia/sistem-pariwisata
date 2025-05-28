@@ -2,34 +2,24 @@
 
 namespace App\Providers;
 
-use Filament\Contracts\Plugin;
-use Filament\Panel;
+use Filament\Facades\Filament;
+use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
+use Illuminate\Support\ServiceProvider;
 
-class FilamentGeocodeServiceProvider implements Plugin
+class FilamentGeocodeServiceProvider extends ServiceProvider
 {
-    public function getId(): string
+    public function register(): void
     {
-        return 'geocode-script';
+        //
     }
 
-    public function register(Panel $panel): Panel
+    public function boot(): void
     {
-        return $panel;
-    }
-
-    public function boot(Panel $panel): void
-    {
-        FilamentAsset::register(
-            assets: [
-                FilamentAsset::script('geocode', asset('js/filament/custom/geocode.js')),
-            ],
-            package: 'geocode-script'
-        );
-    }
-
-    public static function make(): static
-    {
-        return new static();
+        Filament::serving(function () {
+            FilamentAsset::register([
+                Js::make('geocode', asset('js/filament/custom/geocode.js')),
+            ]);
+        });
     }
 }

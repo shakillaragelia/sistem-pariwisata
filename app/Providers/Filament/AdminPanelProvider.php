@@ -19,7 +19,6 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Providers\FilamentGeocodeServiceProvider;
 
-
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -58,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
                 \App\Http\Middleware\IsAdmin::class,
             ])
             ->plugins([
-                \App\Providers\FilamentGeocodeServiceProvider::make(),
+                App\Providers\FilamentGeocodeServiceProvider::class,
             ]);
             
     }
