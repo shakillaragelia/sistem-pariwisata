@@ -15,50 +15,12 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 
-function getCoordinates($address)
-{
-    $apiKey = env('GOOGLE_MAPS_API_KEY');
-    $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($address) . "&key=$apiKey";
-    $response = Http::get($url);
-    $data = $response->json();
-
-    if (!empty($data['results'][0])) {
-        $location = $data['results'][0]['geometry']['location'];
-        return [
-            'latitude' => $location['lat'],
-            'longitude' => $location['lng'],
-        ];
-    }
-
-    return null;
-}
-
 class HotelResource extends Resource
 {
     protected static ?string $model = Hotel::class;
 
     protected static ?string $navigationGroup = 'Data Master';
     protected static ?string $navigationLabel = 'Hotel';
-
-    protected static function mutateFormDataBeforeCreate(array $data): array
-    {
-        $coordinates = getCoordinates($data['lokasi']);
-        if ($coordinates) {
-            $data['latitude'] = $coordinates['latitude'];
-            $data['longitude'] = $coordinates['longitude'];
-        }
-        return $data;
-    }
-
-    protected static function mutateFormDataBeforeUpdate(array $data): array
-    {
-        $coordinates = getCoordinates($data['lokasi']);
-        if ($coordinates) {
-            $data['latitude'] = $coordinates['latitude'];
-            $data['longitude'] = $coordinates['longitude'];
-        }
-        return $data;
-    }
 
     public static function form(Form $form): Form
     {
@@ -67,16 +29,49 @@ class HotelResource extends Resource
                 TextInput::make('nama')->required(),
                 TextInput::make('slug')->required(),
                 TextInput::make('deskripsi')->required(),
-                TextInput::make('lokasi')->required(),
+                
+                TextInput::make('lokasi')
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(function ($state, callable $set) {
+                    if (!$state) return;
+                
+                    $response = \Illuminate\Support\Facades\Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
+                        'address' => $state,
+                        'key' => config('services.google_maps.key'),
+                    ]);
+                
+                    $data = $response->json();
+                
+                    // Tambahkan debug log ini:
+                    \Log::info('Google Maps Response:', $data);
+                
+                    if (!empty($data['results'][0]['geometry']['location'])) {
+                        $location = $data['results'][0]['geometry']['location'];
+                        $set('latitude', $location['lat']);
+                        $set('longitude', $location['lng']);
+                    }
+                }),
+            
+
                 FileUpload::make('gambar'),
+
                 TextInput::make('bintang')
                     ->label('Bintang')
                     ->numeric()
                     ->minValue(1)
                     ->maxValue(5)
                     ->required(),
-                TextInput::make('latitude')->required(),
-                TextInput::make('longitude')->required(),
+
+                TextInput::make('latitude')
+                    ->required()
+                    ->reactive()
+                    ->extraAttributes(['readonly' => true]),
+
+                TextInput::make('longitude')
+                    ->required()
+                    ->reactive()
+                    ->extraAttributes(['readonly' => true]),
             ]);
     }
 
