@@ -29,32 +29,49 @@ class HotelResource extends Resource
                 TextInput::make('nama')->required(),
                 TextInput::make('slug')->required(),
                 TextInput::make('deskripsi')->required(),
-                
+
                 TextInput::make('lokasi')
                 ->required()
                 ->reactive()
+                ->afterStateHydrated(function ($state, callable $set, $get) {
+                    if ($state && !$get('latitude') && !$get('longitude')) {
+                        $response = Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
+                            'address' => $state,
+                            'key' => config('services.google_maps.key'),
+                        ]);
+
+                        $data = $response->json();
+
+                        if (!empty($data['results'][0]['geometry']['location'])) {
+                            $location = $data['results'][0]['geometry']['location'];
+                            $set('latitude', $location['lat']);
+                            $set('longitude', $location['lng']);
+                        }
+                    }
+                })
                 ->afterStateUpdated(function ($state, callable $set) {
                     if (!$state) return;
-                
-                    $response = \Illuminate\Support\Facades\Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
+
+                    $response = Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
                         'address' => $state,
                         'key' => config('services.google_maps.key'),
                     ]);
-                
+
                     $data = $response->json();
-                
-                    // Tambahkan debug log ini:
-                    \Log::info('Google Maps Response:', $data);
-                
+
                     if (!empty($data['results'][0]['geometry']['location'])) {
                         $location = $data['results'][0]['geometry']['location'];
                         $set('latitude', $location['lat']);
                         $set('longitude', $location['lng']);
                     }
                 }),
-            
 
-                FileUpload::make('gambar'),
+
+                FileUpload::make('gambar')
+                    ->image()
+                    ->disk('public')
+                    ->directory('hotel-images')
+                    ->required(),
 
                 TextInput::make('bintang')
                     ->label('Bintang')

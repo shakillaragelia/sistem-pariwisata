@@ -18,6 +18,8 @@ class hotel extends Model
         'lokasi',
         'gambar',
         'bintang',
+        'latitude',
+        'longitude',
 
     ];
 }

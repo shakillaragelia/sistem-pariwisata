@@ -20,6 +20,8 @@ class Wisata extends Model
         'harga',
         'lokasi',
         'gambar',
+        'latitude',
+        'longitude',
     ];
 
     public function kategori()
