@@ -15,6 +15,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 
 class WisataResource extends Resource
 {
@@ -30,11 +31,31 @@ class WisataResource extends Resource
                 TextInput::make('nama')->required(),
                 TextInput::make('slug')->required(),
                 Textarea::make('deskripsi')->required(),
-                TextInput::make('harga')->required()->numeric(),
+
+                TextInput::make('harga')
+                    ->required()
+                    ->numeric()
+                    ->inputMode('decimal'),
 
                 TextInput::make('lokasi')
                     ->required()
                     ->reactive()
+                    ->afterStateHydrated(function ($state, callable $set, $get) {
+                        if ($state && !$get('latitude') && !$get('longitude')) {
+                            $response = Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
+                                'address' => $state,
+                                'key' => config('services.google_maps.key'),
+                            ]);
+
+                            $data = $response->json();
+
+                            if (!empty($data['results'][0]['geometry']['location'])) {
+                                $location = $data['results'][0]['geometry']['location'];
+                                $set('latitude', $location['lat']);
+                                $set('longitude', $location['lng']);
+                            }
+                        }
+                    })
                     ->afterStateUpdated(function ($state, callable $set) {
                         if (!$state) return;
 
@@ -83,10 +104,12 @@ class WisataResource extends Resource
                 TextColumn::make('deskripsi')->limit(50)->wrap()->toggleable(),
                 TextColumn::make('slug'),
                 TextColumn::make('lokasi')->limit(50)->wrap()->toggleable(),
-                TextColumn::make('harga'),
-                Tables\Columns\ImageColumn::make('gambar')
+                TextColumn::make('harga')
+                    ->label('Harga')
+                    ->formatStateUsing(fn ($state) => 'IDR ' . number_format($state, 0, ',', '.')),
+                ImageColumn::make('gambar')
                     ->label('Gambar')
-                    ->url(fn ($record) => asset('storage/' . $record->gambar)), 
+                    ->url(fn ($record) => asset('storage/' . $record->gambar)),
                 TextColumn::make('kategori.nama')->label('Kategori'),
             ])
             ->actions([
