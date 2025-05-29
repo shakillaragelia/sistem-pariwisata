@@ -15,9 +15,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Register geocode plugin for Filament
-        $this->app->register(FilamentGeocodeServiceProvider::class);
-
         // Tracking kunjungan otomatis (selain admin route)
         if (!app()->runningInConsole() && !app()->runningUnitTests()) {
             if (!request()->is('admin*')) {

@@ -55,10 +55,8 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
                 \App\Http\Middleware\IsAdmin::class,
-            ])
-            ->plugins([
-                App\Providers\FilamentGeocodeServiceProvider::class,
             ]);
+            
             
     }
 }
