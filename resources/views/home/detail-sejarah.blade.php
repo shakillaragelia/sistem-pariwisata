@@ -29,8 +29,21 @@
               <li class="mb-2"><strong>Nama Tempat:</strong> {{ $wisata->nama }}</li>
               <li class="mb-2"><strong>Lokasi:</strong> {{ $wisata->lokasi ?? '-' }}</li>
             </ul>
+
             <h5 class="fw-bold mt-4">Deskripsi Sejarah</h5>
             <p>{{ $wisata->deskripsi }}</p>
+
+            <h5 class="fw-bold mt-4">Rekomendasi Hotel Terdekat (Bintang 3+)</h5>
+            @forelse ($rekomendasiHotel as $hotel)
+              <div class="mb-2">
+                <a href="{{ url('/detail- ' . $hotel->slug) }}">
+                  {{ $hotel->nama }} ({{ number_format($hotel->distance, 2) }} km)
+                </a>
+              </div>
+            @empty
+              <p>Tidak ada hotel terdekat yang ditemukan.</p>
+            @endforelse
+
           </div>
         </div>
       </div>
@@ -50,13 +63,8 @@
       @if(auth()->check() && auth()->user()->role === 'user')
         <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
           @csrf
-
-      
-
           <input type="hidden" name="id" value="{{ $wisata->id_wisata }}">
-
           <input type="hidden" name="type" value="App\Models\Wisata">
-
           <div class="mb-3">
             <label for="komentar" class="form-label">Tulis Komentar:</label>
             <textarea name="komentar" class="form-control" rows="3" required></textarea>

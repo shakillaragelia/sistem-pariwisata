@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Wisata;
 use App\Models\Kuliner;
 use App\Models\Senbud;
+use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Event;
 use App\Models\Kategori;
-use Illuminate\Http\Request;
+use App\Models\Komentar;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    // INDEX
     public function index()
     {
         $kategori = Kategori::all();
@@ -27,38 +28,33 @@ class UserController extends Controller
         return view('home.index', compact('kategori', 'ikon'));
     }
 
-    // WISATA
     public function wisata()
     {
         $wisata = Wisata::latest()->get();
         $kuliner = Kuliner::latest()->get();
         $senbud = Senbud::latest()->get();
-
         $data = $wisata->concat($kuliner)->concat($senbud);
+
         return view('home.wisata', compact('data'));
     }
 
-    // HOTEL
     public function hotel()
     {
         $data = Hotel::latest()->get(); 
         return view('home.hotel', compact('data'));
     }
 
-    // DETAIL HOTEL + REKOMENDASI WISATA TERDEKAT
     public function detailHotel($slug)
     {
         $hotel = Hotel::where('slug', $slug)->firstOrFail();
 
-        $radius = 10; // KM
+        $radius = 10; // km
         $rekomendasiWisata = DB::table('wisatas')
-            ->join('kategoris', 'wisatas.id_kategori', '=', 'kategoris.id_kategori')
-            ->select('wisatas.*', 'kategoris.slug as kategori_slug')
-            ->selectRaw('(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * 
-                        cos(radians(longitude) - radians(?)) + 
-                        sin(radians(?)) * sin(radians(latitude)))) AS distance', [
-                            $hotel->latitude, $hotel->longitude, $hotel->latitude
-                        ])
+            ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
+                cos(radians(longitude) - radians(?)) + 
+                sin(radians(?)) * sin(radians(latitude)))) AS distance", [
+                    $hotel->latitude, $hotel->longitude, $hotel->latitude
+                ])
             ->having('distance', '<', $radius)
             ->orderBy('distance')
             ->limit(3)
@@ -67,45 +63,49 @@ class UserController extends Controller
         return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
     }
 
-    // DETAIL ALAM
     public function detailAlam($slug)
     {
-        $wisata = Wisata::where('slug', $slug)
-            ->whereHas('kategori', fn($q) => $q->where('slug', 'alam'))
-            ->firstOrFail();
+        $wisata = Wisata::where('slug', $slug)->whereHas('kategori', function($q) {
+            $q->where('slug', 'alam');
+        })->firstOrFail();
 
         $komentar = $wisata->komentar()->latest()->get();
-        return view('home.detail-alam', compact('wisata', 'komentar'));
+
+        $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
+
+        return view('home.detail-alam', compact('wisata', 'komentar', 'rekomendasiHotel'));
     }
 
-    // DETAIL SEJARAH
     public function detailSejarah($slug)
     {
-        $wisata = Wisata::where('slug', $slug)
-            ->whereHas('kategori', fn($q) => $q->where('slug', 'sejarah'))
-            ->firstOrFail();
-
+        $wisata = Wisata::where('slug', $slug)->firstOrFail();
         $komentar = $wisata->komentar()->latest()->get();
-        return view('home.detail-sejarah', compact('wisata', 'komentar'));
+
+        $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
+
+        return view('home.detail-sejarah', compact('wisata', 'komentar', 'rekomendasiHotel'));
     }
 
-    // DETAIL KULINER
     public function detailKuliner($slug)
     {
         $kuliner = Kuliner::where('slug', $slug)->firstOrFail();
         $komentar = $kuliner->komentar()->latest()->get();
-        return view('home.detail-kuliner', compact('kuliner', 'komentar'));
+
+        $rekomendasiHotel = $this->getNearbyHotels($kuliner->latitude, $kuliner->longitude);
+
+        return view('home.detail-kuliner', compact('kuliner', 'komentar', 'rekomendasiHotel'));
     }
 
-    // DETAIL SENI BUDAYA
     public function detailSenbud($slug)
     {
         $senbud = Senbud::where('slug', $slug)->firstOrFail();
         $komentar = $senbud->komentar()->latest()->get();
-        return view('home.detail-senbud', compact('senbud', 'komentar'));
+
+        $rekomendasiHotel = $this->getNearbyHotels($senbud->latitude, $senbud->longitude);
+
+        return view('home.detail-senbud', compact('senbud', 'komentar', 'rekomendasiHotel'));
     }
 
-    // SIMPAN KOMENTAR (POLYMORPHIC)
     public function simpanKomentar(Request $request)
     {
         $request->validate([
@@ -124,10 +124,26 @@ class UserController extends Controller
         return back()->with('success', 'Komentar berhasil dikirim.');
     }
 
-    // EVENT
     public function event()
     {
         $events = Event::latest()->get();
-        return view('home.event', compact('events'));
+        return view('home.event', compact('events')); 
+    }
+
+    // Fungsi bantu untuk rekomendasi hotel terdekat
+    private function getNearbyHotels($lat, $lng)
+    {
+        $radius = 10; // km
+        return DB::table('hotels')
+            ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
+                cos(radians(longitude) - radians(?)) + 
+                sin(radians(?)) * sin(radians(latitude)))) AS distance", [
+                    $lat, $lng, $lat
+                ])
+            ->where('bintang', '>=', 3)
+            ->having('distance', '<', $radius)
+            ->orderBy('distance')
+            ->limit(3)
+            ->get();
     }
 }
