@@ -15,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Tracking kunjungan otomatis (selain admin route)
         if (!app()->runningInConsole() && !app()->runningUnitTests()) {
             if (!request()->is('admin*')) {
                 $data = [

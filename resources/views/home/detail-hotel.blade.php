@@ -33,7 +33,10 @@
             <h4 class="fw-bold mb-3">Informasi Hotel</h4>
             <ul class="list-unstyled">
               <li class="mb-2"><strong>Nama:</strong> {{ $hotel->nama }}</li>
-              <li class="mb-2"><strong>Alamat:</strong> {{ $hotel->lokasi ?? '-' }}</li>
+              <strong>Alamat:</strong>
+                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($hotel->lokasi) }}" target="_blank">
+                  {{ $hotel->lokasi ?? '-' }}
+                  </a>
               @if($hotel->bintang)
               <li class="mb-2"><strong>Bintang:</strong>
                 @for ($i = 0; $i < $hotel->bintang; $i++)
