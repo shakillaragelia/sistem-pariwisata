@@ -16,6 +16,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\Toggle;
+
 
 class WisataResource extends Resource
 {
@@ -93,6 +95,10 @@ class WisataResource extends Resource
                     ->required()
                     ->reactive()
                     ->extraAttributes(['readonly' => true]),
+
+                    Toggle::make('toilet')->label('Toilet'),
+                    Toggle::make('parkir')->label('Parkir'),
+                    Toggle::make('tempat_ibadah')->label('Tempat Ibadah'),
             ]);
     }
 

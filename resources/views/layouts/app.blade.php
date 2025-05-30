@@ -23,6 +23,13 @@
   <link href="{{ asset('ragel/ragel/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ asset('ragel/ragel/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
+  
+  <!-- Font Awesome 6 (Free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- ✅ Lucide Icons -->
+  <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
+
   <!-- Main CSS File -->
   <link href="{{ asset('ragel/ragel/assets/css/main.css') }}" rel="stylesheet">
 </head>
@@ -57,12 +64,12 @@
   <script src="{{ asset('ragel/ragel/assets/js/main.js') }}"></script>
 
   {{-- Script tambahan (misal: SweetAlert dari halaman lain) --}}
-@stack('scripts')
+  @stack('scripts')
 
-<script>
-  window.GOOGLE_API_KEY = "{{ env('GOOGLE_MAPS_API_KEY') }}";
-</script>
-
+  <script>
+    window.GOOGLE_API_KEY = "{{ env('GOOGLE_MAPS_API_KEY') }}";
+    lucide.createIcons(); // ✅ Init Lucide Icons
+  </script>
 
 </body>
 </html>

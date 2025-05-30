@@ -27,16 +27,41 @@
             <h4 class="fw-bold mb-3">Informasi</h4>
             <ul class="list-unstyled">
               <li class="mb-2"><strong>Nama Tempat:</strong> {{ $wisata->nama }}</li>
-              <li class="mb-2"><strong>Lokasi:</strong> {{ $wisata->lokasi ?? '-' }}</li>
+              <li class="mb-2">
+                <strong>Lokasi:</strong>
+                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($wisata->lokasi) }}" target="_blank">
+                  {{ $wisata->lokasi ?? '-' }}
+                </a>
+              </li>
             </ul>
 
             <h5 class="fw-bold mt-4">Deskripsi Sejarah</h5>
             <p>{{ $wisata->deskripsi }}</p>
 
+            <h5 class="fw-bold mt-4">Fasilitas</h5>
+            <ul class="list-unstyled">
+              <li class="mb-1">
+              <i class="fas fa-square-parking me-2"></i>
+                {{ $wisata->parkir ? 'Tersedia' : 'Tidak tersedia' }}
+              </li>
+              <li class="mb-1">
+              <i class="fas fa-toilet me-2"></i>
+                {{ $wisata->toilet ? 'Tersedia' : 'Tidak tersedia' }}
+              </li>
+              <li class="mb-1">
+              <i class="fas fa-mosque me-2"></i>
+                 {{ $wisata->tempat_ibadah ? 'Tersedia' : 'Tidak tersedia' }}
+              </li>
+              <li class="mb-1">
+              <i class="fas fa-money-bill-wave me-2"></i>
+                {{ $wisata->harga ? 'Rp' . number_format($wisata->harga, 0, ',', '.') : 'Gratis / Tidak tersedia' }}
+              </li>
+            </ul>
+
             <h5 class="fw-bold mt-4">Rekomendasi Hotel Terdekat (Bintang 3+)</h5>
             @forelse ($rekomendasiHotel as $hotel)
               <div class="mb-2">
-                <a href="{{ url('/detail- ' . $hotel->slug) }}">
+                <a href="{{ url('/detail-' . $hotel->slug) }}">
                   {{ $hotel->nama }} ({{ number_format($hotel->distance, 2) }} km)
                 </a>
               </div>
