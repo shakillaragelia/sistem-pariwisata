@@ -46,25 +46,27 @@
             <p>{{ $hotel->deskripsi }}</p>
 
             <h5 class="fw-bold mt-4">Rekomendasi Wisata Terdekat</h5>
-            @forelse ($rekomendasiWisata as $wisata)
-              @php
-                $kategoriSlug = $wisata->kategori->slug ?? 'wisata';
-                $routePrefix = match($kategoriSlug) {
-                    'alam' => 'detail-alam',
-                    'sejarah' => 'detail-sejarah',
-                    'kuliner' => 'detail-kuliner',
-                    'senbud' => 'detail-senbud',
-                    default => 'detail-wisata',
-                };
-              @endphp
-              <div class="mb-2">
-              <a href="{{ url('/detail-' . $wisata->kategori_slug . '/' . $wisata->slug) }}">
-                  {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)
-                </a>
-              </div>
-            @empty
-              <p>Tidak ada wisata terdekat yang ditemukan.</p>
-            @endforelse
+            @foreach ($rekomendasiWisata as $wisata)
+  <div class="mb-2">
+    <a href="{{ url('/detail- ' . $wisata->slug) }}">
+      {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)
+    </a>
+  </div>
+@endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           </div>
         </div>

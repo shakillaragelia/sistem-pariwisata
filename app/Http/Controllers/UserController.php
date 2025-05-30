@@ -146,4 +146,19 @@ class UserController extends Controller
             ->limit(3)
             ->get();
     }
+
+
+    public function searchWisata(Request $request)
+    {
+        $keyword = $request->input('search');
+
+        $wisata = \App\Models\Wisata::where('nama', 'like', '%' . $keyword . '%')->get();
+        $kuliner = \App\Models\Kuliner::where('nama', 'like', '%' . $keyword . '%')->get();
+        $senbud = \App\Models\Senbud::where('nama', 'like', '%' . $keyword . '%')->get();
+
+        $data = $wisata->concat($kuliner)->concat($senbud);
+
+        return view('home.wisata', compact('data', 'keyword'));
+    }
+
 }

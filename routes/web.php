@@ -20,6 +20,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/wisata', [UserController::class, 'wisata']);
+Route::get('/wisata/search', [UserController::class, 'searchWisata'])->name('wisata.search');
 Route::get('/detail-alam/{slug}', [UserController::class, 'detailAlam'])->name('detail.alam');
 Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
 Route::get('/detail-kuliner/{slug}', [UserController::class, 'detailKuliner'])->name('detail.kuliner');
