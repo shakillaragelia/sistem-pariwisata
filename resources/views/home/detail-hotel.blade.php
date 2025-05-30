@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -40,6 +41,8 @@
                 @endfor
               </li>
               @endif
+              <li class="mb-2"><strong>Harga:</strong> Rp{{ number_format($hotel->harga_mulai ?? 0) }} – Rp{{ number_format($hotel->harga_max ?? 0) }}</li>
+              <li class="mb-2"><strong>Telepon:</strong> {{ $hotel->telepon ?? 'Belum tersedia' }}</li>
             </ul>
 
             <h5 class="fw-bold mt-4">Deskripsi</h5>
@@ -53,21 +56,6 @@
     </a>
   </div>
 @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
         </div>
       </div>

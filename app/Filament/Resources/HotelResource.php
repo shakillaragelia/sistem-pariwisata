@@ -90,11 +90,15 @@ class HotelResource extends Resource
                     ->reactive()
                     ->extraAttributes(['readonly' => true]),
 
-               TextInput::make('harga_mulai')
-                        ->label('Harga Mulai Dari')
-                        ->numeric()
-                        ->prefix('Rp')
-                        ->nullable(),
+                    TextInput::make('harga_mulai')
+                    ->label('Harga Mulai Dari')
+                    ->numeric()
+                    ->nullable(),
+
+                    TextInput::make('harga_max')
+                    ->label('Harga Tertinggi')
+                    ->numeric()
+                    ->nullable(),
 
                 TextInput::make('telepon')
                         ->label('No. Telepon')

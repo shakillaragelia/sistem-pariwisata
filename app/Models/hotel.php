@@ -20,6 +20,8 @@ class hotel extends Model
         'bintang',
         'latitude',
         'longitude',
-
+        'telepon',
+        'harga_mulai',
+        'harga_max',
     ];
 }
