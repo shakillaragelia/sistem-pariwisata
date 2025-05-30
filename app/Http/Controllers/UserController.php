@@ -161,4 +161,15 @@ class UserController extends Controller
         return view('home.wisata', compact('data', 'keyword'));
     }
 
+    public function searchHotel(Request $request)
+    {
+        $keyword = $request->input('search');
+
+        $hotel = \App\Models\Hotel::where('nama', 'like', '%' . $keyword . '%')->get();
+
+        $data = $hotel;
+
+        return view('home.hotel', compact('data', 'keyword'));
+    }
+
 }

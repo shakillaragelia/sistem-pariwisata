@@ -30,7 +30,7 @@ Route::get('/event', [UserController::class, 'event'])->name('home.event');
 
 
 Route::get('/hotel', [UserController::class, 'hotel']);
-
+Route::get('/hotel/search', [UserController::class, 'searchHotel'])->name('hotel.search');
 Route::get('/detail-hotel/{slug}', [UserController::class, 'detailHotel']);
 
 

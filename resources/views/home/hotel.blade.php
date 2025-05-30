@@ -19,6 +19,11 @@
       <p>HOTEL DI BUKITTINGGI</p>
     </div>
 
+    <form action="{{ route('hotel.search') }}" method="GET" class="mb-4 d-flex justify-content-center">
+          <input type="text" name="search" class="form-control w-50 me-2" placeholder="Cari nama hotel..." value="{{ request('search') }}">
+          <button type="submit" class="btn btn-primary">Cari</button>
+        </form>
+
     <div class="container">
       <div class="row gy-5">
         @foreach ($data as $item)
