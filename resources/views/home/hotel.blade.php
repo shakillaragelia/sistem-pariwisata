@@ -33,8 +33,11 @@
                    style="object-fit: cover; height: 220px;" alt="{{ $item->nama }}">
               <div class="card-body">
                 <h5 class="card-title">{{ $item->nama }}</h5>
-                <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi, 70) }}</p>
-                <a href="{{ url('/detail-hotel/' . $item->slug) }}" class="btn btn-sm btn-primary">Lihat Detail</a>
+                <p class="card-text text-warning mb-2">
+  @for ($i = 0; $i < $item->bintang; $i++)
+    <i class="fas fa-star"></i>
+  @endfor
+</p>                <a href="{{ url('/detail-hotel/' . $item->slug) }}" class="btn btn-sm btn-primary">Lihat Detail</a>
               </div>
             </div>
           </div>
