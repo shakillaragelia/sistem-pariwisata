@@ -41,7 +41,7 @@ Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.s
 Route::get('/wisata/sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
 
 //kririksarab(kontak)
-Route::get('/kontak', [KritikController::class, 'index'])->name('home.kontak');
+Route::get('/saran', [KritikController::class, 'index'])->name('home.saran');
 Route::post('/kritik', [KritikController::class, 'store'])->name('kritik.store');
 
 

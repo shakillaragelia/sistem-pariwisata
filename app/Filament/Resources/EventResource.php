@@ -2,17 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EventResource\Pages;
-use App\Filament\Resources\EventResource\RelationManagers;
-use App\Models\Event;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Event;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\EventResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EventResource\RelationManagers;
 
 
 class EventResource extends Resource
@@ -31,8 +35,11 @@ class EventResource extends Resource
                 ->required() 
                 ->reactive() 
                 ->afterStateUpdated(fn($state, callable $set) => $set ('slug', Str::slug($state))),
-                Forms\Components\TextInput::make('deskripsi')->required(),
-                
+                Textarea::make('deskripsi')
+                    ->label('Deskripsi')
+                    ->required()
+                    ->maxLength(null),
+                FileUpload::make('gambar')
             ]);
         }
 
@@ -42,7 +49,10 @@ class EventResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('judul'),
                 Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('deskripsi'),
+                TextColumn::make('deskripsi')->label('Deskripsi')->limit(30),
+                ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->url(fn ($record) => asset('storage/' . $record->gambar)),
             ])
             ->filters([
                 //
