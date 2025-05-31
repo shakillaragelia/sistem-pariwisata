@@ -17,15 +17,15 @@
   <section id="wisata" class="wisata section">
     <section id="portfolio" class="portfolio section">
       <div class="container section-title" data-aos="fade-up">
-        <form action="{{ route('wisata.search') }}" method="GET" class="mb-4 d-flex justify-content-center">
-          <input type="text" name="search" class="form-control w-50 me-2" placeholder="Cari nama wisata..." value="{{ request('search') }}">
-          <button type="submit" class="btn btn-primary">Cari</button>
-        </form>
 
         <h2>WISATA</h2>
         <p>WISATA KOTA BUKITTINGGI</p>
       </div>
 
+<form action="{{ route('wisata.search') }}" method="GET" class="mb-4 d-flex justify-content-center">
+          <input type="text" name="search" class="form-control w-50 me-2" placeholder="Cari nama wisata..." value="{{ request('search') }}">
+          <button type="submit" class="btn btn-primary">Cari</button>
+        </form>
       <div class="container">
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
