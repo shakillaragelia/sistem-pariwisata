@@ -17,15 +17,17 @@
     </div>
 
     <div class="container">
-      <div class="row gy-5">
-        <div class="col-lg-7" data-aos="fade-up">
-          <div class="card shadow-sm border-0">
-            <img src="{{ asset('storage/' . $wisata->gambar) }}" class="card-img-top w-100" style="object-fit: cover; height: 350px;" alt="{{ $wisata->nama }}">
-          </div>
+      <div class="row align-items-stretch" data-aos="fade-up">
+        <!-- Gambar kiri -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <img src="{{ asset('storage/' . $wisata->gambar) }}"
+               class="img-fluid h-100 w-100 object-fit-cover rounded"
+               alt="{{ $wisata->nama }}">
         </div>
 
-        <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-          <div class="info-wisata">
+        <!-- Konten kanan -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="info-wisata h-100 d-flex flex-column justify-content-between">
             <h4 class="fw-bold mb-3">Informasi</h4>
             <ul class="list-unstyled">
               <li class="mb-2"><strong>Nama:</strong> {{ $wisata->nama }}</li>
@@ -43,19 +45,19 @@
             <h5 class="fw-bold mt-4">Fasilitas</h5>
             <ul class="list-unstyled">
               <li class="mb-1">
-              <i class="fas fa-square-parking me-2"></i>
+                <i class="fas fa-square-parking me-2"></i>
                 {{ $wisata->parkir ? 'Tersedia' : 'Tidak tersedia' }}
               </li>
               <li class="mb-1">
-              <i class="fas fa-toilet me-2"></i>
+                <i class="fas fa-toilet me-2"></i>
                 {{ $wisata->toilet ? 'Tersedia' : 'Tidak tersedia' }}
               </li>
               <li class="mb-1">
-              <i class="fas fa-mosque me-2"></i>
-                 {{ $wisata->tempat_ibadah ? 'Tersedia' : 'Tidak tersedia' }}
+                <i class="fas fa-mosque me-2"></i>
+                {{ $wisata->tempat_ibadah ? 'Tersedia' : 'Tidak tersedia' }}
               </li>
               <li class="mb-1">
-              <i class="fas fa-money-bill-wave me-2"></i>
+                <i class="fas fa-money-bill-wave me-2"></i>
                 {{ $wisata->harga ? 'Rp' . number_format($wisata->harga, 0, ',', '.') : 'Gratis / Tidak tersedia' }}
               </li>
             </ul>
@@ -70,7 +72,6 @@
             @empty
               <p>Tidak ada hotel terdekat yang ditemukan.</p>
             @endforelse
-
           </div>
         </div>
       </div>
