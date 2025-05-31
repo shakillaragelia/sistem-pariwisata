@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -17,20 +16,24 @@
     </div>
 
     <div class="container">
-      <div class="row gy-5">
-        <div class="col-lg-7" data-aos="fade-up">
-          <div class="card shadow-sm border-0">
-            <img src="{{ asset('storage/' . $senbud->gambar) }}" class="card-img-top w-100" style="object-fit: cover; height: 350px;" alt="{{ $senbud->nama }}">
-          </div>
+      <div class="row align-items-stretch" data-aos="fade-up">
+        <!-- Gambar kiri -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <img src="{{ asset('storage/' . $senbud->gambar) }}"
+               class="img-fluid h-100 w-100 object-fit-cover rounded"
+               alt="{{ $senbud->nama }}">
         </div>
-        <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-          <div class="info">
+
+        <!-- Konten kanan -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="info h-100 d-flex flex-column justify-content-between">
             <h4 class="fw-bold mb-3">Informasi</h4>
             <ul class="list-unstyled">
               <li class="mb-2"><strong>Nama:</strong> {{ $senbud->nama }}</li>
             </ul>
+
             <h5 class="fw-bold mt-4">Deskripsi</h5>
-            <p>{{ $senbud->deskripsi }}</p>
+            <p style="text-align: justify;">{{ $senbud->deskripsi }}</p>
           </div>
         </div>
       </div>
