@@ -1,7 +1,7 @@
-
 @extends('layouts.app')
 
 @section('content')
+
 <main class="main">
 
   <!-- Hero Section -->
@@ -27,14 +27,14 @@
         @foreach ($kategori as $item)
         <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
           <div class="wisata-item h-100">
-            <div class="img position-relative">
-              <img src="{{ asset('storage/' . $item->gambar) }}" class="img-fluid" style="height:250px; object-fit:cover;" alt="">
-              <div class="icon" style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: #ff4a17; color: white; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
+            <div class="img" style="width: 100%; height: 250px; overflow: hidden; border-radius: 10px;">
+              <img src="{{ asset('storage/' . $item->gambar) }}" class="img-fluid w-100 h-100" style="object-fit: cover; object-position: center;" alt="">
+            </div>
+            <div class="details position-relative text-center p-4 shadow-sm bg-white" style="border-radius: 10px; margin-top: -30px;">
+              <div class="icon mx-auto mb-2" style="width: 50px; height: 50px; background: #ff4a17; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-top: -25px;">
                 <i class="bi bi-activity"></i>
               </div>
-            </div>
-            <div class="details position-relative text-center p-3 shadow-sm bg-white" style="margin-top: -30px; border-radius: 10px;">
-              <h5 class="card-title">{{ $item->nama }}</h5>
+              <h5 class="card-title mb-2">{{ $item->nama }}</h5>
               <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi, 80) }}</p>
             </div>
           </div>
