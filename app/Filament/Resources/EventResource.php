@@ -32,8 +32,7 @@ class EventResource extends Resource
                 ->reactive() 
                 ->afterStateUpdated(fn($state, callable $set) => $set ('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('deskripsi')->required(),
-                Forms\Components\Hidden::make('id_user')
-                    ->default(auth()->user()->id),
+                
             ]);
         }
 

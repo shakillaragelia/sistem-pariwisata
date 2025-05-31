@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('hotels', function (Blueprint $table) {
-            $table->integer('harga_max')->nullable()->after('harga_mulai');
+            $table->integer('harga_max')->nullable()->after('harga_mulai');$table->integer('harga_max')->nullable()->after('harga_mulai');
         });
     }
 
