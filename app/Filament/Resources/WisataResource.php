@@ -23,7 +23,9 @@ class WisataResource extends Resource
 {
     protected static ?string $model = Wisata::class;
 
-    protected static ?string $navigationGroup = 'Data Master';
+    protected static ?string $navigationGroup = 'Data Pariwisata';
+
+    protected static ?string $navigationLabel = 'Wisata';
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
     public static function form(Form $form): Form

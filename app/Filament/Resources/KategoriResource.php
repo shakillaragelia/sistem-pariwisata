@@ -15,7 +15,9 @@ use Filament\Tables\Columns\ImageColumn;
 class KategoriResource extends Resource
 {
     protected static ?string $model = Kategori::class;
-    protected static ?string $navigationGroup = 'Data Master';
+    protected static ?string $navigationGroup = 'Data Pariwisata';
+
+    protected static ?string $navigationLabel = 'Kategori';
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
     public static function form(Form $form): Form

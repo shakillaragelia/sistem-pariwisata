@@ -21,7 +21,9 @@ class SenbudResource extends Resource
 {
     protected static ?string $model = Senbud::class;
 
-    protected static ?string $navigationGroup = 'Data Master';
+    protected static ?string $navigationGroup = 'Data Pariwisata';
+
+    protected static ?string $navigationLabel = 'Seni Budaya';
     protected static ?string $navigationIcon = 'heroicon-o-lifebuoy';
 
 

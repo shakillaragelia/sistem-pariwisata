@@ -18,7 +18,9 @@ class KritiksaranResource extends Resource
 {
     protected static ?string $model = Kritiksaran::class;
 
-    protected static ?string $navigationGroup = 'Data Master';
+    protected static ?string $navigationGroup = 'Data Pariwisata';
+
+    protected static ?string $navigationLabel = 'Kritik Saran';
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
     public static function form(Form $form): Form
