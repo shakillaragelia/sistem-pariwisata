@@ -76,4 +76,10 @@ class KritiksaranResource extends Resource
             'edit' => Pages\EditKritiksaran::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+{
+    return false;
+}
+
 }

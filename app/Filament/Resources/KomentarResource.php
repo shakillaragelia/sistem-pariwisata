@@ -26,6 +26,7 @@ class KomentarResource extends Resource
 
     protected static ?string $navigationLabel = 'Komentar';
     protected static ?string $navigationIcon = 'heroicon-s-chat-bubble-left';
+    
 
     public static function form(Form $form): Form
     {
@@ -96,6 +97,11 @@ class KomentarResource extends Resource
             'edit' => Pages\EditKomentar::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+{
+    return false;
+}
 
 }
 
