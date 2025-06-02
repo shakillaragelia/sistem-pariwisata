@@ -17,4 +17,7 @@ class event extends Model
         'slug',
         'deskripsi',
     ];
+
 }
+
+
