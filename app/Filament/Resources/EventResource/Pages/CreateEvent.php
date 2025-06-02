@@ -9,6 +9,5 @@ class CreateEvent extends CreateRecord
 {
     protected static string $resource = EventResource::class;
 
-    // Ini dia solusi diam-diam yang ampuh
     protected static bool $canCreateAnother = false;
 }
