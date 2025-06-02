@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class KritikController extends Controller
 {
+    //kritik saran
     public function index(){
         $kontak=kritiksaran::all();
         return view('home.kritiksaran', compact('kontak'));

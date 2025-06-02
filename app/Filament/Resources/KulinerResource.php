@@ -21,7 +21,8 @@ class KulinerResource extends Resource
     protected static ?string $model = Kuliner::class;
 
     protected static ?string $navigationGroup = 'Data Master';
-    protected static ?string $navigationLabel = 'Kuliner';
+    protected static ?string $navigationIcon = 'heroicon-c-building-storefront';
+
 
     public static function form(Form $form): Form
     {

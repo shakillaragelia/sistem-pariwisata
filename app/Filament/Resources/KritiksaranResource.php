@@ -19,14 +19,14 @@ class KritiksaranResource extends Resource
     protected static ?string $model = Kritiksaran::class;
 
     protected static ?string $navigationGroup = 'Data Master';
-    protected static ?string $navigationLabel = 'Kritik Saran';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('subjek')->required(),
-                Forms\Components\TextInput::make('pesan')->required(),
+                Forms\Components\TextInput::make('konten')->required(),
                 Forms\Components\Hidden::make('id_user')
                     ->default(auth()->user()->id),
             ]);
@@ -43,7 +43,7 @@ class KritiksaranResource extends Resource
                     ->default('-') 
                     ->formatStateUsing(fn ($state) => $state ?? 'Anonim'), 
                 Tables\Columns\TextColumn::make('subjek'),
-                Tables\Columns\TextColumn::make('pesan'),
+                Tables\Columns\TextColumn::make('konten'),
     
             ])
             ->filters([

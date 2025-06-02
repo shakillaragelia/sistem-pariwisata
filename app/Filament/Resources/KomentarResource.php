@@ -23,7 +23,7 @@ class KomentarResource extends Resource
     protected static ?string $model = Komentar::class;
 
     protected static ?string $navigationGroup = 'Data Master';
-    protected static ?string $navigationLabel = 'Komentar';
+    protected static ?string $navigationIcon = 'heroicon-s-chat-bubble-left';
 
     public static function form(Form $form): Form
     {

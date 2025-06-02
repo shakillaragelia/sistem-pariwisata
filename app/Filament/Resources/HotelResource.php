@@ -20,7 +20,7 @@ class HotelResource extends Resource
     protected static ?string $model = Hotel::class;
 
     protected static ?string $navigationGroup = 'Data Master';
-    protected static ?string $navigationLabel = 'Hotel';
+    protected static ?string $navigationIcon = 'heroicon-s-building-office-2';
 
     public static function form(Form $form): Form
     {

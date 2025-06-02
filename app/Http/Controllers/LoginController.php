@@ -12,6 +12,7 @@ class LoginController extends Controller
     return view('auth.login');
 }
 
+//login pengunjung
 public function login(Request $request)
 {
     $credentials = $request->only('email', 'password');
@@ -19,10 +20,10 @@ public function login(Request $request)
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
 
-        // Ambil parameter redirect kalau ada
+        
         $redirect = $request->input('redirect');
 
-        // Kalau ada redirect → arahkan ke sana, kalau tidak → fallback ke halaman utama
+        
         return redirect()->to($redirect ?? '/');
     }
 
@@ -31,6 +32,7 @@ public function login(Request $request)
     ])->onlyInput('email');
 }
 
+//logout pengunjung
 public function logout(Request $request)
     {
         Auth::logout();

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    //index
     public function index()
     {
         $kategori = Kategori::all();
@@ -28,6 +30,8 @@ class UserController extends Controller
         return view('home.index', compact('kategori', 'ikon'));
     }
 
+
+    //wisata
     public function wisata()
     {
         $wisata = Wisata::latest()->get();
@@ -38,12 +42,16 @@ class UserController extends Controller
         return view('home.wisata', compact('data'));
     }
 
+    
+    //hotel
     public function hotel()
     {
         $data = Hotel::latest()->get(); 
         return view('home.hotel', compact('data'));
     }
 
+
+    //detail hotel + rekomendasi wisata
     public function detailHotel($slug)
     {
         $hotel = Hotel::where('slug', $slug)->firstOrFail();
@@ -63,6 +71,8 @@ class UserController extends Controller
         return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
     }
 
+
+    //detail alam
     public function detailAlam($slug)
     {
         $wisata = Wisata::where('slug', $slug)->whereHas('kategori', function($q) {
@@ -70,12 +80,12 @@ class UserController extends Controller
         })->firstOrFail();
 
         $komentar = $wisata->komentar()->latest()->get();
-
         $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
 
         return view('home.detail-alam', compact('wisata', 'komentar', 'rekomendasiHotel'));
     }
 
+    //detail sejarah
     public function detailSejarah($slug)
     {
         $wisata = Wisata::where('slug', $slug)->firstOrFail();
@@ -86,6 +96,8 @@ class UserController extends Controller
         return view('home.detail-sejarah', compact('wisata', 'komentar', 'rekomendasiHotel'));
     }
 
+
+    //detail kuliner
     public function detailKuliner($slug)
     {
         $kuliner = Kuliner::where('slug', $slug)->firstOrFail();
@@ -96,6 +108,8 @@ class UserController extends Controller
         return view('home.detail-kuliner', compact('kuliner', 'komentar', 'rekomendasiHotel'));
     }
 
+
+    //detail senbud
     public function detailSenbud($slug)
     {
         $senbud = Senbud::where('slug', $slug)->firstOrFail();
@@ -106,6 +120,7 @@ class UserController extends Controller
         return view('home.detail-senbud', compact('senbud', 'komentar', 'rekomendasiHotel'));
     }
 
+    //komentar
     public function simpanKomentar(Request $request)
     {
         $request->validate([
@@ -124,6 +139,7 @@ class UserController extends Controller
         return back()->with('success', 'Komentar berhasil dikirim.');
     }
 
+    //event
     public function event()
     {
         $events = Event::latest()->get();
@@ -147,7 +163,7 @@ class UserController extends Controller
             ->get();
     }
 
-
+    //search wisata
     public function searchWisata(Request $request)
     {
         $keyword = $request->input('search');
@@ -161,6 +177,7 @@ class UserController extends Controller
         return view('home.wisata', compact('data', 'keyword'));
     }
 
+        //search hotel
     public function searchHotel(Request $request)
     {
         $keyword = $request->input('search');

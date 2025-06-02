@@ -30,7 +30,6 @@
             <h4 class="fw-bold mb-3">Informasi</h4>
             <ul class="list-unstyled">
               <li class="mb-2"><strong>Nama:</strong> {{ $kuliner->nama }}</li>
-              <li class="mb-2"><strong>Lokasi:</strong> {{ $kuliner->lokasi ?? '-' }}</li>
             </ul>
 
             <h5 class="fw-bold mt-4">Deskripsi</h5>

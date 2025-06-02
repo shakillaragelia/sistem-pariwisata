@@ -14,6 +14,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    //login admin
     public function auth(Request $request)
     {
         $credentials = $request->validate([
@@ -61,6 +62,7 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    //log out admin
     public function logout(Request $request)
     {
         Auth::logout();
