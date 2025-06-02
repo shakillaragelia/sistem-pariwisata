@@ -33,7 +33,7 @@ class WisataResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nama')->required(),
-                TextInput::make('slug')->required(),
+                TextInput::make('slug')->required()->label('Kata Kunci'),
                 Textarea::make('deskripsi')->required(),
 
                 TextInput::make('harga')
@@ -110,7 +110,7 @@ class WisataResource extends Resource
             ->columns([
                 TextColumn::make('nama')->searchable(),
                 TextColumn::make('deskripsi')->limit(50)->wrap()->toggleable(),
-                TextColumn::make('slug'),
+                TextColumn::make('slug')->label('Kata Kunci'),
                 TextColumn::make('lokasi')->limit(50)->wrap()->toggleable(),
                 TextColumn::make('harga')
                     ->label('Harga')

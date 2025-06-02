@@ -34,9 +34,10 @@ class EventResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('judul')->required(),
                 Forms\Components\TextInput::make('slug')
-                ->required() 
-                ->reactive() 
-                ->afterStateUpdated(fn($state, callable $set) => $set ('slug', Str::slug($state))),
+                    ->label('Kata Kunci') 
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
                 Textarea::make('deskripsi')
                     ->label('Deskripsi')
                     ->required()
@@ -50,7 +51,7 @@ class EventResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('judul'),
-                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('slug') ->label('Kata Kunci'),
                 TextColumn::make('deskripsi')->label('Deskripsi')->limit(30),
                 ImageColumn::make('gambar')
                     ->label('Gambar')

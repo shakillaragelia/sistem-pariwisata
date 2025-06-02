@@ -29,7 +29,7 @@ class HotelResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nama')->required(),
-                TextInput::make('slug')->required(),
+                TextInput::make('slug')->required() ->label('Kata Kunci') ,
                 TextInput::make('deskripsi')->required(),
 
                 TextInput::make('lokasi')

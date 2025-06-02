@@ -24,7 +24,7 @@ class KategoriResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('nama')->required(),
-            Forms\Components\TextInput::make('slug')->required(),
+            Forms\Components\TextInput::make('slug')->required() ->label('Kata Kunci'),
             FileUpload::make('gambar')
         ]);
     }
@@ -34,7 +34,7 @@ class KategoriResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama'),
-                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('slug')->label('Kata Kunci') ,
                 ImageColumn::make('gambar')
                     ->label('Gambar')
                     ->url(fn ($record) => asset('storage/' . $record->gambar)),

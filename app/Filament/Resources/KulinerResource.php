@@ -31,7 +31,7 @@ class KulinerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama')->required(),
-                Forms\Components\TextInput::make('slug')->required(),
+                Forms\Components\TextInput::make('slug')->required()->label('Kata Kunci') ,
                 Forms\Components\TextInput::make('deskripsi')->required(),
                 Forms\Components\FileUpload::make('gambar')
                 ->image()
@@ -55,7 +55,7 @@ class KulinerResource extends Resource
                     ->limit(50)
                     ->wrap()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('slug')->label('Kata Kunci') ,
                 Tables\Columns\ImageColumn::make('gambar')
                     ->label('Gambar')
                     ->url(fn ($record) => asset('storage/' . $record->gambar)), 
