@@ -26,4 +26,9 @@ class Komentar extends Model
     {
         return $this->morphTo();
     }
+    public function wisata(): BelongsTo
+    {
+        return $this->belongsTo(Wisata::class, 'id_wisata');
+    }  
+
 }

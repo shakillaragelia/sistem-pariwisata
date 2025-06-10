@@ -5,16 +5,28 @@
     <div class="col-md-6">
         <h4 class="mb-4 text-center">Login untuk Berkomentar</h4>
 
+        {{-- Tampilkan pesan error dari session --}}
         @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
+        {{-- Tampilkan pesan sukses dari session --}}
         @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        {{-- Tampilkan error dari validasi --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <form action="{{ route('login.user') }}" method="POST">
             @csrf
@@ -32,10 +44,12 @@
                 <input type="password" name="password" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Sign In</button>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </div>
         </form>
 
-        <div class="text-center mt-3">
+        <div class="mt-3 text-center">
             Belum punya akun? <a href="{{ route('register') }}">Buat akun</a>
         </div>
     </div>

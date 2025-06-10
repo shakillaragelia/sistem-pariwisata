@@ -14,14 +14,17 @@
         <li><a href="{{ url('/event') }}" class="{{ request()->is('event') ? 'active' : '' }}">Event</a></li>
         <li><a href="{{ url('/hotel') }}" class="{{ request()->is('hotel') ? 'active' : '' }}">Hotel</a></li>
         <li><a href="{{ url('/saran') }}" class="{{ request()->is('kontak') ? 'active' : '' }}">Saran</a></li>
+
+        @if(auth()->check() && auth()->user()->role === 'user')
         <li>
           <form action="{{ url('/logout-user') }}" method="POST" style="display: inline;">
             @csrf
-            <button type="submit" class="btn btn-link nav-link {{ request()->is('keluar') ? 'active' : '' }}" style="padding: 0; border: none; background: none;">
+            <button type="submit" class="btn btn-link nav-link" style="padding: 0; border: none; background: none;">
               KELUAR
             </button>
           </form>
         </li>
+        @endif
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>

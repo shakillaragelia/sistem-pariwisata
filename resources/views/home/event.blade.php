@@ -3,6 +3,7 @@
 @section('content')
 
 <main class="main">
+
   <!-- Hero Section -->
   <section id="hero" class="hero section dark-background">
     <img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
@@ -12,33 +13,54 @@
   </section>
 
   <!-- Event Section -->
-  <section id="blog" class="blog section">
+  <section id="event" class="event section light-background">
     <div class="container section-title" data-aos="fade-up">
-      <h2>EVENT</h2>
-      <p>EVENT KOTA BUKITTINGGI</p>
+      <h2>Event</h2>
+      <p>EVENT DI BUKITTINGGI</p>
     </div>
 
     <div class="container">
-      <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-        @forelse ($events as $item)
-          <div class="col-lg-4 col-md-6 blog-item isotope-item filter-app">
-            <div class="blog-content h-100">
-              <img src="{{ asset('storage/' . $item->gambar) }}" class="img-fluid" alt="{{ $item->judul }}">
-              <div class="blog-info">
-                <h4>{{ $item->judul }}</h4>
-                <p>Tekan Gambar Untuk Tampilan Yang Lebih Besar</p>
-                <a href="{{ asset('storage/' . $item->gambar) }}" title="{{ $item->judul }}" data-gallery="blog-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+      <div class="row">
+        @foreach($events as $event)
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 shadow">
+            <img src="{{ asset('storage/' . $event->gambar) }}"
+                 class="card-img-top"
+                 alt="{{ $event->nama }}"
+                 style="height: 220px; object-fit: cover; width: 100%; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ $event->nama }}</h5>
+              <p class="card-text">{{ \Illuminate\Support\Str::limit($event->deskripsi, 100) }}</p>
+              <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalEvent{{ $event->id_event }}">
+                Lihat Selengkapnya
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalEvent{{ $event->id_event }}" tabindex="-1" aria-labelledby="modalEventLabel{{ $event->id_event }}" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalEventLabel{{ $event->id_event }}">{{ $event->nama }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+              </div>
+              <div class="modal-body">
+                <img src="{{ asset('storage/' . $event->gambar) }}" class="img-fluid mb-3 rounded" alt="{{ $event->nama }}">
+                <p>{{ $event->deskripsi }}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
               </div>
             </div>
           </div>
-        @empty
-          <div class="col-12 text-center">
-            <p>Belum ada event tersedia.</p>
-          </div>
-        @endforelse
+        </div>
+        @endforeach
       </div>
     </div>
   </section>
+
 </main>
 
 @endsection

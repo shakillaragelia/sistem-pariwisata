@@ -2240,3 +2240,36 @@ section,
   font-size: 26px;
   color: white;
 }
+.kategori-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ff4a17;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -40px auto 15px auto;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 4px #ffffff;
+}
+
+.kategori-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.kategori-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ff4a17;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  margin: -40px auto 10px auto;
+  z-index: 2;
+  box-shadow: 0 0 0 4px #ffffff;
+}
