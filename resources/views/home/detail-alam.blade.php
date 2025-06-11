@@ -65,9 +65,10 @@
             <h5 class="fw-bold mt-4">Rekomendasi Hotel Terdekat</h5>
             @forelse ($rekomendasiHotel as $hotel)
               <div class="mb-2">
-                <a href="{{ url('/detail-' . $hotel->slug) }}">
-                  {{ $hotel->nama }} ({{ number_format($hotel->distance, 2) }} km)
-                </a>
+              <a href="{{ route('detailHotel', ['slug' => $hotel->slug]) }}">
+    {{ $hotel->nama }} ({{ number_format($hotel->distance, 2) }} km)
+</a>
+
               </div>
             @empty
               <p>Tidak ada hotel terdekat yang ditemukan.</p>

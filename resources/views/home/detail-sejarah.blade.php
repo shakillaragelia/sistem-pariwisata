@@ -56,6 +56,7 @@
               <a href="{{ route('detailHotel', ['slug' => $hotel->slug]) }}">
     {{ $hotel->nama }} ({{ number_format($hotel->distance, 2) }} km)
 </a>
+
               </div>
             @empty
               <p>Tidak ada hotel terdekat yang ditemukan.</p>

@@ -53,9 +53,23 @@
             <h5 class="fw-bold mt-4">Rekomendasi Wisata Terdekat</h5>
             @forelse ($rekomendasiWisata as $wisata)
               <div class="mb-2">
-                <a href="{{ url('/detail-' . $wisata->slug) }}">
-                  {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)
-                </a>
+              @php
+    switch ($wisata->kategori) {
+        case 'sejarah':
+            $route = route('detail.sejarah', ['slug' => $wisata->slug]);
+            break;
+        case 'alam':
+            $route = route('detail.alam', ['slug' => $wisata->slug]);
+            break;
+        default:
+            $route = '#';
+    }
+@endphp
+
+<a href="{{ $route }}">
+    {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)
+</a>
+
               </div>
             @empty
               <p>Tidak ada wisata terdekat yang ditemukan.</p>

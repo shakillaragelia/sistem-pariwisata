@@ -58,16 +58,32 @@ class UserController extends Controller
 
         $radius = 10; // km
         $rekomendasiWisata = DB::table('wisatas')
-            ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
-                cos(radians(longitude) - radians(?)) + 
-                sin(radians(?)) * sin(radians(latitude)))) AS distance", [
-                    $hotel->latitude, $hotel->longitude, $hotel->latitude
-                ])
-            ->having('distance', '<', $radius)
-            ->orderBy('distance')
-            ->limit(3)
-            ->get();
+    ->selectRaw("nama, slug, id_kategori, latitude, longitude, 
+        (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
+        cos(radians(longitude) - radians(?)) + 
+        sin(radians(?)) * sin(radians(latitude)))) AS distance", [
+            $hotel->latitude, $hotel->longitude, $hotel->latitude
+        ])
+    ->having('distance', '<', $radius)
+    ->orderBy('distance')
+    ->limit(3)
+    ->get();
 
+// Tambahkan mapping kategori:
+foreach ($rekomendasiWisata as $wisata) {
+    switch ($wisata->id_kategori) {
+        case 1:
+            $wisata->kategori = 'alam';
+            break;
+        case 2:
+            $wisata->kategori = 'sejarah';
+            break;
+        default:
+            $wisata->kategori = null;
+    }
+}
+
+  
         return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
     }
 
