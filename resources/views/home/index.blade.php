@@ -74,5 +74,13 @@
     </div>
   </section>
 
+  <script>
+    if (!localStorage.getItem('visited_once')) {
+        fetch('/api/record-visit', { method: 'POST' });
+        localStorage.setItem('visited_once', true);
+    }
+</script>
+
+
 </main>
 @endsection

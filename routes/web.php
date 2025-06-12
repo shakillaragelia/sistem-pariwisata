@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -73,6 +75,30 @@ Route::post('/register', [RegisterController::class, 'store']);
     Route::get('/wisata-sejarah/{slug}', [UserController::class, 'detailSejarah']);
     Route::get('/wisata-kuliner/{slug}', [UserController::class, 'detailKuliner']);
     Route::get('/wisata-senbud/{slug}', [UserController::class, 'detailSenbud']);
+
+
+ //NEW VISIT   
+    Route::post('/api/record-visit', function (Request $request) {
+        $ip = $request->ip();
+        $agent = $request->header('User-Agent');
+        $today = now()->toDateString();
+    
+        $alreadyLogged = Visit::where('ip_address', $ip)
+            ->where('user_agent', $agent)
+            ->whereDate('visit_time', $today)
+            ->exists();
+    
+        if (!$alreadyLogged) {
+            Visit::create([
+                'ip_address' => $ip,
+                'user_agent' => $agent,
+                'visit_time' => now(),
+            ]);
+        }
+    
+        return response()->json(['status' => 'recorded']);
+    });
+    
 
 
 

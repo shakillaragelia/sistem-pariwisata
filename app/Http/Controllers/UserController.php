@@ -19,6 +19,7 @@ class UserController extends Controller
     //index
     public function index()
     {
+
         $kategori = Kategori::all();
         $ikon = Kategori::whereIn('nama', [
             'Wisata Sejarah',
