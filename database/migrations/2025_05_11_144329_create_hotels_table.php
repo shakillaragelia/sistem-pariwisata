@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('lokasi');
             $table->string('gambar');
             $table->tinyInteger('bintang')->nullable();
+            $table->integer('harga_max');
             $table->timestamps();
         });
     }
