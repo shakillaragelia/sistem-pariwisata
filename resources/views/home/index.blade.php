@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+use Illuminate\Support\Str;
+@endphp
+
+
 @section('content')
 
 <main class="main">
@@ -26,30 +31,43 @@
       <div class="row gy-4">
         @foreach ($kategori as $item)
         <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-          <div class="wisata-item h-100">
-            <div class="img" style="width: 100%; height: 250px; overflow: hidden; border-radius: 10px;">
-              <img src="{{ asset('storage/' . $item->gambar) }}" class="img-fluid w-100 h-100" style="object-fit: cover; object-position: center;" alt="">
-            </div>
-            <div class="details position-relative text-center p-4 shadow-sm bg-white" style="border-radius: 10px; margin-top: -30px;">
-            @php
-  $icon = match(strtolower($item->nama)) {
-    'wisata alam' => 'tree',
-    'wisata sejarah' => 'bank',
-    'wisata kuliner' => 'cup-straw',
-    'seni budaya' => 'brush',
-    default => 'pin-map'
-  };
-@endphp
+  @php
+      $kategoriSlug = match(strtolower($item->nama)) {
+          'wisata alam' => 'alam',
+          'wisata sejarah' => 'sejarah',
+          'wisata kuliner' => 'kuliner',
+          'wisata seni budaya', 'seni budaya', 'wisata senbud' => 'senibudaya',
+          default => ''
+      };
+  @endphp
 
-<div class="kategori-icon">
-  <i class="bi bi-{{ $icon }}"></i>
+  <a href="{{ url('/wisata?kategori=' . $kategoriSlug) }}" style="text-decoration: none; color: inherit;">
+    <div class="wisata-item h-100">
+      <div class="img" style="width: 100%; height: 250px; overflow: hidden; border-radius: 10px;">
+        <img src="{{ asset('storage/' . $item->gambar) }}" class="img-fluid w-100 h-100" style="object-fit: cover; object-position: center;" alt="">
+      </div>
+      <div class="details position-relative text-center p-4 shadow-sm bg-white" style="border-radius: 10px; margin-top: -30px;">
+        @php
+          $icon = match(strtolower($item->nama)) {
+              'wisata alam' => 'tree',
+              'wisata sejarah' => 'bank',
+              'wisata kuliner' => 'cup-straw',
+              'seni budaya', 'wisata seni budaya', 'wisata senbud' => 'brush',
+              default => 'pin-map'
+          };
+        @endphp
+
+        <div class="kategori-icon">
+          <i class="bi bi-{{ $icon }}"></i>
+        </div>
+
+        <h5 class="card-title mb-2">{{ $item->nama }}</h5>
+        <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi, 80) }}</p>
+      </div>
+    </div>
+  </a>
 </div>
 
-              <h5 class="card-title mb-2">{{ $item->nama }}</h5>
-              <p class="card-text">{{ \Illuminate\Support\Str::limit($item->deskripsi, 80) }}</p>
-            </div>
-          </div>
-        </div>
         @endforeach
       </div>
     </div>
@@ -74,13 +92,7 @@
     </div>
   </section>
 
-  <script>
-    if (!localStorage.getItem('visited_once')) {
-        fetch('/api/record-visit', { method: 'POST' });
-        localStorage.setItem('visited_once', true);
-    }
-</script>
-
+  
 
 </main>
 @endsection

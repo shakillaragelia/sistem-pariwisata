@@ -33,15 +33,34 @@ class UserController extends Controller
 
 
     //wisata
-    public function wisata()
-    {
-        $wisata = Wisata::latest()->get();
-        $kuliner = Kuliner::latest()->get();
-        $senbud = Senbud::latest()->get();
-        $data = $wisata->concat($kuliner)->concat($senbud);
+    public function wisata(Request $request)
+{
+    $filter = $request->query('kategori');
 
-        return view('home.wisata', compact('data'));
+    $data = collect();
+
+    if ($filter == 'sejarah') {
+        $data = Wisata::whereHas('kategori', function ($q) {
+            $q->where('slug', 'sejarah');
+        })->get();
+    } elseif ($filter == 'alam') {
+        $data = Wisata::whereHas('kategori', function ($q) {
+            $q->where('slug', 'alam');
+        })->get();
+    } elseif ($filter == 'kuliner') {
+        $data = Kuliner::all();
+    } elseif ($filter == 'senibudaya' || $filter == 'senbud') {
+        $data = Senbud::all();
+    } else {
+        $wisata = Wisata::all();
+        $kuliner = Kuliner::all();
+        $senbud = Senbud::all();
+        $data = $wisata->concat($kuliner)->concat($senbud);
     }
+
+    return view('home.wisata', compact('data', 'filter'));
+}
+
 
     
     //hotel

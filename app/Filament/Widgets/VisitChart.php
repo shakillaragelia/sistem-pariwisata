@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class VisitChart extends ChartWidget
 {
-    protected static ?string $heading = 'Grafik Daily Unique Visitor';
+    protected static ?string $heading = 'Grafik Pengunjung Harian';
     protected static ?int $sort = 1; // urutan tampil di dashboard
 
     protected function getData(): array
@@ -36,7 +36,7 @@ class VisitChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Unique Visitor',
+                    'label' => 'Pengunjung',
                     'data' => $allDays->values(),
                 ],
             ],

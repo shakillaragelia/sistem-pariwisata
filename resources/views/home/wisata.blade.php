@@ -29,13 +29,16 @@
       <div class="container">
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">SEMUA</li>
-            <li data-filter=".filter-sejarah">SEJARAH</li>
-            <li data-filter=".filter-alam">ALAM</li>
-            <li data-filter=".filter-kuliner">KULINER</li>
-            <li data-filter=".filter-senbud">SENI BUDAYA</li>
-          </ul>
+        <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100" style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 20px;">
+  <li><a href="{{ url('/wisata') }}" style="color: {{ empty($filter) ? '#FF6600' : 'black' }};">SEMUA</a></li>
+  <li><a href="{{ url('/wisata?kategori=sejarah') }}" style="color: {{ ($filter == 'sejarah') ? '#FF6600' : 'black' }};">SEJARAH</a></li>
+  <li><a href="{{ url('/wisata?kategori=alam') }}" style="color: {{ ($filter == 'alam') ? '#FF6600' : 'black' }};">ALAM</a></li>
+  <li><a href="{{ url('/wisata?kategori=kuliner') }}" style="color: {{ ($filter == 'kuliner') ? '#FF6600' : 'black' }};">KULINER</a></li>
+  <li><a href="{{ url('/wisata?kategori=senibudaya') }}" style="color: {{ ($filter == 'senibudaya' || $filter == 'senbud') ? '#FF6600' : 'black' }};">SENI BUDAYA</a></li>
+</ul>
+
+
+
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
             @forelse ($data as $item)

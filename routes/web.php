@@ -21,7 +21,8 @@ Route::get('/about', function () {
     return view('home.about');
 });
 
-Route::get('/wisata', [UserController::class, 'wisata']);
+Route::get('/wisata', [UserController::class, 'wisata'])->name('wisata');
+
 Route::get('/wisata/search', [UserController::class, 'searchWisata'])->name('wisata.search');
 Route::get('/detail-alam/{slug}', [UserController::class, 'detailAlam'])->name('detail.alam');
 Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');

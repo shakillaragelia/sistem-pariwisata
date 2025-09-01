@@ -21,7 +21,7 @@
 
     <div class="container">
       <div class="row">
-        @foreach($events as $event)
+        @forelse($events as $event)
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100 shadow">
             <img src="{{ asset('storage/' . $event->gambar) }}"
@@ -56,7 +56,13 @@
             </div>
           </div>
         </div>
-        @endforeach
+        @empty
+        <div class="col-12 text-center">
+          <div class="alert alert-info">
+            Belum ada event saat ini.
+          </div>
+        </div>
+        @endforelse
       </div>
     </div>
   </section>
