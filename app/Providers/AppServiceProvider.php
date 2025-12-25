@@ -16,21 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (!app()->runningInConsole() && !app()->runningUnitTests()) {
-            if (!request()->is('admin*')) {
-                $data = [
-                    'ip_address' => request()->ip(),
-                    'id_session' => session()->getId(),
-                    'tanggal' => now()->toDateString(),
-                    'time' => now()->toTimeString(),
-                    'online' => 1,
-                ];
-
-                if (auth()->check()) {
-                    $data['id_user'] = auth()->id();
-                }
-
-                Visit::create($data);
-            }
+            // Logic moved to LogVisit middleware
         }
     }
 }
