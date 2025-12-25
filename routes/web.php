@@ -48,61 +48,39 @@ Route::get('/saran', [KritikController::class, 'index'])->name('home.saran');
 Route::post('/kritik', [KritikController::class, 'store'])->name('kritik.store');
 
 
-//ADMIN
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'register_proses']);
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+// AUTHENTICATION
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'auth']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-// Login user
-Route::get('/login-user', [LoginController::class, 'showLoginForm'])->name('login.user');
-Route::post('/login-user', [LoginController::class, 'login']);
-
-//logout user
-Route::post('/logout-user', [LoginController::class, 'logout']);
-
-
-
-// Register user
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
 
+// ADMIN
+Route::middleware(['auth'])->group(function () {
+    Route::get('dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
+    Route::get('/kategoriad', [AdminController::class, 'kategori'])->name('kategori.kategoriad');
+});
 
-//VISIT
-    
-    Route::get('/wisata-alam/{slug}', [UserController::class, 'detailAlam']);
-    Route::get('/wisata-sejarah/{slug}', [UserController::class, 'detailSejarah']);
-    Route::get('/wisata-kuliner/{slug}', [UserController::class, 'detailKuliner']);
-    Route::get('/wisata-senbud/{slug}', [UserController::class, 'detailSenbud']);
+// NEW VISIT
+Route::post('/api/record-visit', function (Request $request) {
+    $ip = $request->ip();
+    $agent = $request->header('User-Agent');
+    $today = now()->toDateString();
 
+    $alreadyLogged = Visit::where('ip_address', $ip)
+        ->where('user_agent', $agent)
+        ->whereDate('visit_time', $today)
+        ->exists();
 
- //NEW VISIT   
-    Route::post('/api/record-visit', function (Request $request) {
-        $ip = $request->ip();
-        $agent = $request->header('User-Agent');
-        $today = now()->toDateString();
-    
-        $alreadyLogged = Visit::where('ip_address', $ip)
-            ->where('user_agent', $agent)
-            ->whereDate('visit_time', $today)
-            ->exists();
-    
-        if (!$alreadyLogged) {
-            Visit::create([
-                'ip_address' => $ip,
-                'user_agent' => $agent,
-                'visit_time' => now(),
-            ]);
-        }
-    
-        return response()->json(['status' => 'recorded']);
-    });
-    
+    if (!$alreadyLogged) {
+        Visit::create([
+            'ip_address' => $ip,
+            'user_agent' => $agent,
+            'visit_time' => now(),
+        ]);
+    }
 
-
-
-
-Route::get('dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
-Route::get('/kategoriad', [AdminController::class, 'kategori'])->name('kategori.kategoriad');
+    return response()->json(['status' => 'recorded']);
+});

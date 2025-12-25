@@ -11,9 +11,9 @@ class AdminController extends Controller
     {
         return view('dashboard.admin');
     }
-}
- function kategori()
-{
-    $kategori = \App\Models\Kategori::all(); // pastikan model Kategori sudah ada
-    return view('kategoriad', compact('kategori'));
+    public function kategori()
+    {
+        $kategori = \App\Models\Kategori::all(); // pastikan model Kategori sudah ada
+        return view('kategoriad', compact('kategori'));
+    }
 }
