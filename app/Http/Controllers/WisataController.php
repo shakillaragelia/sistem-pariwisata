@@ -22,16 +22,24 @@ class WisataController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|unique:wisatas,nama',
             'id_kategori' => 'required',
             'deskripsi' => 'required',
-            'harga' => 'required|numeric',
+            'harga' => 'nullable|numeric',
             'lokasi' => 'required',
-            'gambar' => 'nullable|image|max:2048'
+            'gambar' => 'nullable|image|max:2048',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'toilet' => 'nullable|boolean',
+            'parkir' => 'nullable|boolean',
+            'tempat_ibadah' => 'nullable|boolean'
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->nama);
+        $data['toilet'] = $request->has('toilet');
+$data['parkir'] = $request->has('parkir');
+$data['tempat_ibadah'] = $request->has('tempat_ibadah');
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
@@ -54,18 +62,26 @@ class WisataController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|unique:wisatas,nama',
             'id_kategori' => 'required',
             'deskripsi' => 'required',
-            'harga' => 'required|numeric',
+            'harga' => 'nullable|numeric',
             'lokasi' => 'required',
-            'gambar' => 'nullable|image|max:2048'
+            'gambar' => 'nullable|image|max:2048',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'toilet' => 'nullable|boolean',
+            'parkir' => 'nullable|boolean',
+            'tempat_ibadah' => 'nullable|boolean',
         ]);
 
         $wisata = Wisata::findOrFail($id);
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->nama);
+        $data['toilet'] = $request->has('toilet');
+$data['parkir'] = $request->has('parkir');
+$data['tempat_ibadah'] = $request->has('tempat_ibadah');
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');

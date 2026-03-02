@@ -9,10 +9,11 @@ use App\Models\Komentar;
 class Wisata extends Model
 {
     use HasFactory;
-    protected $table ='wisatas';
+
+    protected $table = 'wisatas';
     protected $primaryKey = 'id_wisata';
+
     protected $fillable = [
-        'id_wisata',
         'nama',
         'slug',
         'id_kategori',
@@ -22,7 +23,9 @@ class Wisata extends Model
         'gambar',
         'latitude',
         'longitude',
-        'toilet', 'parkir', 'tempat_ibadah',
+        'toilet',
+        'parkir',
+        'tempat_ibadah',
     ];
 
     public function kategori()
@@ -30,12 +33,6 @@ class Wisata extends Model
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id_user');
-    }
-
-    // Relasi komentar polymorphic
     public function komentar()
     {
         return $this->morphMany(Komentar::class, 'commentable');

@@ -11,17 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wisatas', function (Blueprint $table) {
-            $table->id('id_wisata');
-            $table->foreignId('id_kategori');
-            $table->string('nama');
-            $table->string('slug');
-            $table->text('deskripsi');
-            $table->decimal('harga');
-            $table->text('lokasi');
-            $table->string('gambar');
-            $table->timestamps();
-        });
+       Schema::create('wisatas', function (Blueprint $table) {
+    $table->id('id_wisata');
+
+    $table->foreignId('id_kategori')
+          ->constrained('kategoris', 'id_kategori')
+          ->onDelete('cascade');
+
+    $table->string('nama');
+    $table->string('slug')->unique();
+    $table->text('deskripsi');
+    $table->decimal('harga', 12, 2)->nullable();
+    $table->text('lokasi');
+    $table->string('gambar');
+
+    // Koordinat (untuk rekomendasi terdekat)
+    $table->decimal('latitude', 10, 7)->nullable();
+    $table->decimal('longitude', 10, 7)->nullable();
+
+    // Fasilitas
+    $table->boolean('toilet')->default(false);
+    $table->boolean('parkir')->default(false);
+    $table->boolean('tempat_ibadah')->default(false);
+
+    $table->timestamps();
+});
     }
 
     /**
