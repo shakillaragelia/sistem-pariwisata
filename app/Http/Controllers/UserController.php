@@ -5,224 +5,166 @@ namespace App\Http\Controllers;
 use App\Models\Wisata;
 use App\Models\Kuliner;
 use App\Models\Senbud;
-use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Event;
 use App\Models\Kategori;
-use App\Models\Komentar;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-
-    //index
+    //Index
     public function index()
     {
-
         $kategori = Kategori::all();
         $ikon = Kategori::whereIn('nama', [
-            'Wisata Sejarah',
-            'Wisata Alam',
-            'Wisata Kuliner',
-            'Wisata Senbud',
+            'Wisata Sejarah', 'Wisata Alam', 'Wisata Kuliner', 'Wisata Senbud',
         ])->take(5)->get();
 
         return view('home.index', compact('kategori', 'ikon'));
     }
 
-
-    //wisata
+    //Wisata
     public function wisata(Request $request)
-{
-    $filter = $request->query('kategori');
+    {
+        $filter = $request->query('kategori');
 
-    $data = collect();
+        if ($filter === 'sejarah') {
+            $data = Wisata::with('kategori')
+                ->whereHas('kategori', fn($q) => $q->where('slug', 'sejarah'))
+                ->paginate(12);
+        } elseif ($filter === 'alam') {
+            $data = Wisata::with('kategori')
+                ->whereHas('kategori', fn($q) => $q->where('slug', 'alam'))
+                ->paginate(12);
+        } elseif ($filter === 'kuliner') {
+            $data = Kuliner::with('kategori')->paginate(12);
+        } elseif (in_array($filter, ['senibudaya', 'senbud'])) {
+            $data = Senbud::with('kategori')->paginate(12);
+        } else {
+            $wisata  = Wisata::with('kategori')->get();
+            $kuliner = Kuliner::with('kategori')->get();
+            $senbud  = Senbud::with('kategori')->get();
+            $data    = $wisata->concat($kuliner)->concat($senbud);
+        }
 
-    if ($filter == 'sejarah') {
-        $data = Wisata::whereHas('kategori', function ($q) {
-            $q->where('slug', 'sejarah');
-        })->get();
-    } elseif ($filter == 'alam') {
-        $data = Wisata::whereHas('kategori', function ($q) {
-            $q->where('slug', 'alam');
-        })->get();
-    } elseif ($filter == 'kuliner') {
-        $data = Kuliner::all();
-    } elseif ($filter == 'senibudaya' || $filter == 'senbud') {
-        $data = Senbud::all();
-    } else {
-        $wisata = Wisata::all();
-        $kuliner = Kuliner::all();
-        $senbud = Senbud::all();
-        $data = $wisata->concat($kuliner)->concat($senbud);
+        return view('home.wisata', compact('data', 'filter'));
     }
 
-    return view('home.wisata', compact('data', 'filter'));
-}
-
-
-    
-    //hotel
+    //Hotel
     public function hotel()
     {
-        $data = Hotel::latest()->get(); 
+        $data = Hotel::latest()->paginate(12);
         return view('home.hotel', compact('data'));
     }
 
-
-    //detail hotel + rekomendasi wisata
     public function detailHotel($slug)
     {
         $hotel = Hotel::where('slug', $slug)->firstOrFail();
+        $rekomendasiWisata = $this->getNearbyWisata($hotel->latitude, $hotel->longitude);
 
-        $radius = 10; // km
-        $rekomendasiWisata = DB::table('wisatas')
-    ->selectRaw("nama, slug, id_kategori, latitude, longitude, 
-        (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
-        cos(radians(longitude) - radians(?)) + 
-        sin(radians(?)) * sin(radians(latitude)))) AS distance", [
-            $hotel->latitude, $hotel->longitude, $hotel->latitude
-        ])
-    ->having('distance', '<', $radius)
-    ->orderBy('distance')
-    ->limit(3)
-    ->get();
-
-// Tambahkan mapping kategori:
-foreach ($rekomendasiWisata as $wisata) {
-    switch ($wisata->id_kategori) {
-        case 1:
-            $wisata->kategori = 'alam';
-            break;
-        case 2:
-            $wisata->kategori = 'sejarah';
-            break;
-        default:
-            $wisata->kategori = null;
-    }
-}
-
-  
         return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
     }
 
-
-    //detail alam
+    //Detail Wisata
     public function detailAlam($slug)
     {
-        $wisata = Wisata::where('slug', $slug)->whereHas('kategori', function($q) {
-            $q->where('slug', 'alam');
-        })->firstOrFail();
+        $wisata = Wisata::with(['komentar.user', 'kategori'])
+            ->where('slug', $slug)
+            ->whereHas('kategori', fn($q) => $q->where('slug', 'alam'))
+            ->firstOrFail();
 
-        $komentar = $wisata->komentar()->latest()->get();
         $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
 
-        return view('home.detail-alam', compact('wisata', 'komentar', 'rekomendasiHotel'));
+        return view('home.detail-alam', compact('wisata', 'rekomendasiHotel'));
     }
 
-    //detail sejarah
     public function detailSejarah($slug)
     {
-        $wisata = Wisata::where('slug', $slug)->firstOrFail();
-        $komentar = $wisata->komentar()->latest()->get();
+        $wisata = Wisata::with(['komentar.user', 'kategori'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
 
-        return view('home.detail-sejarah', compact('wisata', 'komentar', 'rekomendasiHotel'));
+        return view('home.detail-sejarah', compact('wisata', 'rekomendasiHotel'));
     }
 
-
-    //detail kuliner
     public function detailKuliner($slug)
     {
-        $kuliner = Kuliner::where('slug', $slug)->firstOrFail();
-        $komentar = $kuliner->komentar()->latest()->get();
+        $kuliner = Kuliner::with(['komentar.user', 'kategori'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         $rekomendasiHotel = $this->getNearbyHotels($kuliner->latitude, $kuliner->longitude);
 
-        return view('home.detail-kuliner', compact('kuliner', 'komentar', 'rekomendasiHotel'));
+        return view('home.detail-kuliner', compact('kuliner', 'rekomendasiHotel'));
     }
 
-
-    //detail senbud
     public function detailSenbud($slug)
     {
-        $senbud = Senbud::where('slug', $slug)->firstOrFail();
-        $komentar = $senbud->komentar()->latest()->get();
+        $senbud = Senbud::with(['komentar.user', 'kategori'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         $rekomendasiHotel = $this->getNearbyHotels($senbud->latitude, $senbud->longitude);
 
-        return view('home.detail-senbud', compact('senbud', 'komentar', 'rekomendasiHotel'));
+        return view('home.detail-senbud', compact('senbud', 'rekomendasiHotel'));
     }
 
-    //komentar
-    public function simpanKomentar(Request $request)
-    {
-        $request->validate([
-            'id' => 'required',
-            'type' => 'required',
-            'komentar' => 'required',
-        ]);
-
-        $model = $request->type::findOrFail($request->id);
-
-        $model->komentar()->create([
-            'id_user' => auth()->id(),
-            'komentar' => $request->komentar,
-        ]);
-
-        return back()->with('success', 'Komentar berhasil dikirim.');
-    }
-
-    //event
+    //Event
     public function event()
     {
-        $events = Event::latest()->get();
-        return view('home.event', compact('events')); 
+        $events = Event::latest()->paginate(12);
+        return view('home.event', compact('events'));
     }
 
-    // Fungsi bantu untuk rekomendasi hotel terdekat
-    private function getNearbyHotels($lat, $lng)
-    {
-        $radius = 10; // km
-        return DB::table('hotels')
-            ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
-                cos(radians(longitude) - radians(?)) + 
-                sin(radians(?)) * sin(radians(latitude)))) AS distance", [
-                    $lat, $lng, $lat
-                ])
-            ->where('bintang', '>=', 3)
-            ->having('distance', '<', $radius)
-            ->orderBy('distance')
-            ->limit(3)
-            ->get();
-    }
-
-    //search wisata
+    //Search
     public function searchWisata(Request $request)
     {
         $keyword = $request->input('search');
 
-        $wisata = \App\Models\Wisata::where('nama', 'like', '%' . $keyword . '%')->get();
-        $kuliner = \App\Models\Kuliner::where('nama', 'like', '%' . $keyword . '%')->get();
-        $senbud = \App\Models\Senbud::where('nama', 'like', '%' . $keyword . '%')->get();
+        $wisata  = Wisata::where('nama', 'like', "%{$keyword}%")->with('kategori')->get();
+        $kuliner = Kuliner::where('nama', 'like', "%{$keyword}%")->with('kategori')->get();
+        $senbud  = Senbud::where('nama', 'like', "%{$keyword}%")->with('kategori')->get();
 
         $data = $wisata->concat($kuliner)->concat($senbud);
 
         return view('home.wisata', compact('data', 'keyword'));
     }
 
-        //search hotel
     public function searchHotel(Request $request)
     {
         $keyword = $request->input('search');
-
-        $hotel = \App\Models\Hotel::where('nama', 'like', '%' . $keyword . '%')->get();
-
-        $data = $hotel;
+        $data = Hotel::where('nama', 'like', "%{$keyword}%")->paginate(12);
 
         return view('home.hotel', compact('data', 'keyword'));
     }
 
+    //Helper : Rekomendasi Terdekat
+    private function getNearbyHotels(float $lat, float $lng, int $radius = 10, int $limit = 3)
+    {
+        return DB::table('hotels')
+            ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
+                cos(radians(longitude) - radians(?)) +
+                sin(radians(?)) * sin(radians(latitude)))) AS distance", [$lat, $lng, $lat])
+            ->where('bintang', '>=', 3)
+            ->having('distance', '<', $radius)
+            ->orderBy('distance')
+            ->limit($limit)
+            ->get();
+    }
+
+    private function getNearbyWisata(float $lat, float $lng, int $radius = 10, int $limit = 3)
+    {
+        return DB::table('wisatas')
+            ->selectRaw("nama, slug, id_kategori, latitude, longitude,
+                (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
+                cos(radians(longitude) - radians(?)) +
+                sin(radians(?)) * sin(radians(latitude)))) AS distance", [$lat, $lng, $lat])
+            ->having('distance', '<', $radius)
+            ->orderBy('distance')
+            ->limit($limit)
+            ->get();
+    }
 }
