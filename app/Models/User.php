@@ -49,8 +49,9 @@ class User extends Authenticatable
         ];
     }
 
-    // public function canAccessPanel(Panel $panel): bool
-    // {
-    //     return true;
-    // }
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === 'admin';
+    }
+
 }

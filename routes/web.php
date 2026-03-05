@@ -21,7 +21,7 @@ Route::get('/about', fn() => view('home.about'))->name('about');
 Route::get('/wisata', [UserController::class, 'wisata'])->name('wisata');
 Route::get('/wisata/search', [UserController::class, 'searchWisata'])->name('wisata.search');
 
-// Detail wisata — satu set route saja (hapus duplikat)
+// Detail wisata
 Route::get('/detail-alam/{slug}',    [UserController::class, 'detailAlam'])->name('detail.alam');
 Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
 Route::get('/detail-kuliner/{slug}', [UserController::class, 'detailKuliner'])->name('detail.kuliner');
@@ -39,12 +39,12 @@ Route::get('/event', [UserController::class, 'event'])->name('home.event');
 Route::get('/saran',  [KritikController::class, 'index'])->name('home.saran');
 Route::post('/kritik', [KritikController::class, 'store'])->name('kritik.store');
 
-// Komentar (auth required agar tau siapa yang berkomentar)
+// Komentar
 Route::post('/komentar', [KomentarController::class, 'store'])
     ->middleware('auth')
     ->name('komentar.store');
 
-// Visit tracker dari frontend JS
+// Visit tracker 
 Route::post('/api/record-visit', [VisitController::class, 'store'])
     ->middleware('throttle:60,1')
     ->name('visit.record');
@@ -75,7 +75,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout-user', [LoginController::class, 'logout'])->name('logout.user')->middleware('auth');
 
 // ============================================================
-// ADMIN DASHBOARD — Dilindungi middleware auth + is_admin
+// ADMIN DASHBOARD
 // ============================================================
 
 Route::middleware(['auth', 'is_admin'])->group(function () {
