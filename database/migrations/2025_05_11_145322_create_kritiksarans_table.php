@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kritiksarans', function (Blueprint $table) {
+            $table->string('nama')->nullable()->after('id_user');
+    $table->string('email')->nullable()->after('nama');
             $table->id('id_kritiksaran');
             $table->foreignId('id_user');
             $table->string('subjek');
