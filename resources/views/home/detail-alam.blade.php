@@ -93,7 +93,7 @@
         <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
           @csrf
           <input type="hidden" name="id" value="{{ $wisata->id_wisata }}">
-          <input type="hidden" name="type" value="App\Models\Wisata">
+          <input type="hidden" name="type" value="wisata">
           <div class="mb-3">
             <label for="komentar" class="form-label">Tulis Komentar:</label>
             <textarea name="komentar" class="form-control" rows="3" required></textarea>

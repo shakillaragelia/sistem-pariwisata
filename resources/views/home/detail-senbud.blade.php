@@ -54,7 +54,7 @@
         <form action="{{ route('komentar.store') }}" method="POST" class="mb-4">
           @csrf
           <input type="hidden" name="id" value="{{ $senbud->id_senbud }}">
-          <input type="hidden" name="type" value="{{ get_class($senbud) }}">
+<input type="hidden" name="type" value="senbud">
 
           <div class="mb-3">
             <label for="komentar" class="form-label">Tulis Komentar:</label>
