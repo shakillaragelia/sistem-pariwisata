@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Kategori;
 
 class AdminController extends Controller
 {
@@ -11,9 +11,10 @@ class AdminController extends Controller
     {
         return view('dashboard.admin');
     }
+
     public function kategori()
     {
-        $kategori = \App\Models\Kategori::all(); // pastikan model Kategori sudah ada
+        $kategori = Kategori::all();
         return view('kategoriad', compact('kategori'));
     }
 }

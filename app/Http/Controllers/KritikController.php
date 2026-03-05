@@ -10,7 +10,7 @@ class KritikController extends Controller
 {
     //kritik saran
     public function index(){
-        $kontak=kritiksaran::all();
+        $kontak=Kritiksaran::all();
         return view('home.kritiksaran', compact('kontak'));
     }
     public function store(Request $request)
@@ -22,7 +22,7 @@ class KritikController extends Controller
             'message' => 'required|string',
         ]);
 
-        kritiksaran::create([
+        Kritiksaran::create([
             'nama'    => $request->name,
             'email'   => $request->email,
             'subjek' => $request->subject,

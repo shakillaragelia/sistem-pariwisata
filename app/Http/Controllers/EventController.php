@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     public function index(){
-        $event=event::all();
-        return view('home.event', compact('event'));
+    $events = Event::latest()->paginate(12);
+    return view('home.event', compact('events'));
     }
 }

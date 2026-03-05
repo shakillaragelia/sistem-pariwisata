@@ -1,86 +1,84 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Models\Visit;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Indexcontroller;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\KritikController;
 use App\Http\Controllers\KomentarController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\VisitController;
 
-
+// ============================================================
+// PUBLIC ROUTES
+// ============================================================
 
 Route::get('/', [UserController::class, 'index'])->name('home');
+Route::get('/about', fn() => view('home.about'))->name('about');
 
-
-Route::get('/about', function () {
-    return view('home.about');
-});
-
+// Wisata
 Route::get('/wisata', [UserController::class, 'wisata'])->name('wisata');
-
 Route::get('/wisata/search', [UserController::class, 'searchWisata'])->name('wisata.search');
-Route::get('/detail-alam/{slug}', [UserController::class, 'detailAlam'])->name('detail.alam');
+
+// Detail wisata — satu set route saja (hapus duplikat)
+Route::get('/detail-alam/{slug}',    [UserController::class, 'detailAlam'])->name('detail.alam');
 Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
 Route::get('/detail-kuliner/{slug}', [UserController::class, 'detailKuliner'])->name('detail.kuliner');
-Route::get('/detail-senbud/{slug}', [UserController::class, 'detailSenbud'])->name('detail.senbud');
+Route::get('/detail-senbud/{slug}',  [UserController::class, 'detailSenbud'])->name('detail.senbud');
 
-Route::get('/event', [UserController::class, 'event'])->name('home.event');
-
-
-Route::get('/hotel', [UserController::class, 'hotel']);
-Route::get('/hotel/search', [UserController::class, 'searchHotel'])->name('hotel.search');
+// Hotel
+Route::get('/hotel',         [UserController::class, 'hotel'])->name('hotel');
+Route::get('/hotel/search',  [UserController::class, 'searchHotel'])->name('hotel.search');
 Route::get('/detail-hotel/{slug}', [UserController::class, 'detailHotel'])->name('detailHotel');
 
+// Event
+Route::get('/event', [UserController::class, 'event'])->name('home.event');
 
-
-//KOMENTAR
-Route::post('/wisata/{id}/komentar', [UserController::class, 'storeKomentarWisata'])->name('komentar.wisata.store');
-Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
-Route::get('/wisata/sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
-
-//kririksarab(kontak)
-Route::get('/saran', [KritikController::class, 'index'])->name('home.saran');
+// Kritik Saran
+Route::get('/saran',  [KritikController::class, 'index'])->name('home.saran');
 Route::post('/kritik', [KritikController::class, 'store'])->name('kritik.store');
 
+// Komentar (auth required agar tau siapa yang berkomentar)
+Route::post('/komentar', [KomentarController::class, 'store'])
+    ->middleware('auth')
+    ->name('komentar.store');
 
-// AUTHENTICATION
-Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'auth']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Visit tracker dari frontend JS
+Route::post('/api/record-visit', [VisitController::class, 'store'])
+    ->middleware('throttle:60,1')
+    ->name('visit.record');
 
-Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+// ============================================================
+// AUTH — Admin
+// ============================================================
 
-
-// ADMIN
-Route::middleware(['auth'])->group(function () {
-    Route::get('dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
-    Route::get('/kategoriad', [AdminController::class, 'kategori'])->name('kategori.kategoriad');
+Route::middleware('guest')->group(function () {
+    Route::get('/login',  [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'auth']);
 });
 
-// NEW VISIT
-Route::post('/api/record-visit', function (Request $request) {
-    $ip = $request->ip();
-    $agent = $request->header('User-Agent');
-    $today = now()->toDateString();
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-    $alreadyLogged = Visit::where('ip_address', $ip)
-        ->where('user_agent', $agent)
-        ->whereDate('visit_time', $today)
-        ->exists();
+// ============================================================
+// AUTH — User (Pengunjung)
+// ============================================================
 
-    if (!$alreadyLogged) {
-        Visit::create([
-            'ip_address' => $ip,
-            'user_agent' => $agent,
-            'visit_time' => now(),
-        ]);
-    }
+Route::middleware('guest')->group(function () {
+    Route::get('/login-user',  [LoginController::class, 'showLoginForm'])->name('login.user');
+    Route::post('/login-user', [LoginController::class, 'login'])->middleware('throttle:5,1');
 
-    return response()->json(['status' => 'recorded']);
+    Route::get('/register',  [RegisterController::class, 'showForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
+});
+
+Route::post('/logout-user', [LoginController::class, 'logout'])->name('logout.user')->middleware('auth');
+
+// ============================================================
+// ADMIN DASHBOARD — Dilindungi middleware auth + is_admin
+// ============================================================
+
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
+    Route::get('/kategoriad',      [AdminController::class, 'kategori'])->name('kategori.kategoriad');
 });

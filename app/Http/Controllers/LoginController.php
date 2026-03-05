@@ -21,10 +21,11 @@ public function login(Request $request)
         $request->session()->regenerate();
 
         
-        $redirect = $request->input('redirect');
+        if ($redirect && str_starts_with($redirect, '/')
+            && !str_starts_with($redirect, '//')) {
+            return redirect()->to($redirect);}
+            return redirect('/');
 
-        
-        return redirect()->to($redirect ?? '/');
     }
 
     return back()->withErrors([
