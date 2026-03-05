@@ -11,7 +11,6 @@ class Kritiksaran extends Model
     protected $table ='kritiksarans';
     protected $primaryKey = 'id_kritiksaran';
     protected $fillable = [
-        'id_kritiksaran', 
         'id_user',
         'subjek',
         'konten',

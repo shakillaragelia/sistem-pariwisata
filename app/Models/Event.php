@@ -11,7 +11,6 @@ class Event extends Model
     protected $table ='events';
     protected $primaryKey = 'id_event';
     protected $fillable = [
-        'id_event',
         'gambar',
         'judul',
         'slug',

@@ -11,7 +11,6 @@ class Senbud extends Model
     protected $table ='senbuds';
     protected $primaryKey = 'id_senbud';
     protected $fillable = [
-        'id_senbud',
         'nama',
         'slug',
         'id_kategori',
