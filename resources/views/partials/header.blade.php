@@ -13,7 +13,7 @@
         <li><a href="{{ url('/wisata') }}" class="{{ request()->is('wisata') ? 'active' : '' }}">Wisata</a></li>
         <li><a href="{{ url('/event') }}" class="{{ request()->is('event') ? 'active' : '' }}">Event</a></li>
         <li><a href="{{ url('/hotel') }}" class="{{ request()->is('hotel') ? 'active' : '' }}">Hotel</a></li>
-        <li><a href="{{ url('/saran') }}" class="{{ request()->is('kontak') ? 'active' : '' }}">Saran</a></li>
+        <li><a href="/saran" class="{{ request()->is('saran') ? 'active' : '' }}"></li>
 
         @if(auth()->check() && auth()->user()->role === 'user')
         <li>
