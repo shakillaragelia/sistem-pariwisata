@@ -36,8 +36,8 @@ class WisataController extends Controller
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
             $gambarName = time() . '_' . $gambar->getClientOriginalName();
-            $gambar->move(public_path('images/wisata'), $gambarName);
-            $data['gambar'] = $gambarName;
+            $path = $request->file('gambar')->store('wisata-images', 'public');
+            $data['gambar'] = $path;
         }
 
         Wisata::create($data);
