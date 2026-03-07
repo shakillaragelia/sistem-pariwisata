@@ -5,7 +5,7 @@
 
   <!-- Hero Section -->
   <section class="hero section dark-background" id="hero">
-    <img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
+    <img src="{{ asset('ragel/ragel/assets/img/jam.jpg') }}" alt="" data-aos="fade-in">
     <div class="container d-flex flex-column align-items-center text-center">
       <h2 class="white-text-shadow" data-aos="fade-up" data-aos-delay="100">TENTANG KOTA BUKITTINGGI</h2>
     </div>
@@ -21,7 +21,7 @@
 
       <div class="row gy-4 align-items-center">
         <div class="col-lg-6" data-aos="fade-right">
-          <img src="ragel/ragel/assets/img/about.jpg" alt="Tentang Bukittinggi" class="img-fluid rounded-4 shadow">
+          <img src="{{ asset('ragel/ragel/assets/img/about.jpg') }}" alt="Tentang Bukittinggi" class="img-fluid rounded-4 shadow">
         </div>
         <div class="col-lg-6" data-aos="fade-left">
           <h5 class="text-uppercase fw-bold mb-3">KOTA WISATA DENGAN PESONA ALAM</h5>
