@@ -26,8 +26,4 @@ class Komentar extends Model
     {
         return $this->morphTo();
     }
-    public function commentable()
-    {
-        return $this->morphTo();
-    }
 }
