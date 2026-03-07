@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\KategoriResource\pages;
+namespace App\Filament\Resources\KategoriResource\Pages;
 
 use App\Filament\Resources\KategoriResource;
 use Filament\Actions;
