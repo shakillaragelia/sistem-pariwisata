@@ -80,27 +80,6 @@
   </section>
 
 </main>
-
-<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-<script src="https://unpkg.com/desandro-matches-selector@2.0.2/matches-selector.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var iso = new Isotope('.isotope-container', {
-      itemSelector: '.portfolio-item',
-      layoutMode: 'masonry'
-    });
-
-    document.querySelectorAll('.portfolio-filters li').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        const filterValue = btn.getAttribute('data-filter');
-        iso.arrange({ filter: filterValue });
-        document.querySelectorAll('.portfolio-filters li').forEach(li => li.classList.remove('filter-active'));
-        btn.classList.add('filter-active');
-      });
-    });
-  });
-</script>
-
 @endsection
 
 @push('scripts')
