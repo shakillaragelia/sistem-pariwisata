@@ -96,9 +96,7 @@ class UserController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $rekomendasiHotel = $this->getNearbyHotels($kuliner->latitude, $kuliner->longitude);
-
-        return view('home.detail-kuliner', compact('kuliner', 'rekomendasiHotel'));
+        return view('home.detail-kuliner', compact('kuliner'));
     }
 
     public function detailSenbud($slug)
@@ -107,9 +105,7 @@ class UserController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $rekomendasiHotel = $this->getNearbyHotels($senbud->latitude, $senbud->longitude);
-
-        return view('home.detail-senbud', compact('senbud', 'rekomendasiHotel'));
+        return view('home.detail-senbud', compact('senbud'));
     }
 
     //Event
