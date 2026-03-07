@@ -12,9 +12,9 @@ class AdminController extends Controller
         return view('dashboard.admin');
     }
 
-    public function kategori()
+    public function kategori() 
     {
-        $kategori = Kategori::all();
-        return view('kategoriad', compact('kategori'));
-    }
+    return view('kategori.kategoriad', compact('kategori')); 
+}
+
 }
