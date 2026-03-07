@@ -3,8 +3,6 @@
 @section('content')
 
 <main>
-<!-- resources/views/list-wisata.blade.php -->
-
 <section id="list-wisata" class="section">
   <div class="container">
     <div class="section-title">
@@ -18,9 +16,10 @@
           <div class="card shadow-sm border-0">
             <div class="row g-0">
               <div class="col-md-4">
-              <img src="{{ asset('ragel/ragel/assets/img/sejarah-4.jpg/' . $wisata->gambar) }}" class="img-fluid rounded-start" alt="{{ $wisata->nama }}">
-
-
+                {{-- Fix 1: path gambar dari storage --}}
+                <img src="{{ asset('storage/' . $wisata->gambar) }}" 
+                     class="img-fluid rounded-start" 
+                     alt="{{ $wisata->nama }}">
               </div>
               <div class="col-md-8">
                 <div class="card-body d-flex flex-column justify-content-between h-100">
@@ -28,8 +27,16 @@
                     <h5 class="card-title">{{ $wisata->nama }}</h5>
                     <p class="card-text">{{ Str::limit($wisata->deskripsi, 150) }}</p>
                   </div>
-                  <a href="{{ route('detail-wisata', $wisata->id) }}" class="btn btn-primary mt-3" style="width: fit-content;">Lihat Detail</a>
-
+                  {{-- Fix 3: route sesuai kategori --}}
+                  @php
+                    $slug = $wisata->kategori->slug ?? '';
+                    $route = match($slug) {
+                        'sejarah' => route('detail.sejarah', $wisata->slug),
+                        'alam'    => route('detail.alam',    $wisata->slug),
+                        default   => '#',
+                    };
+                  @endphp
+                  <a href="{{ $route }}" class="btn btn-primary mt-3" style="width: fit-content;">Lihat Detail</a>
                 </div>
               </div>
             </div>
@@ -40,4 +47,6 @@
   </div>
 </section>
 </main>
-@end
+
+{{-- Fix 2: @endsection bukan @end --}}
+@endsection

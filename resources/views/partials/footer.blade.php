@@ -3,7 +3,8 @@
 <div class="container footer-top">
   <div class="row gy-4">
     <div class="col-lg-4 col-md-6 footer-about">
-      <a href="index.blade.php" class="logo d-flex align-items-center">
+      <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+        <img src="{{ asset('ragel/ragel/assets/img/logobkt.png') }}" alt="Logo" style="height: 40px;" class="me-2">
         <span class="sitename">DISPAR BUKITTINGGI</span>
       </a>
       <div class="footer-contact pt-3">

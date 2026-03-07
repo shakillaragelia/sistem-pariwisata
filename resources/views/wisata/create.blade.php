@@ -26,14 +26,12 @@
 
         <div class="form-group mb-3">
             <label for="id_kategori">Kategori Wisata</label>
-            <select name="id_kategori" id="id_kategori" class="form-control" required>
-                <option value="">-- Pilih Kategori --</option>
-                {{-- Contoh kategori statis, nanti bisa dinamis --}}
-                <option value="1">Sejarah</option>
-                <option value="2">Alam</option>
-                <option value="3">Kuliner</option>
-                <option value="4">Seni & </option>
-            </select>
+            <select name="id_kategori" class="form-control" required>
+    <option value="">-- Pilih Kategori --</option>
+    @foreach($kategori as $kat)
+        <option value="{{ $kat->id_kategori }}">{{ $kat->nama }}</option>
+    @endforeach
+</select>
         </div>
 
         <div class="form-group mb-3">
