@@ -19,7 +19,7 @@
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel=" stylesheet" href="{{asset('admin/src/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
-  <link rel=" stylesheet" type="text/css" href="admin/assets/js/select.dataTables.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('admin/src/assets/js/select.dataTables.min.css')}}">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel=" stylesheet" href="{{asset('admin/src/assets/css/style.css')}}">
@@ -49,8 +49,8 @@
   <script src="{{asset('admin/src/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="{{asset('admin/src/assets/vendors/chart.js')}}/chart.umd.js')}}"></script>
-  <script src="{{asset('admin/src/assets/vendors/progressbar.js')}}/progressbar.min.js')}}"></script>
+  <script src="{{asset('admin/src/assets/vendors/chart.js/chart.umd.js')}}"></script>
+<script src="{{asset('admin/src/assets/vendors/progressbar.js/progressbar.min.js')}}"></script>
   <!-- End plugin js for this page -->
   <!-- inject:js -->
   <script src="{{asset('admin/src/assets/js/off-canvas.js')}}"></script>
