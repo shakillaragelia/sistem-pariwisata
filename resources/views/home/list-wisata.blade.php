@@ -49,4 +49,4 @@
 </main>
 
 {{-- Fix 2: @endsection bukan @end --}}
-@endsection
+@endsection\
