@@ -32,12 +32,14 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('judul')->required(),
-                Forms\Components\TextInput::make('slug')
-                    ->label('Kata Kunci') 
+                Forms\Components\TextInput::make('judul')
+                    ->label('Kata Kunci')
                     ->required()
-                    ->reactive()
+                    ->live(onBlur: true)
                     ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->unique(Event::class, 'slug', ignoreRecord: true),
                 Textarea::make('deskripsi')
                     ->label('Deskripsi')
                     ->required()
