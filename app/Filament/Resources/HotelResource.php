@@ -32,41 +32,45 @@ class HotelResource extends Resource
                 TextInput::make('slug')->required() ->label('Kata Kunci') ,
                 TextInput::make('deskripsi')->required(),
 
-                TextInput::make('lokasi')
-                ->required()
-                ->reactive()
-                ->afterStateHydrated(function ($state, callable $set, $get) {
-                    if ($state && !$get('latitude') && !$get('longitude')) {
-                        $response = Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
-                            'address' => $state,
-                            'key' => config('services.google_maps.key'),
-                        ]);
+               TextInput::make('lokasi')
+    ->required()
+    ->reactive()
+    ->afterStateHydrated(function ($state, callable $set, $get) {
+        if ($state && !$get('latitude') && !$get('longitude')) {
+            $response = Http::withHeaders([
+                'User-Agent' => 'SistemPariwisataBukittinggi/1.0'
+            ])->get("https://nominatim.openstreetmap.org/search", [
+                'q' => $state,
+                'format' => 'json',
+                'limit' => 1,
+            ]);
 
-                        $data = $response->json();
+            $data = $response->json();
 
-                        if (!empty($data['results'][0]['geometry']['location'])) {
-                            $location = $data['results'][0]['geometry']['location'];
-                            $set('latitude', $location['lat']);
-                            $set('longitude', $location['lng']);
-                        }
-                    }
-                })
-                ->afterStateUpdated(function ($state, callable $set) {
-                    if (!$state) return;
+            if (!empty($data[0])) {
+                $set('latitude', $data[0]['lat']);
+                $set('longitude', $data[0]['lon']);
+            }
+        }
+    })
+    ->afterStateUpdated(function ($state, callable $set) {
+        if (!$state) return;
 
-                    $response = Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
-                        'address' => $state,
-                        'key' => config('services.google_maps.key'),
-                    ]);
+        $response = Http::withHeaders([
+            'User-Agent' => 'SistemPariwisataBukittinggi/1.0'
+        ])->get("https://nominatim.openstreetmap.org/search", [
+            'q' => $state,
+            'format' => 'json',
+            'limit' => 1,
+        ]);
 
-                    $data = $response->json();
+        $data = $response->json();
 
-                    if (!empty($data['results'][0]['geometry']['location'])) {
-                        $location = $data['results'][0]['geometry']['location'];
-                        $set('latitude', $location['lat']);
-                        $set('longitude', $location['lng']);
-                    }
-                }),
+        if (!empty($data[0])) {
+            $set('latitude', $data[0]['lat']);
+            $set('longitude', $data[0]['lon']);
+        }
+    }),
 
 
                 FileUpload::make('gambar')
