@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
   <!-- Hero Section -->
   <section id="hero" class="hero section dark-background">
-    <img src="ragel/ragel/assets/img/jam.jpg" alt="" data-aos="fade-in">
+    <img src="{{ asset('ragel/ragel/assets/img/jam.jpg') }}" alt="" data-aos="fade-in">
     <div class="container d-flex flex-column align-items-center">
       <h2 class="white-text-shadow" data-aos="fade-up" data-aos-delay="100">SELAMAT DATANG!</h2>
       <p class="white-text-shadow" data-aos="fade-up" data-aos-delay="200">
