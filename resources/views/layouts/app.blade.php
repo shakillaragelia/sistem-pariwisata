@@ -27,7 +27,7 @@
   <!-- Font Awesome 6 (Free) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- ✅ Lucide Icons -->
+  <!-- Lucide Icons -->
   <!-- <script src="https://unpkg.com/lucide@latest"></script> -->
 
   <!-- Tambahkan di <head> -->
@@ -75,7 +75,7 @@
 
   <script>
     window.GOOGLE_API_KEY = "{{ env('GOOGLE_MAPS_API_KEY') }}";
-    lucide.createIcons(); // ✅ Init Lucide Icons
+    lucide.createIcons(); // Init Lucide Icons
   </script>
 
 </body>
