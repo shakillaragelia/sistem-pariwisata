@@ -32,10 +32,6 @@ class KomentarResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('komentar')->required(),
-                Forms\Components\Select::make('id_wisata')
-                    ->label('Wisata')
-                    ->relationship('wisata', 'nama')
-                    ->required(),
                 Forms\Components\Select::make('id_user')
                     ->label('User')
                     ->relationship('user', 'name') 
