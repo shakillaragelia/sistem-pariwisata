@@ -15,9 +15,10 @@ class WisataController extends Controller
     }
 
     public function create()
-    {
-        return view('admin.wisata.create');
-    }
+{
+    $kategori = Kategori::all();
+    return view('wisata.create', compact('kategori'));
+}
 
     public function store(Request $request)
     {
