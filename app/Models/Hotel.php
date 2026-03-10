@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Hotel extends Model
 {
     use HasFactory;
-    protected $table ='hotels';
+    protected $table = 'hotels';
     protected $primaryKey = 'id_hotel';
     protected $fillable = [
         'nama',
@@ -22,5 +22,9 @@ class Hotel extends Model
         'telepon',
         'harga_mulai',
         'harga_max',
+    ];
+
+    protected $casts = [
+        'gambar' => 'array',
     ];
 }
