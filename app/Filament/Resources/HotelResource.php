@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
@@ -24,54 +25,53 @@ class HotelResource extends Resource
     protected static ?string $navigationLabel = 'Hotel';
     protected static ?string $navigationIcon = 'heroicon-s-building-office-2';
 
-    public static function form(Form $form): Form
+    private static function geocodeAndSet(string $address, callable $set): void
     {
-        return $form
-            ->schema([
-                TextInput::make('nama')->required(),
-                TextInput::make('slug')->required() ->label('Kata Kunci') ,
-                TextInput::make('deskripsi')->required(),
-
-               TextInput::make('lokasi')
-    ->required()
-    ->reactive()
-    ->afterStateHydrated(function ($state, callable $set, $get) {
-        if ($state && !$get('latitude') && !$get('longitude')) {
-            $response = Http::withHeaders([
-                'User-Agent' => 'SistemPariwisataBukittinggi/1.0'
-            ])->get("https://nominatim.openstreetmap.org/search", [
-                'q' => $state,
-                'format' => 'json',
-                'limit' => 1,
-            ]);
-
-            $data = $response->json();
-
-            if (!empty($data[0])) {
-                $set('latitude', $data[0]['lat']);
-                $set('longitude', $data[0]['lon']);
-            }
-        }
-    })
-    ->afterStateUpdated(function ($state, callable $set) {
-        if (!$state) return;
-
-        $response = Http::withHeaders([
-            'User-Agent' => 'SistemPariwisataBukittinggi/1.0'
-        ])->get("https://nominatim.openstreetmap.org/search", [
-            'q' => $state,
-            'format' => 'json',
-            'limit' => 1,
+        $response = Http::get("https://api.opencagedata.com/geocode/v1/json", [
+            'q'           => $address,
+            'key'         => config('services.opencage.key'),
+            'limit'       => 1,
+            'countrycode' => 'id',
         ]);
 
         $data = $response->json();
 
-        if (!empty($data[0])) {
-            $set('latitude', $data[0]['lat']);
-            $set('longitude', $data[0]['lon']);
+        if (!empty($data['results'][0]['geometry'])) {
+            $set('latitude',  $data['results'][0]['geometry']['lat']);
+            $set('longitude', $data['results'][0]['geometry']['lng']);
         }
-    }),
+    }
 
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                TextInput::make('nama')
+                    ->required()
+                    ->live(debounce: 500)
+                    ->afterStateUpdated(fn ($state, callable $set) =>
+                        $set('slug', Str::slug($state))
+                    ),
+
+                TextInput::make('slug')
+                    ->required()
+                    ->label('Kata Kunci')
+                    ->readOnly(),
+
+                TextInput::make('deskripsi')->required(),
+
+                TextInput::make('lokasi')
+                    ->required()
+                    ->lazy()
+                    ->afterStateHydrated(function ($state, callable $set, $get) {
+                        if ($state && !$get('latitude') && !$get('longitude')) {
+                            self::geocodeAndSet($state, $set);
+                        }
+                    })
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        if (!$state) return;
+                        self::geocodeAndSet($state, $set);
+                    }),
 
                 FileUpload::make('gambar')
                     ->image()
@@ -88,29 +88,26 @@ class HotelResource extends Resource
 
                 TextInput::make('latitude')
                     ->required()
-                    ->reactive()
-                    ->extraAttributes(['readonly' => true]),
+                    ->readOnly(),
 
                 TextInput::make('longitude')
                     ->required()
-                    ->reactive()
-                    ->extraAttributes(['readonly' => true]),
+                    ->readOnly(),
 
-                    TextInput::make('harga_mulai')
+                TextInput::make('harga_mulai')
                     ->label('Harga Mulai Dari')
                     ->numeric()
                     ->nullable(),
 
-                    TextInput::make('harga_max')
+                TextInput::make('harga_max')
                     ->label('Harga Tertinggi')
                     ->numeric()
                     ->nullable(),
 
                 TextInput::make('telepon')
-                        ->label('No. Telepon')
-                        ->tel()
-                        ->nullable(),
-
+                    ->label('No. Telepon')
+                    ->tel()
+                    ->nullable(),
             ]);
     }
 
@@ -123,8 +120,11 @@ class HotelResource extends Resource
                 TextColumn::make('deskripsi')->label('Deskripsi')->limit(30),
                 TextColumn::make('bintang')->label('Bintang')->sortable(),
                 ImageColumn::make('gambar')
-                    ->label('Gambar')
-                    ->url(fn ($record) => asset('storage/' . $record->gambar)),
+                ->label('Gambar')
+                ->disk('public')
+                ->visibility('public')
+                ->square()
+                ->size(60),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -142,9 +142,9 @@ class HotelResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListHotels::route('/'),
+            'index'  => Pages\ListHotels::route('/'),
             'create' => Pages\CreateHotel::route('/create'),
-            'edit' => Pages\EditHotel::route('/{record}/edit'),
+            'edit'   => Pages\EditHotel::route('/{record}/edit'),
         ];
     }
 }

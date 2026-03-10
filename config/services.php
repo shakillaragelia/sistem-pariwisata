@@ -38,5 +38,9 @@ return [
     'google_maps' => [
         'key' => env('GOOGLE_MAPS_API_KEY'),
     ],
+    
+    'opencage' => [
+    'key' => env('OPENCAGE_API_KEY'),
+],
 
 ];
