@@ -29,18 +29,20 @@ class WisataResource extends Resource
 
     private static function geocodeAndSet(string $address, callable $set): void
     {
-        $response = Http::get("https://api.opencagedata.com/geocode/v1/json", [
-            'q'           => $address . ', Bukittinggi',
-            'key'         => config('services.opencage.key'),
-            'limit'       => 1,
-            'countrycode' => 'id',
+        // Menggunakan Nominatim (OpenStreetMap) yang lebih akurat untuk lokasi lokal Indonesia
+        $response = Http::withHeaders([
+            'User-Agent' => 'SistemPariwisata/1.0'
+        ])->get("https://nominatim.openstreetmap.org/search", [
+            'q'      => $address . ', Bukittinggi, Sumatera Barat',
+            'format' => 'json',
+            'limit'  => 1,
         ]);
 
         $data = $response->json();
 
-        if (!empty($data['results'][0]['geometry'])) {
-            $set('latitude',  $data['results'][0]['geometry']['lat']);
-            $set('longitude', $data['results'][0]['geometry']['lng']);
+        if (!empty($data[0])) {
+            $set('latitude',  $data[0]['lat']);
+            $set('longitude', $data[0]['lon']);
         }
     }
 
@@ -80,12 +82,7 @@ class WisataResource extends Resource
 
                 TextInput::make('lokasi')
                     ->required()
-                    ->lazy()
-                    ->afterStateHydrated(function ($state, callable $set, $get) {
-                        if ($state && !$get('latitude') && !$get('longitude')) {
-                            self::geocodeAndSet($state, $set);
-                        }
-                    })
+                    ->live(onBlur: true)
                     ->afterStateUpdated(function ($state, callable $set) {
                         if (!$state) return;
                         self::geocodeAndSet($state, $set);

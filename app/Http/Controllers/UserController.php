@@ -10,6 +10,7 @@ use App\Models\Event;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -151,20 +152,26 @@ class UserController extends Controller
 
     private function getNearbyHotels(float $lat, float $lng, int $radius = 10, int $limit = 3)
     {
-        return DB::table('hotels')
+        $hotels = DB::table('hotels')
             ->selectRaw("*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
                 cos(radians(longitude) - radians(?)) +
                 sin(radians(?)) * sin(radians(latitude)))) AS distance", [$lat, $lng, $lat])
-            ->where('bintang', '>=', 3)
+            ->where('bintang', '>=', 1) // Menurunkan syarat bintang agar lebih banyak hasil
             ->having('distance', '<', $radius)
             ->orderBy('distance')
             ->limit($limit)
             ->get();
+
+        foreach ($hotels as $hotel) {
+            $hotel->distance = $this->getRoadDistance($lat, $lng, $hotel->latitude, $hotel->longitude) ?? $hotel->distance;
+        }
+
+        return $hotels;
     }
 
     private function getNearbyWisata(float $lat, float $lng, int $radius = 10, int $limit = 3)
     {
-        return DB::table('wisatas')
+        $wisatas = DB::table('wisatas')
             ->join('kategoris', 'wisatas.id_kategori', '=', 'kategoris.id_kategori')
             ->selectRaw("wisatas.nama, wisatas.slug, kategoris.slug as kategori, wisatas.latitude, wisatas.longitude,
                 (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
@@ -174,5 +181,29 @@ class UserController extends Controller
             ->orderBy('distance')
             ->limit($limit)
             ->get();
+
+        foreach ($wisatas as $wisata) {
+            $wisata->distance = $this->getRoadDistance($lat, $lng, $wisata->latitude, $wisata->longitude) ?? $wisata->distance;
+        }
+
+        return $wisatas;
+    }
+
+    private function getRoadDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        try {
+            // Memanggil OSRM API (Gratis) untuk rute jalan kaki/berkendara
+            $response = Http::timeout(3)->get("https://router.project-osrm.org/route/v1/driving/{$lon1},{$lat1};{$lon2},{$lat2}", [
+                'overview' => 'false',
+            ]);
+
+            if ($response->successful() && isset($response->json()['routes'][0]['distance'])) {
+                // Jarak dalam meter diubah ke kilometer
+                return $response->json()['routes'][0]['distance'] / 1000;
+            }
+        } catch (\Exception $e) {
+            return null;
+        }
+        return null;
     }
 }
