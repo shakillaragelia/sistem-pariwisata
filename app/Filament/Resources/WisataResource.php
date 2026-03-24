@@ -124,7 +124,8 @@ class WisataResource extends Resource
                 TextColumn::make('kategori.nama')->label('Kategori'),
                 TextColumn::make('harga')
                     ->label('Harga')
-                    ->formatStateUsing(fn ($state) => $state == 0 ? 'Gratis' : 'Rp' . number_format($state, 0, ',', '.')),
+                    ->default(0)
+                    ->formatStateUsing(fn ($state) => ($state == 0) ? 'Gratis' : 'Rp' . number_format($state, 0, ',', '.')),
                 TextColumn::make('lokasi')->limit(30)->toggleable(),
                 ImageColumn::make('gambar')
                     ->label('Gambar')

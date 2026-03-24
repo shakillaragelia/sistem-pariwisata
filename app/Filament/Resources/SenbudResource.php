@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -31,8 +32,19 @@ class SenbudResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')->required(),
-                Forms\Components\TextInput::make('slug')->required()->label('Kata Kunci') ,
+                Forms\Components\TextInput::make('nama')
+                    ->required()
+                    ->live(debounce: 500)
+                    ->afterStateUpdated(fn ($state, callable $set) =>
+                        $set('slug', Str::slug($state))
+                    ),
+
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->label('Kata Kunci')
+                    ->readOnly()
+                    ->unique(Senbud::class, 'slug', ignoreRecord: true),
+
                 Forms\Components\TextInput::make('deskripsi')->required(),
                 Forms\Components\FileUpload::make('gambar')
                 ->image()
