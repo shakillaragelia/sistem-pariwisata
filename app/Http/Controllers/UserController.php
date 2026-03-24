@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    //Index
     public function index()
     {
         $kategori = Kategori::all();
@@ -24,34 +23,34 @@ class UserController extends Controller
         return view('home.index', compact('kategori', 'ikon'));
     }
 
-    //Wisata
     public function wisata(Request $request)
     {
         $filter = $request->query('kategori');
 
-        if ($filter === 'sejarah') {
+        if ($filter) {
             $data = Wisata::with('kategori')
-                ->whereHas('kategori', fn($q) => $q->where('slug', 'sejarah'))
+                ->whereHas('kategori', fn($q) => $q->where('slug', $filter))
                 ->paginate(12);
-        } elseif ($filter === 'alam') {
-            $data = Wisata::with('kategori')
-                ->whereHas('kategori', fn($q) => $q->where('slug', 'alam'))
-                ->paginate(12);
-        } elseif ($filter === 'kuliner') {
-            $data = Kuliner::with('kategori')->paginate(12);
-        } elseif (in_array($filter, ['senibudaya', 'senbud'])) {
-            $data = Senbud::with('kategori')->paginate(12);
         } else {
-            $wisata  = Wisata::with('kategori')->get();
-            $kuliner = Kuliner::with('kategori')->get();
-            $senbud  = Senbud::with('kategori')->get();
-            $data    = $wisata->concat($kuliner)->concat($senbud);
+            $data = Wisata::with('kategori')->paginate(12);
         }
 
-        return view('home.wisata', compact('data', 'filter'));
+        $kategoris = Kategori::all();
+
+        return view('home.wisata', compact('data', 'filter', 'kategoris'));
     }
 
-    //Hotel
+    public function detailWisata($slug)
+    {
+        $wisata = Wisata::with(['komentar.user', 'kategori'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
+
+        return view('home.detail-wisata', compact('wisata', 'rekomendasiHotel'));
+    }
+
     public function hotel()
     {
         $data = Hotel::latest()->paginate(12);
@@ -66,12 +65,10 @@ class UserController extends Controller
         return view('home.detail-hotel', compact('hotel', 'rekomendasiWisata'));
     }
 
-    //Detail Wisata
     public function detailAlam($slug)
     {
         $wisata = Wisata::with(['komentar.user', 'kategori'])
             ->where('slug', $slug)
-            ->whereHas('kategori', fn($q) => $q->where('slug', 'alam'))
             ->firstOrFail();
 
         $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
@@ -108,25 +105,20 @@ class UserController extends Controller
         return view('home.detail-senbud', compact('senbud'));
     }
 
-    //Event
     public function event()
     {
         $events = Event::latest()->paginate(12);
         return view('home.event', compact('events'));
     }
 
-    //Search
     public function searchWisata(Request $request)
     {
         $keyword = $request->input('search');
+        $data = Wisata::where('nama', 'like', "%{$keyword}%")->with('kategori')->paginate(12);
+        $kategoris = Kategori::all();
+        $filter = null;
 
-        $wisata  = Wisata::where('nama', 'like', "%{$keyword}%")->with('kategori')->get();
-        $kuliner = Kuliner::where('nama', 'like', "%{$keyword}%")->with('kategori')->get();
-        $senbud  = Senbud::where('nama', 'like', "%{$keyword}%")->with('kategori')->get();
-
-        $data = $wisata->concat($kuliner)->concat($senbud);
-
-        return view('home.wisata', compact('data', 'keyword'));
+        return view('home.wisata', compact('data', 'keyword', 'filter', 'kategoris'));
     }
 
     public function searchHotel(Request $request)
@@ -137,7 +129,6 @@ class UserController extends Controller
         return view('home.hotel', compact('data', 'keyword'));
     }
 
-    //Helper : Rekomendasi Terdekat
     private function getNearbyHotels(float $lat, float $lng, int $radius = 10, int $limit = 3)
     {
         return DB::table('hotels')

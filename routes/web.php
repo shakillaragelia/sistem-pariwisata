@@ -23,7 +23,8 @@ Route::get('/wisata/search', [UserController::class, 'searchWisata'])->name('wis
 
 // Detail wisata
 Route::get('/detail-alam/{slug}',    [UserController::class, 'detailAlam'])->name('detail.alam');
-Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah');
+Route::get('/detail-sejarah/{slug}', [UserController::class, 'detailSejarah'])->name('detail.sejarah'); //sblmnya
+Route::get('/detail-wisata/{slug}', [UserController::class, 'detailWisata'])->name('detail.wisata'); //baru
 Route::get('/detail-kuliner/{slug}', [UserController::class, 'detailKuliner'])->name('detail.kuliner');
 Route::get('/detail-senbud/{slug}',  [UserController::class, 'detailSenbud'])->name('detail.senbud');
 

@@ -3,66 +3,62 @@
 @section('content')
 
 <main class="main">
-
-  <!-- Hero Section -->
   <section id="hero" class="hero section dark-background">
     <img src="{{ asset('ragel/ragel/assets/img/jam.jpg') }}" alt="" data-aos="fade-in">
     <div class="container d-flex flex-column align-items-center">
       <h2 data-aos="fade-up" data-aos-delay="100">WISATA</h2>
-      <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300"></div>
     </div>
   </section>
 
-  <!-- Wisata Section -->
   <section id="wisata" class="wisata section">
     <section id="portfolio" class="portfolio section">
       <div class="container section-title" data-aos="fade-up">
-
         <h2>WISATA</h2>
         <p>WISATA KOTA BUKITTINGGI</p>
       </div>
 
-<form action="{{ route('wisata.search') }}" method="GET" class="mb-4 d-flex justify-content-center">
-          <input type="text" name="search" class="form-control w-50 me-2" placeholder="Cari nama wisata..." value="{{ request('search') }}">
-          <button type="submit" class="btn btn-primary">Cari</button>
-        </form>
+      <form action="{{ route('wisata.search') }}" method="GET" class="mb-4 d-flex justify-content-center">
+        <input type="text" name="search" class="form-control w-50 me-2" placeholder="Cari nama wisata..." value="{{ request('search') }}">
+        <button type="submit" class="btn btn-primary">Cari</button>
+      </form>
+
       <div class="container">
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-        <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100" style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 20px;">
-  <li><a href="{{ url('/wisata') }}" style="color: {{ empty($filter) ? '#FF6600' : 'black' }};">SEMUA</a></li>
-  <li><a href="{{ url('/wisata?kategori=sejarah') }}" style="color: {{ ($filter == 'sejarah') ? '#FF6600' : 'black' }};">SEJARAH</a></li>
-  <li><a href="{{ url('/wisata?kategori=alam') }}" style="color: {{ ($filter == 'alam') ? '#FF6600' : 'black' }};">ALAM</a></li>
-  <li><a href="{{ url('/wisata?kategori=kuliner') }}" style="color: {{ ($filter == 'kuliner') ? '#FF6600' : 'black' }};">KULINER</a></li>
-  <li><a href="{{ url('/wisata?kategori=senibudaya') }}" style="color: {{ ($filter == 'senibudaya' || $filter == 'senbud') ? '#FF6600' : 'black' }};">SENI BUDAYA</a></li>
-</ul>
-
-
-
+          {{-- Filter kategori dinamis dari DB --}}
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100"
+              style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <li>
+              <a href="{{ url('/wisata') }}" style="color: {{ empty($filter) ? '#FF6600' : 'black' }};">SEMUA</a>
+            </li>
+            @foreach($kategoris as $kat)
+            <li>
+              <a href="{{ url('/wisata?kategori=' . $kat->slug) }}"
+                 style="color: {{ $filter == $kat->slug ? '#FF6600' : 'black' }};">
+                {{ strtoupper($kat->nama) }}
+              </a>
+            </li>
+            @endforeach
+          </ul>
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
             @forelse ($data as $item)
             @php
-            $slugKategori = $item->kategori->slug ?? 'lainnya';
-            $route = match ($slugKategori) {
-            'sejarah' => route('detail.sejarah', $item->slug),
-            'alam' => route('detail.alam', $item->slug),
-            'kuliner' => route('detail.kuliner', $item->slug),
-            'senbud' => route('detail.senbud', $item->slug),
-            default => '#',
-            };
+              $route = route('detail.wisata', $item->slug);
             @endphp
 
-            <div class="col-lg-4 col-md-6 mb-4 portfolio-item filter-{{ $slugKategori }}">
+            <div class="col-lg-4 col-md-6 mb-4 portfolio-item">
               <a href="{{ $route }}" class="text-decoration-none text-dark">
                 <div class="card border-0 shadow-sm h-100">
-                  <img
-                    src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://via.placeholder.com/500x300?text=No+Image' }}"
-                    class="card-img-top w-100" style="object-fit: cover; height: 230px;" alt="{{ $item->nama }}">
+                  <img src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://via.placeholder.com/500x300?text=No+Image' }}"
+                       class="card-img-top w-100"
+                       style="object-fit: cover; height: 230px;"
+                       alt="{{ $item->nama }}">
                   <div class="card-body px-3 py-2">
                     <h5 class="card-title fw-bold mb-1 text-center">{{ $item->nama }}</h5>
-                    <p class="card-text text-muted" style="font-size: 14px;">{{
-                      \Illuminate\Support\Str::limit($item->deskripsi, 80) }}</p>
+                    <p class="card-text text-muted" style="font-size: 14px;">
+                      {{ \Illuminate\Support\Str::limit($item->deskripsi, 80) }}
+                    </p>
                   </div>
                 </div>
               </a>
@@ -78,7 +74,6 @@
       </div>
     </section>
   </section>
-
 </main>
 @endsection
 
@@ -90,18 +85,6 @@
     var iso = new Isotope(elem, {
       itemSelector: '.portfolio-item',
       layoutMode: 'masonry'
-    });
-
-    var filtersElem = document.querySelector('.portfolio-filters');
-    filtersElem.addEventListener('click', function(event) {
-      if (!event.target.matches('li')) return;
-      var filterValue = event.target.getAttribute('data-filter');
-      iso.arrange({ filter: filterValue });
-
-      document.querySelectorAll('.portfolio-filters li').forEach(function(el) {
-        el.classList.remove('filter-active');
-      });
-      event.target.classList.add('filter-active');
     });
   });
 </script>
