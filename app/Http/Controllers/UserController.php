@@ -27,12 +27,32 @@ class UserController extends Controller
     {
         $filter = $request->query('kategori');
 
+        // Query dasar dari masing-masing tabel dengan kolom yang disamakan
+        $qWisata = DB::table('wisatas')
+            ->join('kategoris', 'wisatas.id_kategori', '=', 'kategoris.id_kategori')
+            ->select('wisatas.nama', 'wisatas.slug', 'wisatas.deskripsi', 'wisatas.gambar', 'kategoris.slug as kategori_slug', 'kategoris.nama as kategori_nama', DB::raw("'wisata' as type"));
+
+        $qKuliner = DB::table('kuliners')
+            ->join('kategoris', 'kuliners.id_kategori', '=', 'kategoris.id_kategori')
+            ->select('kuliners.nama', 'kuliners.slug', 'kuliners.deskripsi', 'kuliners.gambar', 'kategoris.slug as kategori_slug', 'kategoris.nama as kategori_nama', DB::raw("'kuliner' as type"));
+
+        $qSenbud = DB::table('senbuds')
+            ->join('kategoris', 'senbuds.id_kategori', '=', 'kategoris.id_kategori')
+            ->select('senbuds.nama', 'senbuds.slug', 'senbuds.deskripsi', 'senbuds.gambar', 'kategoris.slug as kategori_slug', 'kategoris.nama as kategori_nama', DB::raw("'senbud' as type"));
+
+        // Gabungkan semuanya
+        $combined = $qWisata->union($qKuliner)->union($qSenbud);
+
+        // Jika ada filter kategori
         if ($filter) {
-            $data = Wisata::with('kategori')
-                ->whereHas('kategori', fn($q) => $q->where('slug', $filter))
+            $data = DB::table(DB::raw("({$combined->toSql()}) as combined"))
+                ->mergeBindings($combined)
+                ->where('kategori_slug', $filter)
                 ->paginate(12);
         } else {
-            $data = Wisata::with('kategori')->paginate(12);
+            $data = DB::table(DB::raw("({$combined->toSql()}) as combined"))
+                ->mergeBindings($combined)
+                ->paginate(12);
         }
 
         $kategoris = Kategori::all();

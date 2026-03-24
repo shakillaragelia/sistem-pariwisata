@@ -44,7 +44,11 @@
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
             @forelse ($data as $item)
             @php
-              $route = route('detail.wisata', $item->slug);
+              $route = match($item->type) {
+                  'kuliner' => route('detail.kuliner', $item->slug),
+                  'senbud'  => route('detail.senbud', $item->slug),
+                  default   => route('detail.wisata', $item->slug),
+              };
             @endphp
 
             <div class="col-lg-4 col-md-6 mb-4 portfolio-item">
