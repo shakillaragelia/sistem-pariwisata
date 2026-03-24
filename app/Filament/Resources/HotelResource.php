@@ -27,16 +27,27 @@ class HotelResource extends Resource
 
     private static function geocodeAndSet(string $address, callable $set): void
     {
-        // Menggunakan Nominatim (OpenStreetMap) yang lebih akurat untuk lokasi lokal Indonesia
+
         $response = Http::withHeaders([
             'User-Agent' => 'SistemPariwisata/1.0'
         ])->get("https://nominatim.openstreetmap.org/search", [
-            'q'      => $address . ', Bukittinggi, Sumatera Barat',
+            'q'      => $address, 
             'format' => 'json',
             'limit'  => 1,
         ]);
 
         $data = $response->json();
+
+        if (empty($data[0])) {
+             $response = Http::withHeaders([
+                'User-Agent' => 'SistemPariwisata/1.0'
+            ])->get("https://nominatim.openstreetmap.org/search", [
+                'q'      => $address . ', Bukittinggi',
+                'format' => 'json',
+                'limit'  => 1,
+            ]);
+            $data = $response->json();
+        }
 
         if (!empty($data[0])) {
             $set('latitude',  $data[0]['lat']);
@@ -44,7 +55,7 @@ class HotelResource extends Resource
         }
     }
 
-    public static function form(Form $form): Form
+    public static function form(Form $form): Form   
     {
         return $form
             ->schema([

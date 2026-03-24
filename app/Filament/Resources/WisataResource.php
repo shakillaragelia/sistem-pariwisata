@@ -29,16 +29,28 @@ class WisataResource extends Resource
 
     private static function geocodeAndSet(string $address, callable $set): void
     {
-        // Menggunakan Nominatim (OpenStreetMap) yang lebih akurat untuk lokasi lokal Indonesia
+        // Mencoba mencari lokasi dengan Nominatim (OpenStreetMap)
         $response = Http::withHeaders([
             'User-Agent' => 'SistemPariwisata/1.0'
         ])->get("https://nominatim.openstreetmap.org/search", [
-            'q'      => $address . ', Bukittinggi, Sumatera Barat',
+            'q'      => $address, // Gunakan alamat apa adanya dulu
             'format' => 'json',
             'limit'  => 1,
         ]);
 
         $data = $response->json();
+
+        // Jika tidak ketemu, coba tambahkan kata Bukittinggi
+        if (empty($data[0])) {
+             $response = Http::withHeaders([
+                'User-Agent' => 'SistemPariwisata/1.0'
+            ])->get("https://nominatim.openstreetmap.org/search", [
+                'q'      => $address . ', Bukittinggi',
+                'format' => 'json',
+                'limit'  => 1,
+            ]);
+            $data = $response->json();
+        }
 
         if (!empty($data[0])) {
             $set('latitude',  $data[0]['lat']);
