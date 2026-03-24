@@ -38,7 +38,16 @@
   <!-- FORM -->
   <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
     <div class="bg-white p-4 shadow rounded h-100">
-      <form action="{{ route('kritik.store') }}" method="POST" class="php-email-form">
+      @if ($errors->any())
+        <div class="alert alert-danger mb-3">
+          <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+      <form action="{{ route('kritik.store') }}" method="POST">
         @csrf
         <div class="row gy-3">
           <div class="col-md-6">
