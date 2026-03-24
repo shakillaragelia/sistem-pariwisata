@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 
@@ -16,16 +17,29 @@ class KategoriResource extends Resource
 {
     protected static ?string $model = Kategori::class;
     protected static ?string $navigationGroup = 'Data Pariwisata';
-
     protected static ?string $navigationLabel = 'Kategori';
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('nama')->required(),
-            Forms\Components\TextInput::make('slug')->required() ->label('Kata Kunci'),
+            Forms\Components\TextInput::make('nama')
+                ->required()
+                ->live(debounce: 500)
+                ->afterStateUpdated(fn ($state, callable $set) =>
+                    $set('slug', Str::slug($state))
+                ),
+
+            Forms\Components\TextInput::make('slug')
+                ->required()
+                ->label('Kata Kunci')
+                ->readOnly(),
+
             FileUpload::make('gambar')
+                ->image()
+                ->disk('public')
+                ->directory('kategori-images')
+                ->required(),
         ]);
     }
 
@@ -34,10 +48,13 @@ class KategoriResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama'),
-                Tables\Columns\TextColumn::make('slug')->label('Kata Kunci') ,
+                Tables\Columns\TextColumn::make('slug')->label('Kata Kunci'),
                 ImageColumn::make('gambar')
                     ->label('Gambar')
-                    ->url(fn ($record) => asset('storage/' . $record->gambar)),
+                    ->disk('public')
+                    ->visibility('public')
+                    ->square()
+                    ->size(60),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -50,9 +67,9 @@ class KategoriResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListKategoris::route('/'),
+            'index'  => Pages\ListKategoris::route('/'),
             'create' => Pages\CreateKategori::route('/create'),
-            'edit' => Pages\EditKategori::route('/{record}/edit'),
+            'edit'   => Pages\EditKategori::route('/{record}/edit'),
         ];
     }
 }
