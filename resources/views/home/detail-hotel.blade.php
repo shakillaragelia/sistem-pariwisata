@@ -86,16 +86,13 @@
             @forelse ($rekomendasiWisata as $wisata)
               <div class="mb-2">
                 @php
-                  switch ($wisata->kategori) {
-                    case 'sejarah':
-                      $route = route('detail.sejarah', ['slug' => $wisata->slug]);
-                      break;
-                    case 'alam':
-                      $route = route('detail.alam', ['slug' => $wisata->slug]);
-                      break;
-                    default:
-                      $route = '#';
-                  }
+                  $route = match ($wisata->kategori) {
+                    'wisata-sejarah' => route('detail.sejarah', ['slug' => $wisata->slug]),
+                    'wisata-alam'    => route('detail.alam', ['slug' => $wisata->slug]),
+                    'wisata-kuliner' => route('detail.kuliner', ['slug' => $wisata->slug]),
+                    'wisata-senbud'  => route('detail.senbud', ['slug' => $wisata->slug]),
+                    default          => route('detail.wisata', ['slug' => $wisata->slug]),
+                  };
                 @endphp
                 <a href="{{ $route }}">
                   {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)

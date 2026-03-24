@@ -73,7 +73,7 @@
       @endif
 
       <div class="komentar-list mt-4">
-        @forelse ($komentar as $komen)
+        @forelse ($senbud->komentar as $komen)
           <div class="border rounded p-3 mb-3">
             <strong>{{ $komen->user->name }}</strong><br>
             <small class="text-muted">{{ $komen->created_at->format('d M Y') }}</small>

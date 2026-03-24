@@ -165,7 +165,8 @@ class UserController extends Controller
     private function getNearbyWisata(float $lat, float $lng, int $radius = 10, int $limit = 3)
     {
         return DB::table('wisatas')
-            ->selectRaw("nama, slug, id_kategori, latitude, longitude,
+            ->join('kategoris', 'wisatas.id_kategori', '=', 'kategoris.id_kategori')
+            ->selectRaw("wisatas.nama, wisatas.slug, kategoris.slug as kategori, wisatas.latitude, wisatas.longitude,
                 (6371 * acos(cos(radians(?)) * cos(radians(latitude)) *
                 cos(radians(longitude) - radians(?)) +
                 sin(radians(?)) * sin(radians(latitude)))) AS distance", [$lat, $lng, $lat])
