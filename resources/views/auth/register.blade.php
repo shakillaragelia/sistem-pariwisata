@@ -35,24 +35,56 @@
     </div>
 
     <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" name="password" class="form-control" required>
+      <label for="password" class="form-label text-start d-block">Password</label>
+      <div class="input-group">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password" required>
+        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password">
+          <i class="bi bi-eye"></i>
+        </button>
+      </div>
       @error('password')
         <small class="text-danger">{{ $message }}</small>
       @enderror
     </div>
 
     <div class="mb-3">
-      <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-      <input type="password" name="password_confirmation" class="form-control" required>
+      <label for="password_confirmation" class="form-label text-start d-block">Konfirmasi Password</label>
+      <div class="input-group">
+        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Ulangi password" required>
+        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password_confirmation">
+          <i class="bi bi-eye"></i>
+        </button>
+      </div>
       @error('password_confirmation')
         <small class="text-danger">{{ $message }}</small>
       @enderror
     </div>
 
-    <button type="submit" class="btn btn-primary w-100">Daftar</button>
+    <div class="mb-4 mt-4">
+      <button type="submit" class="btn btn-primary w-100 py-2 fw-bold" style="border-radius: 8px;">Daftar Akun</button>
+    </div>
   </form>
 
-  <p class="text-center mt-3">&copy; 2025 DISPAR BUKITTINGGI. All rights reserved.</p>
+  <p class="text-center mt-3 text-muted">&copy; {{ date('Y') }} DISPAR BUKITTINGGI. All rights reserved.</p>
 </div>
+
+@push('scripts')
+<script>
+  document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-target');
+      const input = document.getElementById(targetId);
+      const icon = this.querySelector('i');
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+      }
+    });
+  });
+</script>
+@endpush
 @endsection

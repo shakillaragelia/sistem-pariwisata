@@ -1,54 +1,63 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
-  <div class="container-fluid container-xl position-relative d-flex align-items-center">
+  <div class="container-fluid px-lg-5 d-flex align-items-center justify-content-between">
 
-    <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto">
+    <a href="{{ url('/') }}" class="logo d-flex align-items-center">
       <img src="{{ asset('ragel/ragel/assets/img/logobkt.png') }}" alt="Logo" style="height: 40px;" class="me-2">
       <h1 class="sitename">DISPAR BUKITTINGGI</h1>
     </a>
 
-    <nav id="navmenu" class="navmenu">
-      <ul>
-        <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Beranda</a></li>
-        <li><a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">Tentang</a></li>
-        <li><a href="{{ url('/wisata') }}" class="{{ request()->is('wisata*') ? 'active' : '' }}">Wisata</a></li>
-        <li><a href="{{ url('/event') }}" class="{{ request()->is('event') ? 'active' : '' }}">Event</a></li>
-        <li><a href="{{ url('/hotel') }}" class="{{ request()->is('hotel*') ? 'active' : '' }}">Hotel</a></li>
-        <li><a href="{{ url('/saran') }}" class="{{ request()->is('saran') ? 'active' : '' }}">Kontak</a></li>
-      </ul>
-      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
+    <div class="d-flex align-items-center">
+      <nav id="navmenu" class="navmenu me-lg-4 me-3">
+        <ul>
+          <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Beranda</a></li>
+          <li><a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">Tentang</a></li>
+          <li><a href="{{ url('/wisata') }}" class="{{ request()->is('wisata*') ? 'active' : '' }}">Wisata</a></li>
+          <li><a href="{{ url('/event') }}" class="{{ request()->is('event') ? 'active' : '' }}">Event</a></li>
+          <li><a href="{{ url('/hotel') }}" class="{{ request()->is('hotel*') ? 'active' : '' }}">Hotel</a></li>
+          <li><a href="{{ url('/saran') }}" class="{{ request()->is('saran') ? 'active' : '' }}">Kontak</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
 
-    {{-- Ikon Search --}}
-    <a href="#" id="searchToggleBtn" title="Cari" style="font-size:1.3rem; color:inherit; margin-left:12px;">
-      <i class="bi bi-search"></i>
-    </a>
+      {{-- Ikon Search & User --}}
+      <div class="d-flex align-items-center gap-2 gap-lg-3">
+        <a href="#" id="searchToggleBtn" title="Cari" style="font-size:1.3rem; color:inherit; text-decoration:none;">
+          <i class="bi bi-search"></i>
+        </a>
 
-    {{-- Ikon User: login / dropdown logout --}}
-    @auth
-      @if(auth()->user()->role === 'user')
-        <div class="dropdown" style="margin-left:10px;">
-          <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" style="font-size:1.3rem; color:inherit; text-decoration:none;" title="{{ auth()->user()->name }}">
+        {{-- Dropdown User --}}
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size:1.4rem; color:inherit;">
             <i class="bi bi-person-circle"></i>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><span class="dropdown-item-text fw-bold">{{ auth()->user()->name }}</span></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <form action="{{ url('/logout-user') }}" method="POST">
-                @csrf
-                <button type="submit" class="dropdown-item text-danger">
-                  <i class="bi bi-box-arrow-right me-1"></i> Keluar
-                </button>
-              </form>
-            </li>
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-3 p-0" aria-labelledby="navbarDropdown" style="border-radius:12px; overflow:hidden; min-width:200px; z-index:9999;">
+            @auth
+              <li class="bg-primary text-white p-3 text-center">
+                <small class="d-block opacity-75">Halo,</small>
+                <div class="fw-bold">{{ auth()->user()->name }}</div>
+              </li>
+              <li>
+                <form action="{{ url('/logout-user') }}" method="POST">
+                  @csrf
+                  <button type="submit" class="dropdown-item py-2 text-danger text-center">
+                    <i class="bi bi-box-arrow-right me-2"></i> Keluar
+                  </button>
+                </form>
+              </li>
+            @else
+              <li class="p-2">
+                <a class="dropdown-item py-2 rounded mb-1" href="{{ route('login.user') }}" style="background:rgba(13, 110, 253, 0.1); color:#0d6efd;">
+                   <i class="bi bi-box-arrow-in-right me-2"></i> Masuk (Login)
+                </a>
+                <a class="dropdown-item py-2 rounded" href="{{ url('/register') }}">
+                   <i class="bi bi-person-plus me-2 text-success"></i> Daftar Akun
+                </a>
+              </li>
+            @endauth
           </ul>
         </div>
-      @endif
-    @else
-      <a href="{{ route('login.user') }}" title="Login" style="font-size:1.3rem; color:inherit; margin-left:10px;">
-        <i class="bi bi-person-circle"></i>
-      </a>
-    @endauth
+      </div>
+    </div>
 
   </div>
 
