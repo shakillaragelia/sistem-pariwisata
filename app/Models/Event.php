@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Event extends Model
 {
     use HasFactory;
-    protected $table ='events';
+    protected $table = 'events';
     protected $primaryKey = 'id_event';
     protected $fillable = [
         'gambar',
@@ -17,6 +17,7 @@ class Event extends Model
         'deskripsi',
     ];
 
+    protected $casts = [
+        'gambar' => 'array',
+    ];
 }
-
-

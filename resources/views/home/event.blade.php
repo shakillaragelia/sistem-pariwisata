@@ -24,12 +24,12 @@
         @forelse($events as $event)
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100 shadow">
-            <img src="{{ asset('storage/' . $event->gambar) }}"
+            <img src="{{ asset('storage/' . ($event->gambar[0] ?? '')) }}"
                  class="card-img-top"
-                 alt="{{ $event->nama }}"
+                 alt="{{ $event->judul }}"
                  style="height: 220px; object-fit: cover; width: 100%; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
             <div class="card-body">
-              <h5 class="card-title">{{ $event->nama }}</h5>
+              <h5 class="card-title">{{ $event->judul }}</h5>
               <p class="card-text">{{ \Illuminate\Support\Str::limit($event->deskripsi, 100) }}</p>
               <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalEvent{{ $event->id_event }}">
                 Lihat Selengkapnya
@@ -43,11 +43,36 @@
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalEventLabel{{ $event->id_event }}">{{ $event->nama }}</h5>
+                <h5 class="modal-title" id="modalEventLabel{{ $event->id_event }}">{{ $event->judul }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
               </div>
               <div class="modal-body">
-                <img src="{{ asset('storage/' . $event->gambar) }}" class="img-fluid mb-3 rounded" alt="{{ $event->nama }}">
+                {{-- Carousel kalau gambar lebih dari 1 --}}
+                @if(count($event->gambar ?? []) > 1)
+                  <div id="carouselEvent{{ $event->id_event }}" class="carousel slide mb-3" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      @foreach($event->gambar as $index => $gambar)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                          <img src="{{ asset('storage/' . $gambar) }}"
+                               class="d-block w-100 rounded"
+                               style="height: 300px; object-fit: cover;"
+                               alt="{{ $event->judul }}">
+                        </div>
+                      @endforeach
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselEvent{{ $event->id_event }}" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselEvent{{ $event->id_event }}" data-bs-slide="next">
+                      <span class="carousel-control-next-icon"></span>
+                    </button>
+                  </div>
+                @else
+                  <img src="{{ asset('storage/' . ($event->gambar[0] ?? '')) }}"
+                       class="img-fluid mb-3 rounded"
+                       style="height: 300px; object-fit: cover; width: 100%;"
+                       alt="{{ $event->judul }}">
+                @endif
                 <p>{{ $event->deskripsi }}</p>
               </div>
               <div class="modal-footer">

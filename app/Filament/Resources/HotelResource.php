@@ -74,10 +74,14 @@ class HotelResource extends Resource
                     }),
 
                 FileUpload::make('gambar')
-                    ->image()
-                    ->disk('public')
-                    ->directory('hotel-images')
-                    ->required(),
+    ->image()
+    ->multiple()
+    ->reorderable()
+    ->maxFiles(5)
+    ->disk('public')
+    ->directory('hotel-images')
+    ->required(),
+
 
                 TextInput::make('bintang')
                     ->label('Bintang')
@@ -124,7 +128,8 @@ class HotelResource extends Resource
                 ->disk('public')
                 ->visibility('public')
                 ->square()
-                ->size(60),
+                ->size(60)
+                ->stacked(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

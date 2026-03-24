@@ -3,7 +3,7 @@
 @section('content')
 <main class="main">
   <section id="hero" class="hero section dark-background">
-    <img src="{{ asset('storage/' . $hotel->gambar) }}" alt="{{ $hotel->nama }}" data-aos="fade-in">
+    <img src="{{ asset('storage/' . ($hotel->gambar[0] ?? '')) }}" alt="{{ $hotel->nama }}" data-aos="fade-in">
     <div class="container d-flex flex-column align-items-center">
       <h2 data-aos="fade-up" data-aos-delay="100">{{ strtoupper($hotel->nama) }}</h2>
     </div>
@@ -17,12 +17,44 @@
 
     <div class="container">
       <div class="row align-items-stretch" data-aos="fade-up">
-        <!-- Gambar kiri -->
-        <div class="col-lg-6 d-flex">
-          <img src="{{ asset('storage/' . $hotel->gambar) }}"
-               class="img-fluid w-100 object-fit-cover rounded"
-               style="object-fit: cover; width: 100%;"
-               alt="{{ $hotel->nama }}">
+
+        <!-- Carousel gambar kiri -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div id="hotelCarousel" class="carousel slide rounded overflow-hidden" data-bs-ride="carousel">
+            
+            {{-- Indikator dot --}}
+            <div class="carousel-indicators">
+              @foreach($hotel->gambar ?? [] as $index => $gambar)
+                <button type="button" 
+                        data-bs-target="#hotelCarousel" 
+                        data-bs-slide-to="{{ $index }}"
+                        class="{{ $index === 0 ? 'active' : '' }}"
+                        aria-label="Slide {{ $index + 1 }}">
+                </button>
+              @endforeach
+            </div>
+
+            {{-- Slides --}}
+            <div class="carousel-inner">
+              @foreach($hotel->gambar ?? [] as $index => $gambar)
+                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                  <img src="{{ asset('storage/' . $gambar) }}"
+                       class="d-block w-100"
+                       style="height: 400px; object-fit: cover;"
+                       alt="{{ $hotel->nama }}">
+                </div>
+              @endforeach
+            </div>
+
+            {{-- Tombol prev/next --}}
+            <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+
+          </div>
         </div>
 
         <!-- Konten kanan -->
@@ -53,29 +85,28 @@
             <h5 class="fw-bold mt-4">Rekomendasi Wisata Terdekat</h5>
             @forelse ($rekomendasiWisata as $wisata)
               <div class="mb-2">
-              @php
-    switch ($wisata->kategori) {
-        case 'sejarah':
-            $route = route('detail.sejarah', ['slug' => $wisata->slug]);
-            break;
-        case 'alam':
-            $route = route('detail.alam', ['slug' => $wisata->slug]);
-            break;
-        default:
-            $route = '#';
-    }
-@endphp
-
-<a href="{{ $route }}">
-    {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)
-</a>
-
+                @php
+                  switch ($wisata->kategori) {
+                    case 'sejarah':
+                      $route = route('detail.sejarah', ['slug' => $wisata->slug]);
+                      break;
+                    case 'alam':
+                      $route = route('detail.alam', ['slug' => $wisata->slug]);
+                      break;
+                    default:
+                      $route = '#';
+                  }
+                @endphp
+                <a href="{{ $route }}">
+                  {{ $wisata->nama }} ({{ number_format($wisata->distance, 2) }} km)
+                </a>
               </div>
             @empty
               <p>Tidak ada wisata terdekat yang ditemukan.</p>
             @endforelse
           </div>
         </div>
+
       </div>
     </div>
   </section>

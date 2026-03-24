@@ -34,6 +34,8 @@ Route::get('/detail-hotel/{slug}', [UserController::class, 'detailHotel'])->name
 
 // Event
 Route::get('/event', [UserController::class, 'event'])->name('home.event');
+Route::get('/event', [UserController::class, 'event'])->name('home.event');
+Route::get('/detail-event/{slug}', [UserController::class, 'detailEvent'])->name('detail.event');
 
 // Kritik Saran
 Route::get('/saran',  [KritikController::class, 'index'])->name('home.saran');

@@ -29,7 +29,7 @@
         @foreach ($data as $item)
           <div class="col-lg-4 col-md-6" data-aos="fade-up">
             <div class="card shadow-sm h-100">
-              <img src="{{ asset('storage/' . $item->gambar) }}" class="card-img-top"
+             <img src="{{ asset('storage/' . ($item->gambar[0] ?? '')) }}" class="card-img-top"
                    style="object-fit: cover; height: 220px;" alt="{{ $item->nama }}">
               <div class="card-body">
                 <h5 class="card-title">{{ $item->nama }}</h5>
