@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
 <main class="main">
 
-  <!-- Hero Section -->
+  {{-- Hero --}}
   <section id="hero" class="hero section dark-background">
     <img src="{{ asset('ragel/ragel/assets/img/jam.jpg') }}" alt="" data-aos="fade-in">
     <div class="container d-flex flex-column align-items-center">
@@ -12,37 +11,78 @@
     </div>
   </section>
 
-  <!-- Hotel Section -->
-  <section id="hotel" class="hotel section light-background">
+  {{-- Hotel Section --}}
+  <section id="hotel" class="hotel section light-background py-5">
     <div class="container section-title" data-aos="fade-up">
       <h2>Hotel</h2>
       <p>HOTEL DI BUKITTINGGI</p>
     </div>
 
-    <form action="{{ route('hotel.search') }}" method="GET" class="mb-4 d-flex justify-content-center">
-          <input type="text" name="search" class="form-control w-50 me-2" placeholder="Cari nama hotel..." value="{{ request('search') }}">
-          <button type="submit" class="btn btn-primary">Cari</button>
-        </form>
+    {{-- Search --}}
+    <form action="{{ route('hotel.search') }}" method="GET" class="mb-5 d-flex justify-content-center px-3">
+      <input type="text" name="search" class="form-control w-50 me-2 rounded-3"
+             placeholder="Cari nama hotel..." value="{{ request('search') }}">
+      <button type="submit" class="btn btn-primary px-4 rounded-3">Cari</button>
+    </form>
 
     <div class="container">
-      <div class="row gy-5">
-        @foreach ($data as $item)
+      <div class="row gy-4">
+        @forelse($data as $item)
           <div class="col-lg-4 col-md-6" data-aos="fade-up">
-            <div class="card shadow-sm h-100">
-             <img src="{{ asset('storage/' . ($item->gambar[0] ?? '')) }}" class="card-img-top"
-                   style="object-fit: cover; height: 220px;" alt="{{ $item->nama }}">
-              <div class="card-body">
-                <h5 class="card-title">{{ $item->nama }}</h5>
-                <p class="card-text text-warning mb-2">
-  @for ($i = 0; $i < $item->bintang; $i++)
-    <i class="fas fa-star"></i>
-  @endfor
-</p>                <a href="{{ url('/detail-hotel/' . $item->slug) }}" class="btn btn-sm btn-primary">Lihat Detail</a>
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
+              <div class="position-relative">
+                <img src="{{ asset('storage/' . ($item->gambar[0] ?? '')) }}"
+                     class="card-img-top"
+                     style="object-fit: cover; height: 220px;"
+                     alt="{{ $item->nama }}">
+                {{-- Badge bintang --}}
+                @if($item->bintang)
+                <div class="position-absolute top-0 end-0 m-2 bg-white rounded-pill px-2 py-1 shadow-sm"
+                     style="font-size: 12px;">
+                  @for($i = 0; $i < $item->bintang; $i++)
+                    <i class="bi bi-star-fill text-warning"></i>
+                  @endfor
+                </div>
+                @endif
+              </div>
+
+              <div class="card-body d-flex flex-column p-4">
+                <h5 class="card-title fw-bold mb-1">{{ $item->nama }}</h5>
+
+                @if($item->lokasi)
+                <p class="text-muted small mb-2">
+                  <i class="bi bi-geo-alt me-1"></i>{{ Str::limit($item->lokasi, 40) }}
+                </p>
+                @endif
+
+                @if($item->harga_mulai)
+                <p class="text-muted small mb-3">
+                  <i class="bi bi-cash me-1"></i>
+                  Mulai Rp{{ number_format($item->harga_mulai) }} / malam
+                </p>
+                @endif
+
+                <a href="{{ url('/detail-hotel/' . $item->slug) }}"
+                   class="btn btn-primary btn-sm mt-auto rounded-3">
+                  Lihat Detail
+                </a>
               </div>
             </div>
           </div>
-        @endforeach
+        @empty
+          <div class="col-12 text-center py-5">
+            <i class="bi bi-building fs-1 text-muted d-block mb-3"></i>
+            <p class="text-muted">Belum ada hotel yang tersedia.</p>
+          </div>
+        @endforelse
       </div>
+
+      {{-- Pagination --}}
+      @if(method_exists($data, 'links'))
+      <div class="d-flex justify-content-center mt-5">
+        {{ $data->links() }}
+      </div>
+      @endif
     </div>
   </section>
 
