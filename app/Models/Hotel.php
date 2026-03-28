@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Rating;
 
 class Hotel extends Model
 {
@@ -27,4 +28,15 @@ class Hotel extends Model
     protected $casts = [
         'gambar' => 'array',
     ];
+
+    public function ratings()
+{
+    return $this->morphMany(Rating::class, 'rateable');
+}
+
+public function averageRating()
+{
+    return round($this->ratings()->avg('rating'), 1);
+}
+
 }

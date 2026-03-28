@@ -140,6 +140,85 @@
     </div>
   </section>
 
+  {{-- Rating --}}
+<section class="section py-4" style="background: #f8f9fa;">
+  <div class="container" data-aos="fade-up">
+    @php 
+      $avgRating = $wisata->averageRating(); 
+      $totalRating = $wisata->ratings()->count(); 
+    @endphp
+
+    <div class="row g-4 align-items-start">
+      {{-- Rata-rata rating --}}
+      <div class="col-lg-3 text-center">
+        <div class="bg-white rounded-4 p-4 shadow-sm border">
+          <h1 class="fw-bold mb-0" style="font-size: 3rem; color: #e8531d;">{{ $avgRating ?: '-' }}</h1>
+          <div class="my-2">
+            @for($i = 1; $i <= 5; $i++)
+              <i class="bi bi-star-fill {{ $i <= $avgRating ? 'text-warning' : 'text-muted' }}"></i>
+            @endfor
+          </div>
+          <small class="text-muted">{{ $totalRating }} ulasan</small>
+        </div>
+      </div>
+
+      {{-- Form rating --}}
+      <div class="col-lg-9">
+        <div class="bg-white rounded-4 p-4 shadow-sm border">
+          <h5 class="fw-bold mb-3">Beri Penilaian</h5>
+          @if(auth()->check() && auth()->user()->role === 'user')
+            @php $userRating = $wisata->ratings()->where('id_user', auth()->id())->value('rating'); @endphp
+            <p class="text-muted small mb-3">Kamu sudah mengunjungi {{ $wisata->nama }}? Bagikan pengalamanmu!</p>
+            <form action="{{ route('rating.store') }}" method="POST">
+              @csrf
+              <input type="hidden" name="rateable_id" value="{{ $wisata->id_wisata }}">
+              <input type="hidden" name="rateable_type" value="wisata">
+              <div class="d-flex align-items-center gap-3">
+                <span style="font-size: 14px;" class="text-muted">Rating kamu:</span>
+                <div class="d-flex gap-1">
+                  @for($i = 1; $i <= 5; $i++)
+                    <label style="cursor: pointer; font-size: 2rem; color: {{ $i <= ($userRating ?? 0) ? '#ffc107' : '#ccc' }}; transition: color 0.2s;"
+                           onmouseover="highlightStars({{ $i }})"
+                           onmouseout="resetStars({{ $userRating ?? 0 }})">
+                      <input type="radio" name="rating" value="{{ $i }}" style="display: none;"
+                             onchange="this.form.submit()">
+                      <i class="bi bi-star-fill" id="star-{{ $i }}"></i>
+                    </label>
+                  @endfor
+                </div>
+                @if($userRating)
+                  <span class="badge rounded-pill bg-success">Kamu memberi {{ $userRating }} bintang</span>
+                @endif
+              </div>
+            </form>
+          @else
+            <div class="alert alert-light border d-flex align-items-center gap-3 rounded-3 mb-0">
+              <i class="bi bi-star text-warning fs-5"></i>
+              <div>
+                <a href="{{ route('login.user') }}" class="fw-semibold text-decoration-none">Login</a>
+                untuk memberi rating pada destinasi ini.
+              </div>
+            </div>
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function highlightStars(n) {
+    for (let i = 1; i <= 5; i++) {
+      document.getElementById('star-' + i).parentElement.style.color = i <= n ? '#ffc107' : '#ccc';
+    }
+  }
+  function resetStars(n) {
+    for (let i = 1; i <= 5; i++) {
+      document.getElementById('star-' + i).parentElement.style.color = i <= n ? '#ffc107' : '#ccc';
+    }
+  }
+</script>
+
   {{-- Komentar --}}
   <section class="section py-5">
     <div class="container" data-aos="fade-up">

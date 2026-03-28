@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Komentar;
+use App\Models\Rating;
 
 class Wisata extends Model
 {
@@ -48,4 +49,15 @@ class Wisata extends Model
     {
         return $this->morphMany(Komentar::class, 'commentable');
     }
+
+    public function ratings()
+{
+    return $this->morphMany(Rating::class, 'rateable');
+}
+
+public function averageRating()
+{
+    return round($this->ratings()->avg('rating'), 1);
+}
+
 }

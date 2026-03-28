@@ -25,6 +25,19 @@
       <button type="submit" class="btn btn-primary px-4 rounded-3">Cari</button>
     </form>
 
+    <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
+  <a href="{{ url('/hotel') }}"
+     class="btn btn-sm {{ !request('bintang') ? 'btn-primary' : 'btn-outline-secondary' }} rounded-pill">
+    Semua
+  </a>
+  @for($i = 1; $i <= 5; $i++)
+  <a href="{{ url('/hotel?bintang=' . $i) }}"
+     class="btn btn-sm {{ request('bintang') == $i ? 'btn-primary' : 'btn-outline-secondary' }} rounded-pill">
+    {{ $i }} <i class="bi bi-star-fill text-warning"></i>
+  </a>
+  @endfor
+</div>
+
     <div class="container">
       <div class="row gy-4">
         @forelse($data as $item)
@@ -45,6 +58,15 @@
                 </div>
                 @endif
               </div>
+              @php $avg = $item->averageRating(); @endphp
+@if($avg)
+<p class="text-muted small mb-2">
+  @for($i = 1; $i <= 5; $i++)
+    <i class="bi bi-star-fill {{ $i <= $avg ? 'text-warning' : 'text-muted' }}"></i>
+  @endfor
+  <span class="ms-1">{{ $avg }} ({{ $item->ratings()->count() }})</span>
+</p>
+@endif
 
               <div class="card-body d-flex flex-column p-4">
                 <h5 class="card-title fw-bold mb-1">{{ $item->nama }}</h5>

@@ -115,6 +115,58 @@
             </a>
           </div>
 
+          {{-- Rating --}}
+<div class="mt-4">
+  @php $avgRating = $hotel->averageRating(); $totalRating = $hotel->ratings()->count(); @endphp
+  <h5 class="fw-bold mb-3">Rating</h5>
+
+  {{-- Tampil rata-rata --}}
+  <div class="d-flex align-items-center gap-2 mb-3">
+    @for($i = 1; $i <= 5; $i++)
+      <i class="bi bi-star-fill {{ $i <= $avgRating ? 'text-warning' : 'text-muted' }}" style="font-size: 1.2rem;"></i>
+    @endfor
+    <span class="fw-bold">{{ $avgRating ?: '-' }}</span>
+    <small class="text-muted">({{ $totalRating }} ulasan)</small>
+  </div>
+
+  {{-- Form rating --}}
+  @if(auth()->check() && auth()->user()->role === 'user')
+    @php $userRating = $hotel->ratings()->where('id_user', auth()->id())->value('rating'); @endphp
+    <form action="{{ route('rating.store') }}" method="POST">
+      @csrf
+     <input type="hidden" name="rateable_id" value="{{ $hotel->id_hotel }}">
+      <input type="hidden" name="rateable_type" value="hotel">
+     @php $avgRating = $hotel->averageRating(); $totalRating = $hotel->ratings()->count(); $userRating = $hotel->ratings()->where('id_user', auth()->id())->value('rating'); @endphp
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <span style="font-size: 14px;">Beri rating:</span>
+        @for($i = 1; $i <= 5; $i++)
+          <label style="cursor: pointer; font-size: 1.5rem; color: {{ $i <= ($userRating ?? 0) ? '#ffc107' : '#ccc' }};"
+                 onmouseover="highlightStars({{ $i }})"
+                 onmouseout="resetStars({{ $userRating ?? 0 }})">
+            <input type="radio" name="rating" value="{{ $i }}" style="display: none;"
+                   onchange="this.form.submit()">
+            <i class="bi bi-star-fill" id="star-{{ $i }}"></i>
+          </label>
+        @endfor
+      </div>
+    </form>
+    <script>
+      function highlightStars(n) {
+        for (let i = 1; i <= 5; i++) {
+          document.getElementById('star-' + i).parentElement.style.color = i <= n ? '#ffc107' : '#ccc';
+        }
+      }
+      function resetStars(n) {
+        for (let i = 1; i <= 5; i++) {
+          document.getElementById('star-' + i).parentElement.style.color = i <= n ? '#ffc107' : '#ccc';
+        }
+      }
+    </script>
+  @else
+    <p class="text-muted small"><a href="{{ route('login.user') }}">Login</a> untuk memberi rating.</p>
+  @endif
+</div>
+
           {{-- Rekomendasi Wisata --}}
           @if(count($rekomendasiWisata) > 0)
           <h5 class="fw-bold mb-3 mt-4">Wisata Terdekat</h5>

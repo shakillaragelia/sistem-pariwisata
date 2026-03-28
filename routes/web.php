@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KritikController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\VisitController;
+use App\Http\Controllers\RatingController;
 
 // ============================================================
 // PUBLIC ROUTES
@@ -85,3 +86,8 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
     Route::get('/kategoriad',      [AdminController::class, 'kategori'])->name('kategori.kategoriad');
 });
+
+//rating
+Route::post('/rating', [RatingController::class, 'store'])
+    ->middleware('auth')
+    ->name('rating.store');

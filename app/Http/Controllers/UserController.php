@@ -55,11 +55,17 @@ class UserController extends Controller
     return view('home.detail-wisata', compact('wisata', 'rekomendasiHotel'));
 }
 
-    public function hotel()
-    {
-        $data = Hotel::latest()->paginate(12);
-        return view('home.hotel', compact('data'));
+    public function hotel(Request $request)
+{
+    $query = Hotel::latest();
+
+    if ($request->bintang) {
+        $query->where('bintang', $request->bintang);
     }
+
+    $data = $query->paginate(12);
+    return view('home.hotel', compact('data'));
+}
 
     public function detailHotel($slug)
     {
