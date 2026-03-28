@@ -10,9 +10,11 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\DatePicker;
 use App\Filament\Resources\EventResource\Pages;
 
 class EventResource extends Resource
@@ -22,6 +24,8 @@ class EventResource extends Resource
     protected static ?string $navigationGroup = 'Data Pariwisata';
     protected static ?string $navigationLabel = 'Event';
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static ?string $modelLabel = 'Event';
+    protected static ?string $pluralModelLabel = 'Event';
 
     public static function form(Form $form): Form
     {
@@ -44,6 +48,22 @@ class EventResource extends Resource
                     ->required()
                     ->maxLength(null),
 
+                TextInput::make('lokasi')
+                        ->label('Lokasi')
+                        ->nullable(),
+
+                    DatePicker::make('tanggal_mulai')
+                        ->label('Tanggal Mulai')
+                        ->required()
+                        ->native(false),
+
+                    DatePicker::make('tanggal_selesai')
+                        ->label('Tanggal Selesai')
+                        ->required()
+                        ->native(false)
+                        ->after('tanggal_mulai'),
+
+
                 FileUpload::make('gambar')
                     ->label('Gambar')
                     ->image()
@@ -61,7 +81,13 @@ class EventResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('judul')->label('Judul Event')->searchable(),
-                TextColumn::make('slug')->label('Slug'),
+                TextColumn::make('lokasi')->label('Lokasi')->limit(30),
+TextColumn::make('tanggal_mulai')
+    ->label('Tanggal Mulai')
+    ->date('d M Y'),
+TextColumn::make('tanggal_selesai')
+    ->label('Tanggal Selesai')
+    ->date('d M Y'),
                 TextColumn::make('deskripsi')->label('Deskripsi')->limit(30),
                 ImageColumn::make('gambar')
                     ->label('Gambar')

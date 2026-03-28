@@ -22,16 +22,62 @@
     <div class="container">
       <div class="row">
         @forelse($events as $event)
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100 shadow">
-            <img src="{{ asset('storage/' . ($event->gambar[0] ?? '')) }}"
-                 class="card-img-top"
-                 alt="{{ $event->judul }}"
-                 style="height: 220px; object-fit: cover; width: 100%; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{ $event->judul }}</h5>
-              <p class="card-text">{{ \Illuminate\Support\Str::limit($event->deskripsi, 100) }}</p>
-              <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalEvent{{ $event->id_event }}">
+        @php
+          $today = now()->toDateString();
+          $mulai = $event->tanggal_mulai?->toDateString();
+          $selesai = $event->tanggal_selesai?->toDateString();
+
+          if ($mulai && $today < $mulai) {
+            $status = 'Akan Datang';
+            $badgeClass = 'bg-primary';
+          } elseif ($mulai && $selesai && $today >= $mulai && $today <= $selesai) {
+            $status = 'Sedang Berlangsung';
+            $badgeClass = 'bg-success';
+          } else {
+            $status = 'Selesai';
+            $badgeClass = 'bg-secondary';
+          }
+        @endphp
+
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+          <div class="card h-100 shadow border-0">
+            <!-- Gambar + Badge Status -->
+            <div class="position-relative">
+              <img src="{{ asset('storage/' . ($event->gambar[0] ?? '')) }}"
+                   class="card-img-top"
+                   alt="{{ $event->judul }}"
+                   style="height: 220px; object-fit: cover; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
+              <span class="badge {{ $badgeClass }} position-absolute top-0 end-0 m-2">
+                {{ $status }}
+              </span>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-bold">{{ $event->judul }}</h5>
+
+              <!-- Tanggal -->
+              <p class="text-muted small mb-1">
+                <i class="bi bi-calendar-event me-1"></i>
+                {{ $event->tanggal_mulai?->format('d M Y') ?? '-' }}
+                @if($event->tanggal_selesai)
+                  — {{ $event->tanggal_selesai->format('d M Y') }}
+                @endif
+              </p>
+
+              <!-- Lokasi -->
+              @if($event->lokasi)
+              <p class="text-muted small mb-2">
+                <i class="bi bi-geo-alt me-1"></i> {{ $event->lokasi }}
+              </p>
+              @endif
+
+              <p class="card-text text-muted flex-grow-1">
+                {{ \Illuminate\Support\Str::limit($event->deskripsi, 100) }}
+              </p>
+
+              <button class="btn btn-sm btn-outline-primary mt-2 align-self-start"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEvent{{ $event->id_event }}">
                 Lihat Selengkapnya
               </button>
             </div>
@@ -39,15 +85,18 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="modalEvent{{ $event->id_event }}" tabindex="-1" aria-labelledby="modalEventLabel{{ $event->id_event }}" aria-hidden="true">
+        <div class="modal fade" id="modalEvent{{ $event->id_event }}" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalEventLabel{{ $event->id_event }}">{{ $event->judul }}</h5>
+                <div>
+                  <h5 class="modal-title fw-bold">{{ $event->judul }}</h5>
+                  <span class="badge {{ $badgeClass }}">{{ $status }}</span>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
               </div>
               <div class="modal-body">
-                {{-- Carousel kalau gambar lebih dari 1 --}}
+                {{-- Carousel --}}
                 @if(count($event->gambar ?? []) > 1)
                   <div id="carouselEvent{{ $event->id_event }}" class="carousel slide mb-3" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -73,6 +122,23 @@
                        style="height: 300px; object-fit: cover; width: 100%;"
                        alt="{{ $event->judul }}">
                 @endif
+
+                {{-- Info tanggal & lokasi --}}
+                <div class="d-flex gap-3 mb-3 flex-wrap">
+                  <span class="text-muted">
+                    <i class="bi bi-calendar-event me-1"></i>
+                    {{ $event->tanggal_mulai?->format('d M Y') ?? '-' }}
+                    @if($event->tanggal_selesai)
+                      — {{ $event->tanggal_selesai->format('d M Y') }}
+                    @endif
+                  </span>
+                  @if($event->lokasi)
+                  <span class="text-muted">
+                    <i class="bi bi-geo-alt me-1"></i> {{ $event->lokasi }}
+                  </span>
+                  @endif
+                </div>
+
                 <p>{{ $event->deskripsi }}</p>
               </div>
               <div class="modal-footer">
@@ -81,11 +147,10 @@
             </div>
           </div>
         </div>
+
         @empty
         <div class="col-12 text-center">
-          <div class="alert alert-info">
-            Belum ada event saat ini.
-          </div>
+          <div class="alert alert-info">Belum ada event saat ini.</div>
         </div>
         @endforelse
       </div>

@@ -15,9 +15,14 @@ class Event extends Model
         'judul',
         'slug',
         'deskripsi',
+        'tanggal_mulai',
+        'tanggal_selesai',
+        'lokasi',
     ];
 
     protected $casts = [
         'gambar' => 'array',
+        'tanggal_mulai' => 'date',
+        'tanggal_selesai' => 'date',
     ];
 }
