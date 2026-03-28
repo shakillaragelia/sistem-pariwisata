@@ -38,16 +38,19 @@ class UserController extends Controller
     return view('home.wisata', compact('data', 'filter', 'kategoris'));
 }
 
-    public function detailWisata($slug)
-    {
-        $wisata = Wisata::with(['komentar.user', 'kategori'])
-            ->where('slug', $slug)
-            ->firstOrFail();
+   public function detailWisata($slug)
+{
+    $wisata = Wisata::with(['komentar.user', 'kategori'])
+        ->where('slug', $slug)
+        ->firstOrFail();
 
+    $rekomendasiHotel = collect();
+    if ($wisata->latitude && $wisata->longitude) {
         $rekomendasiHotel = $this->getNearbyHotels($wisata->latitude, $wisata->longitude);
-
-        return view('home.detail-wisata', compact('wisata', 'rekomendasiHotel'));
     }
+
+    return view('home.detail-wisata', compact('wisata', 'rekomendasiHotel'));
+}
 
     public function hotel()
     {
