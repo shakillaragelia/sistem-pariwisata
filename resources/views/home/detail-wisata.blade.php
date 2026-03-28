@@ -4,7 +4,7 @@
 <main class="main">
 
   <section id="hero" class="hero section dark-background">
-   <img src="{{ asset('storage/' . ($wisata->gambar ?? '')) }}" alt="{{ $wisata->nama }}" data-aos="fade-in">
+   <img src="{{ asset('storage/' . ($wisata->gambar[0] ?? '')) }}" alt="{{ $wisata->nama }}" data-aos="fade-in">
     <div class="container d-flex flex-column align-items-center">
       <h2 data-aos="fade-up" data-aos-delay="100">{{ strtoupper($wisata->nama) }}</h2>
     </div>
@@ -20,10 +20,36 @@
       <div class="row align-items-stretch" data-aos="fade-up">
         <!-- Gambar kiri -->
         <div class="col-lg-6 mb-4 mb-lg-0">
-         <img src="{{ asset('storage/' . ($wisata->gambar ?? '')) }}"
-               class="img-fluid h-100 w-100 object-fit-cover rounded"
+  <div id="wisataCarousel" class="carousel slide rounded overflow-hidden" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      @foreach($wisata->gambar ?? [] as $index => $gambar)
+        <button type="button"
+                data-bs-target="#wisataCarousel"
+                data-bs-slide-to="{{ $index }}"
+                class="{{ $index === 0 ? 'active' : '' }}">
+        </button>
+      @endforeach
+    </div>
+
+    <div class="carousel-inner">
+      @foreach($wisata->gambar ?? [] as $index => $gambar)
+        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+          <img src="{{ asset('storage/' . $gambar) }}"
+               class="d-block w-100"
+               style="height: 400px; object-fit: cover;"
                alt="{{ $wisata->nama }}">
         </div>
+      @endforeach
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#wisataCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#wisataCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
 
         <!-- Konten kanan -->
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">

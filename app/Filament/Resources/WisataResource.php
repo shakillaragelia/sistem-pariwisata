@@ -26,13 +26,23 @@ class WisataResource extends Resource
     protected static ?string $navigationGroup = 'Data Pariwisata';
     protected static ?string $navigationLabel = 'Wisata';
     protected static ?string $navigationIcon = 'heroicon-o-map';
+    protected static ?string $modelLabel = 'Wisata';
+    protected static ?string $pluralModelLabel = 'Wisata';
+
+    private static function isNonWisata($get): bool
+    {
+        $kategoriId = $get('id_kategori');
+        if (!$kategoriId) return false;
+        $slug = Kategori::find($kategoriId)?->slug;
+        return in_array($slug, ['wisata-kuliner', 'wisata-seni-budaya']);
+    }
 
     private static function geocodeAndSet(string $address, callable $set): void
     {
         $response = Http::withHeaders([
             'User-Agent' => 'SistemPariwisata/1.0'
         ])->get("https://nominatim.openstreetmap.org/search", [
-            'q'      => $address, 
+            'q'      => $address,
             'format' => 'json',
             'limit'  => 1,
         ]);
@@ -40,7 +50,7 @@ class WisataResource extends Resource
         $data = $response->json();
 
         if (empty($data[0])) {
-             $response = Http::withHeaders([
+            $response = Http::withHeaders([
                 'User-Agent' => 'SistemPariwisata/1.0'
             ])->get("https://nominatim.openstreetmap.org/search", [
                 'q'      => $address . ', Bukittinggi',
@@ -74,20 +84,15 @@ class WisataResource extends Resource
 
                 Textarea::make('deskripsi')->required(),
 
-                Select::make('tipe')
-                    ->label('Tipe')
-                    ->options([
-                        'wisata'  => 'Wisata',
-                        'kuliner' => 'Kuliner',
-                        'senbud'  => 'Seni Budaya',
-                    ])
-                    ->default('wisata')
-                    ->required(),   
+                Select::make('id_kategori')
+                    ->label('Kategori')
+                    ->relationship('kategori', 'nama')
+                    ->required()
+                    ->live(),
 
-                // Toggle gratis + field harga
                 Toggle::make('is_gratis')
                     ->label('Gratis')
-                    ->default(false)
+                    ->hidden(fn ($get) => self::isNonWisata($get))
                     ->live()
                     ->afterStateUpdated(function ($state, callable $set) {
                         if ($state) $set('harga', 0);
@@ -97,12 +102,18 @@ class WisataResource extends Resource
                     ->numeric()
                     ->inputMode('decimal')
                     ->default(0)
-                    ->hidden(fn ($get) => $get('is_gratis'))
-                    ->required(fn ($get) => !$get('is_gratis')),
+                    ->hidden(fn ($get) => self::isNonWisata($get) || $get('is_gratis'))
+                    ->required(fn ($get) => !self::isNonWisata($get) && !$get('is_gratis')),
 
                 TextInput::make('lokasi')
-                    ->required()
-                    ->live(onBlur: true)
+                    ->hidden(fn ($get) => self::isNonWisata($get))
+                    ->required(fn ($get) => !self::isNonWisata($get))
+                    ->lazy()
+                    ->afterStateHydrated(function ($state, callable $set, $get) {
+                        if ($state && !$get('latitude') && !$get('longitude')) {
+                            self::geocodeAndSet($state, $set);
+                        }
+                    })
                     ->afterStateUpdated(function ($state, callable $set) {
                         if (!$state) return;
                         self::geocodeAndSet($state, $set);
@@ -110,26 +121,34 @@ class WisataResource extends Resource
 
                 FileUpload::make('gambar')
                     ->image()
+                    ->multiple()
+                    ->reorderable()
+                    ->maxFiles(5)
                     ->disk('public')
                     ->directory('wisata-images')
                     ->required(),
 
-                Select::make('id_kategori')
-                    ->label('Kategori')
-                    ->relationship('kategori', 'nama')
-                    ->required(),
-
                 TextInput::make('latitude')
-                    ->required()
+                    ->hidden(fn ($get) => self::isNonWisata($get))
+                    ->required(fn ($get) => !self::isNonWisata($get))
                     ->readOnly(),
 
                 TextInput::make('longitude')
-                    ->required()
+                    ->hidden(fn ($get) => self::isNonWisata($get))
+                    ->required(fn ($get) => !self::isNonWisata($get))
                     ->readOnly(),
 
-                Toggle::make('toilet')->label('Toilet'),
-                Toggle::make('parkir')->label('Parkir'),
-                Toggle::make('tempat_ibadah')->label('Tempat Ibadah'),
+                Toggle::make('toilet')
+                    ->label('Toilet')
+                    ->hidden(fn ($get) => self::isNonWisata($get)),
+
+                Toggle::make('parkir')
+                    ->label('Parkir')
+                    ->hidden(fn ($get) => self::isNonWisata($get)),
+
+                Toggle::make('tempat_ibadah')
+                    ->label('Tempat Ibadah')
+                    ->hidden(fn ($get) => self::isNonWisata($get)),
             ]);
     }
 
@@ -138,7 +157,16 @@ class WisataResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('nama')->searchable(),
-                TextColumn::make('kategori.nama')->label('Kategori'),
+                TextColumn::make('kategori.nama')
+                    ->label('Kategori')
+                    ->badge()
+                    ->color(fn ($state) => match($state) {
+                        'Wisata Sejarah'     => 'success',
+                        'Wisata Alam'        => 'info',
+                        'Wisata Kuliner'     => 'warning',
+                        'Wisata Seni Budaya' => 'danger',
+                        default              => 'gray',
+                    }),
                 TextColumn::make('harga')
                     ->label('Harga')
                     ->default(0)
@@ -148,14 +176,13 @@ class WisataResource extends Resource
                     ->label('Gambar')
                     ->disk('public')
                     ->square()
-                    ->size(60),
-                    TextColumn::make('tipe')->label('Tipe')->badge()
-                    ->color(fn ($state) => match($state) {
-                        'wisata'  => 'success',
-                        'kuliner' => 'warning',
-                        'senbud'  => 'info',
-                        default   => 'gray',
-                    }),
+                    ->size(60)
+                    ->stacked(),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('id_kategori')
+                    ->label('Kategori')
+                    ->relationship('kategori', 'nama'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

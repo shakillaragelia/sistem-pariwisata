@@ -11,9 +11,8 @@ class Wisata extends Model
     use HasFactory;
     protected $table ='wisatas';
     protected $primaryKey = 'id_wisata';
-   protected $fillable = [
+    protected $fillable = [
     'id_kategori',
-    'tipe',
     'nama',
     'slug',
     'deskripsi',
@@ -26,6 +25,13 @@ class Wisata extends Model
     'parkir',
     'tempat_ibadah',
 ];
+
+    protected $casts = [
+        'gambar' => 'array',
+        'toilet' => 'boolean',
+        'parkir' => 'boolean',
+        'tempat_ibadah' => 'boolean',
+    ];
 
     public function kategori()
     {
