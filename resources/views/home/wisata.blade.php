@@ -41,21 +41,36 @@
             @endforeach
           </ul>
 
+          {{-- Deskripsi kategori aktif --}}
+          @if($filter)
+            @php $activeKategori = $kategoris->firstWhere('slug', $filter); @endphp
+            @if($activeKategori && $activeKategori->deskripsi)
+            <div class="container mb-4" data-aos="fade-up">
+              <div class="alert alert-light border-start border-4 border-warning shadow-sm">
+                <div class="d-flex align-items-center gap-3">
+                  @if($activeKategori->gambar)
+                    <img src="{{ asset('storage/' . $activeKategori->gambar) }}"
+                         style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"
+                         alt="{{ $activeKategori->nama }}">
+                  @endif
+                  <div>
+                    <h6 class="fw-bold mb-1">{{ $activeKategori->nama }}</h6>
+                    <p class="mb-0 text-muted">{{ $activeKategori->deskripsi }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endif
+          @endif
+
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
             @forelse ($data as $item)
-            @php
-              $route = match($item->type) {
-                  'kuliner' => route('detail.kuliner', $item->slug),
-                  'senbud'  => route('detail.senbud', $item->slug),
-                  default   => route('detail.wisata', $item->slug),
-              };
-            @endphp
 
             <div class="col-lg-4 col-md-6 mb-4 portfolio-item">
-              <a href="{{ $route }}" class="text-decoration-none text-dark">
+              <a href="{{ route('detail.wisata', $item->slug) }}" class="text-decoration-none text-dark">
                 <div class="card border-0 shadow-sm h-100">
                   <img src="{{ $item->gambar ? asset('storage/' . ($item->gambar[0] ?? '')) : 'https://via.placeholder.com/500x300?text=No+Image' }}"
-     class="card-img-top w-100" style="object-fit: cover; height: 230px;" alt="{{ $item->nama }}">
+                       class="card-img-top w-100" style="object-fit: cover; height: 230px;" alt="{{ $item->nama }}">
                   <div class="card-body px-3 py-2">
                     <h5 class="card-title fw-bold mb-1 text-center">{{ $item->nama }}</h5>
                     <p class="card-text text-muted" style="font-size: 14px;">
@@ -65,6 +80,7 @@
                 </div>
               </a>
             </div>
+
             @empty
             <div class="col-12 text-center">
               <p class="text-muted">Belum ada data wisata yang tersedia.</p>

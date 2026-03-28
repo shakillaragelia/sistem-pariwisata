@@ -12,6 +12,8 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
 
 class KategoriResource extends Resource
 {
@@ -40,6 +42,10 @@ class KategoriResource extends Resource
                 ->disk('public')
                 ->directory('kategori-images')
                 ->required(),
+            Textarea::make('deskripsi')
+                ->label('Deskripsi')
+                ->nullable()
+                ->rows(3),
         ]);
     }
 
@@ -55,6 +61,10 @@ class KategoriResource extends Resource
                     ->visibility('public')
                     ->square()
                     ->size(60),
+                TextColumn::make('deskripsi')
+                    ->label('Deskripsi')
+                    ->limit(50)
+                    ->toggleable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
