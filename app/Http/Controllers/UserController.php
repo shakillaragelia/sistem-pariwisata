@@ -13,14 +13,17 @@ use Illuminate\Support\Facades\Http;
 class UserController extends Controller
 {
     public function index()
-    {
-        $kategori = Kategori::all();
-        $ikon = Kategori::whereIn('nama', [
-            'Wisata Sejarah', 'Wisata Alam', 'Wisata Kuliner', 'Wisata Senbud',
-        ])->take(5)->get();
+{
+    $kategori = Kategori::all();
+    $ikon = Wisata::with('kategori')
+        ->whereNotNull('gambar')
+        ->latest()
+        ->take(6)
+        ->get();
 
-        return view('home.index', compact('kategori', 'ikon'));
-    }
+    return view('home.index', compact('kategori', 'ikon'));
+}
+
 
     public function wisata(Request $request)
 {

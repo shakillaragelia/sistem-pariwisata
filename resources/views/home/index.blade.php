@@ -91,7 +91,7 @@
               <div class="col-lg-4 col-md-6">
                 <a href="{{ route('detail.wisata', $item->slug) }}" class="text-decoration-none">
                   <div class="position-relative overflow-hidden rounded-4 shadow">
-                    <img src="{{ asset('storage/' . $item->gambar) }}"
+                    <img src="{{ asset('storage/' . ($item->gambar[0] ?? '')) }}"
                          style="height: 260px; width: 100%; object-fit: cover; border-radius: 16px; transition: transform 0.3s;"
                          onmouseover="this.style.transform='scale(1.05)'"
                          onmouseout="this.style.transform='scale(1)'"
