@@ -2,36 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kritiksaran;
+use App\Models\Kritiksaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class KritikController extends Controller
 {
-    //kritik saran
-    public function index(){
-        $kontak=Kritiksaran::all();
+    public function index()
+    {
+        $kontak = Kritiksaran::all();
         return view('home.kritiksaran', compact('kontak'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
             'name'    => 'required|string|max:255',
             'email'   => 'required|email',
-            'subject' => 'required|string|max:255',
+            'subject' => 'required|in:Kritik,Saran,Pertanyaan,Kerja Sama,Lainnya',
             'message' => 'required|string',
         ]);
 
         Kritiksaran::create([
-            'nama'    => $request->name,
-            'email'   => $request->email,
-            'subjek' => $request->subject,
-            'konten'   => $request->message,
-            'id_user' => Auth::id()
+            'subjek'          => $request->subject,
+            'konten'          => $request->message,
+            'email_pengirim'  => $request->email,
+            'nama_pengirim'   => $request->name,
+            'id_user'         => Auth::id(),
         ]);
 
         return redirect()->back()->with('success', 'Terima kasih atas masukannya!');
     }
-
-    
 }

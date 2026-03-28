@@ -11,10 +11,14 @@ class Kritiksaran extends Model
     protected $table ='kritiksarans';
     protected $primaryKey = 'id_kritiksaran';
     protected $fillable = [
-        'id_user',
-        'subjek',
-        'konten',
-    ];
+    'id_user',
+    'nama_pengirim',
+    'subjek',
+    'konten',
+    'email_pengirim',
+    'balasan',
+    'dibalas_at',
+];
 
     public function user()
 {
