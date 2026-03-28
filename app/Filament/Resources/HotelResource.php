@@ -131,6 +131,10 @@ class HotelResource extends Resource
                 TextColumn::make('lokasi')->label('Lokasi')->limit(30),
                 TextColumn::make('deskripsi')->label('Deskripsi')->limit(30),
                 TextColumn::make('bintang')->label('Bintang')->sortable(),
+                 TextColumn::make('rating')
+                    ->label('Rating')
+                    ->getStateUsing(fn ($record) => $record->averageRating() . ' ⭐ (' . $record->ratings()->count() . ')')
+                    ->default('-'),
                 ImageColumn::make('gambar')
                 ->label('Gambar')
                 ->disk('public')

@@ -172,12 +172,17 @@ class WisataResource extends Resource
                     ->default(0)
                     ->formatStateUsing(fn ($state) => ($state == 0) ? 'Gratis' : 'Rp' . number_format($state, 0, ',', '.')),
                 TextColumn::make('lokasi')->limit(30)->toggleable(),
+                 TextColumn::make('rating')
+                    ->label('Rating')
+                    ->getStateUsing(fn ($record) => $record->averageRating() . ' ⭐ (' . $record->ratings()->count() . ')')
+                    ->default('-'),
                 ImageColumn::make('gambar')
                     ->label('Gambar')
                     ->disk('public')
                     ->square()
                     ->size(60)
                     ->stacked(),
+
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('id_kategori')

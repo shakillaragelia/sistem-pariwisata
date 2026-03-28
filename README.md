@@ -59,3 +59,100 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+# Sistem Informasi Pariwisata Kota Bukittinggi
+
+![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel)
+![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php)
+![Filament](https://img.shields.io/badge/Filament-3.x-FDAE4B?style=for-the-badge)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql)
+
+Sistem informasi pariwisata berbasis web untuk Dinas Pariwisata Kota Bukittinggi, Sumatera Barat. Dibangun menggunakan Laravel 12 dan Filament v3 sebagai admin panel.
+
+---
+
+## Fitur
+
+### Pengunjung
+- Jelajahi destinasi wisata berdasarkan kategori (Sejarah, Alam, Kuliner, Seni Budaya)
+- Informasi hotel beserta rekomendasi wisata terdekat
+- Jadwal event kota dengan status (Akan Datang / Berlangsung / Selesai)
+- Rating dan komentar destinasi wisata
+- Pencarian wisata dan hotel
+- Koordinat otomatis via OpenCage Geocoding
+- Kirim kritik & saran langsung ke admin
+
+### Admin Panel (Filament v3)
+- Dashboard dengan statistik pengunjung, wisata, hotel, event
+- Kelola semua data wisata dalam satu panel (multi-kategori dinamis)
+- Upload multiple gambar per destinasi/hotel/event
+- Balas kritik & saran pengunjung via email (Mailtrap)
+- Manajemen komentar pengunjung
+
+---
+
+## Tech Stack
+
+| Teknologi | Versi |
+|-----------|-------|
+| PHP | 8.4 |
+| Laravel | 12.x |
+| Filament | v3.3 |
+| MySQL | 8.0 |
+| Bootstrap | 5.x |
+| OpenCage API | - |
+
+---
+
+## Instalasi
+
+### Prerequisites
+- PHP >= 8.2
+- Composer
+- MySQL
+- Node.js & NPM
+
+---
+
+## Akses
+- **Admin Panel** — akses melalui route yang dikonfigurasi
+- **Pengunjung** — halaman utama web
+
+---
+
+## Screenshots
+
+> *Admin Panel Dashboard*
+> *Admin Panel Data Wisata*
+> *Admin Panel Data Hotel*
+> *Admin Panel Data Event*
+> *Admin Panel Data Kritik & Saran* 
+> *Admin Panel Data Komentar*
+> *Admin Panel Data Kategori*
+> *Admin Panel Data Email Terkirim*
+
+> *Landing Page Index*
+> *Landing page About*
+> *Landing page Wisata*
+> *Landing Page Detail Wisata*
+> *Landing Page Hotel*
+> *Landing Page Detail Hotel*
+> *Landing Page Event*
+> *Landing Page Kritik & Saran*
+
+
+---
+
+## Developer
+
+**Shakilla Ragelia**  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com/in/shakillaragelia)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/shakillaragelia)
+
+---
+
+## Lisensi
+
+Project ini dibuat untuk keperluan portofolio.
