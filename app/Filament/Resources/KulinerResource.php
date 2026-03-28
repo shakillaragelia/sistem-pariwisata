@@ -25,6 +25,7 @@ class KulinerResource extends Resource
 
     protected static ?string $navigationLabel = 'Kuliner';
     protected static ?string $navigationIcon = 'heroicon-c-building-storefront';
+    protected static bool $shouldRegisterNavigation = false;
 
 
     public static function form(Form $form): Form

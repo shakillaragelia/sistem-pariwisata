@@ -26,6 +26,7 @@ class SenbudResource extends Resource
 
     protected static ?string $navigationLabel = 'Seni Budaya';
     protected static ?string $navigationIcon = 'heroicon-o-lifebuoy';
+    protected static bool $shouldRegisterNavigation = false;
 
 
     public static function form(Form $form): Form

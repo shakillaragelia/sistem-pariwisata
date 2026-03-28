@@ -4,7 +4,7 @@
 <main class="main">
 
   <section id="hero" class="hero section dark-background">
-    <img src="{{ asset('storage/' . $wisata->gambar) }}" alt="{{ $wisata->nama }}" data-aos="fade-in">
+   <img src="{{ asset('storage/' . ($wisata->gambar ?? '')) }}" alt="{{ $wisata->nama }}" data-aos="fade-in">
     <div class="container d-flex flex-column align-items-center">
       <h2 data-aos="fade-up" data-aos-delay="100">{{ strtoupper($wisata->nama) }}</h2>
     </div>
@@ -20,7 +20,7 @@
       <div class="row align-items-stretch" data-aos="fade-up">
         <!-- Gambar kiri -->
         <div class="col-lg-6 mb-4 mb-lg-0">
-          <img src="{{ asset('storage/' . $wisata->gambar) }}"
+         <img src="{{ asset('storage/' . ($wisata->gambar ?? '')) }}"
                class="img-fluid h-100 w-100 object-fit-cover rounded"
                alt="{{ $wisata->nama }}">
         </div>

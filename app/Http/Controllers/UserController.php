@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wisata;
-use App\Models\Kuliner;
-use App\Models\Senbud;
 use App\Models\Hotel;
 use App\Models\Event;
 use App\Models\Kategori;
@@ -25,41 +23,20 @@ class UserController extends Controller
     }
 
     public function wisata(Request $request)
-    {
-        $filter = $request->query('kategori');
+{
+    $filter = $request->query('kategori');
+    $kategoris = Kategori::all();
 
-        // Query dasar dari masing-masing tabel dengan kolom yang disamakan
-        $qWisata = DB::table('wisatas')
-            ->join('kategoris', 'wisatas.id_kategori', '=', 'kategoris.id_kategori')
-            ->select('wisatas.nama', 'wisatas.slug', 'wisatas.deskripsi', 'wisatas.gambar', 'kategoris.slug as kategori_slug', 'kategoris.nama as kategori_nama', DB::raw("'wisata' as type"));
-
-        $qKuliner = DB::table('kuliners')
-            ->join('kategoris', 'kuliners.id_kategori', '=', 'kategoris.id_kategori')
-            ->select('kuliners.nama', 'kuliners.slug', 'kuliners.deskripsi', 'kuliners.gambar', 'kategoris.slug as kategori_slug', 'kategoris.nama as kategori_nama', DB::raw("'kuliner' as type"));
-
-        $qSenbud = DB::table('senbuds')
-            ->join('kategoris', 'senbuds.id_kategori', '=', 'kategoris.id_kategori')
-            ->select('senbuds.nama', 'senbuds.slug', 'senbuds.deskripsi', 'senbuds.gambar', 'kategoris.slug as kategori_slug', 'kategoris.nama as kategori_nama', DB::raw("'senbud' as type"));
-
-        // Gabungkan semuanya
-        $combined = $qWisata->union($qKuliner)->union($qSenbud);
-
-        // Jika ada filter kategori
-        if ($filter) {
-            $data = DB::table(DB::raw("({$combined->toSql()}) as combined"))
-                ->mergeBindings($combined)
-                ->where('kategori_slug', $filter)
-                ->paginate(12);
-        } else {
-            $data = DB::table(DB::raw("({$combined->toSql()}) as combined"))
-                ->mergeBindings($combined)
-                ->paginate(12);
-        }
-
-        $kategoris = Kategori::all();
-
-        return view('home.wisata', compact('data', 'filter', 'kategoris'));
+    if ($filter) {
+        $data = Wisata::with('kategori')
+            ->whereHas('kategori', fn($q) => $q->where('slug', $filter))
+            ->paginate(12);
+    } else {
+        $data = Wisata::with('kategori')->paginate(12);
     }
+
+    return view('home.wisata', compact('data', 'filter', 'kategoris'));
+}
 
     public function detailWisata($slug)
     {
@@ -133,14 +110,16 @@ class UserController extends Controller
     }
 
     public function searchWisata(Request $request)
-    {
-        $keyword = $request->input('search');
-        $data = Wisata::where('nama', 'like', "%{$keyword}%")->with('kategori')->paginate(12);
-        $kategoris = Kategori::all();
-        $filter = null;
+{
+    $keyword = $request->input('search');
+    $data = Wisata::where('nama', 'like', "%{$keyword}%")
+        ->with('kategori')
+        ->paginate(12);
+    $kategoris = Kategori::all();
+    $filter = null;
 
-        return view('home.wisata', compact('data', 'keyword', 'filter', 'kategoris'));
-    }
+    return view('home.wisata', compact('data', 'keyword', 'filter', 'kategoris'));
+}
 
     public function searchHotel(Request $request)
     {
