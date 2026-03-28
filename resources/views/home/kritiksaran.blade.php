@@ -59,14 +59,14 @@
           </div>
 
           <div class="col-12">
-            <select name="subject" class="form-control" required>
-              <option value="" disabled selected>-- Pilih Subjek --</option>
-              <option value="Kritik">Kritik</option>
-              <option value="Saran">Saran</option>
-              <option value="Pertanyaan">Pertanyaan</option>
-              <option value="Kerja Sama">Kerja Sama</option>
-              <option value="Lainnya">Lainnya</option>
-            </select>
+          <select name="subject" class="form-control" required>
+            <option value="" disabled selected>-- Pilih Subjek --</option>
+            <option value="Kritik">Kritik</option>
+            <option value="Saran">Saran</option>
+            <option value="Pertanyaan">Pertanyaan</option>
+            <option value="Kerja Sama">Kerja Sama</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
 </div>
 
           <div class="col-12">

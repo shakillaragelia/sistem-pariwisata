@@ -29,18 +29,16 @@ class WisataResource extends Resource
 
     private static function geocodeAndSet(string $address, callable $set): void
     {
-        // Mencoba mencari lokasi dengan Nominatim (OpenStreetMap)
         $response = Http::withHeaders([
             'User-Agent' => 'SistemPariwisata/1.0'
         ])->get("https://nominatim.openstreetmap.org/search", [
-            'q'      => $address, // Gunakan alamat apa adanya dulu
+            'q'      => $address, 
             'format' => 'json',
             'limit'  => 1,
         ]);
 
         $data = $response->json();
 
-        // Jika tidak ketemu, coba tambahkan kata Bukittinggi
         if (empty($data[0])) {
              $response = Http::withHeaders([
                 'User-Agent' => 'SistemPariwisata/1.0'
@@ -75,6 +73,16 @@ class WisataResource extends Resource
                     ->readOnly(),
 
                 Textarea::make('deskripsi')->required(),
+
+                Select::make('tipe')
+                    ->label('Tipe')
+                    ->options([
+                        'wisata'  => 'Wisata',
+                        'kuliner' => 'Kuliner',
+                        'senbud'  => 'Seni Budaya',
+                    ])
+                    ->default('wisata')
+                    ->required(),   
 
                 // Toggle gratis + field harga
                 Toggle::make('is_gratis')
@@ -141,6 +149,13 @@ class WisataResource extends Resource
                     ->disk('public')
                     ->square()
                     ->size(60),
+                    TextColumn::make('tipe')->label('Tipe')->badge()
+                    ->color(fn ($state) => match($state) {
+                        'wisata'  => 'success',
+                        'kuliner' => 'warning',
+                        'senbud'  => 'info',
+                        default   => 'gray',
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
