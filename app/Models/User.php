@@ -19,9 +19,6 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = ['name', 'email', 'password', 'email_verified_at'];
-    $user = User::create($validated);
-    $user->role = 'user';
-    $user->save();
 
     /**
      * The attributes that should be hidden for serialization.
