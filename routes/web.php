@@ -59,7 +59,7 @@ Route::post('/api/record-visit', [VisitController::class, 'store'])
 
 Route::middleware('guest')->group(function () {
     Route::get('/login',  [AuthController::class, 'login'])->name('login');
-    Route::post('/login', [AuthController::class, 'auth']);
+    Route::post('/login', [AuthController::class, 'auth'])->middleware('throttle:5,1');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
